@@ -1,4 +1,2 @@
 # Intandem-Registration-Project
-This branch is for the code related to user registration
-
-
+Contains all code related to the new registration section for the InTandem website
