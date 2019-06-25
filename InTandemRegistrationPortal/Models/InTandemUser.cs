@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 // model to be added onto later
 namespace InTandemRegistrationPortal.Models
 {
-    public enum TypeOfUser
-    {
-        Volunteer, Stoker, Captain
-    }
     public class InTandemUser : IdentityUser
     {
         [PersonalData]
@@ -19,7 +15,5 @@ namespace InTandemRegistrationPortal.Models
         public string FirstName { get; set; }
         [PersonalData]
         public DateTime DateOfBirth { get; set; }
-        [PersonalData]
-        public TypeOfUser TypeOfUser { get; set; }
     }
 }
