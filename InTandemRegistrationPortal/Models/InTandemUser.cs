@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 // model to be added onto later
 namespace InTandemRegistrationPortal.Models
 {
+    public enum TypeOfUser
+    {
+        Admin, Captain, Stoker, Volunteer
+    }
     public class InTandemUser : IdentityUser
     {
         [PersonalData]
@@ -15,5 +19,28 @@ namespace InTandemRegistrationPortal.Models
         public string FirstName { get; set; }
         [PersonalData]
         public DateTime DateOfBirth { get; set; }
+        public TypeOfUser TypeOfUser { get; set; }
+
+        // stoker/captain properties
+        [PersonalData]
+        public string Height { get; set; }
+        [PersonalData]
+        public string Weight { get; set; }
+        // Captain-specific informaiton
+        [PersonalData]
+        public bool HasSeat { get; set; }
+        [PersonalData]
+        public bool HasTandem { get; set; }
+        [PersonalData]
+        public bool HasSingleBike { get; set; }
+        // Stoker-specific informaiton
+        [PersonalData]
+        public string Dog { get; set; }
+        [PersonalData]
+        public string SpecialEquipment { get; set; }
+        [PersonalData]
+        public string RiderLevel { get; set; }
+        [PersonalData]
+        public bool HasBeenTrained { get; set; }
     }
 }
