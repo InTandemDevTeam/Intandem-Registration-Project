@@ -41,6 +41,68 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Height")]
+            public string Height { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Weight")]
+            public string Weight { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Seat>")]
+            public string HasSeat { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Tandem?")]
+            public string HasTandem { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Single Bike?")]
+            public string HasSingleBike { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Dog")]
+            public string Dog { get; set; }
+
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Special Equipment")]
+            public string SpecialEquipment { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Rider Level")]
+            public string RiderLevel { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Been Trained?")]
+            public string HasBeenTrained { get; set; }
+
+            [Required]
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
+
+            [Required]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -65,8 +127,21 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DateOfBirth = user.DateOfBirth,
+                Height = user.Height,
+                Weight = user.Weight,
+                HasSeat = user.HasSeat,
+                HasTandem = user.HasTandem,
+                HasSingleBike = user.HasSingleBike,
+                Dog = user.Dog,
+                SpecialEquipment = user.SpecialEquipment,
+                RiderLevel = user.RiderLevel,
+                HasBeenTrained = user.HasBeenTrained,
                 Email = email,
                 PhoneNumber = phoneNumber
+
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -97,6 +172,66 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
             }
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+            }
+
+
+            if (Input.DateOfBirth != user.DateOfBirth)
+            {
+                user.DateOfBirth = Input.DateOfBirth;
+            }
+
+            if (Input.Height != user.Height)
+            {
+                user.Height = Input.Height;
+            }
+
+            if (Input.Weight != user.Weight)
+            {
+                user.Weight = Input.Weight;
+            }
+
+            if (Input.HasSeat != user.HasSeat)
+            {
+                user.HasSeat = Input.HasSeat;
+            }
+
+            if (Input.HasTandem != user.HasTandem)
+            {
+                user.HasTandem = Input.HasTandem;
+            }
+
+            if (Input.HasSingleBike != user.HasSingleBike)
+            {
+                user.HasSingleBike = Input.HasSingleBike;
+            }
+
+            if (Input.Dog != user.Dog)
+            {
+                user.Dog = Input.Dog;
+            }
+
+            if (Input.SpecialEquipment != user.SpecialEquipment)
+            {
+                user.SpecialEquipment = Input.SpecialEquipment;
+            }
+
+            if (Input.RiderLevel != user.RiderLevel)
+            {
+                user.RiderLevel = Input.RiderLevel;
+            }
+
+            if (Input.HasBeenTrained != user.HasBeenTrained)
+            {
+                user.HasBeenTrained = Input.HasBeenTrained;
+            }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
@@ -108,6 +243,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

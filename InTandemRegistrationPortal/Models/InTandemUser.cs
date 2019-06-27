@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 // model to be added onto later
 namespace InTandemRegistrationPortal.Models
 {
-    public enum TypeOfUser
+    /*public enum TypeOfUser
     {
         Admin, Captain, Stoker, Volunteer
-    }
+    }*/
     public class InTandemUser : IdentityUser
     {
         [PersonalData]
-        public string LastName { get; set; }
-        [PersonalData]
         public string FirstName { get; set; }
         [PersonalData]
+        public string LastName { get; set; }
+        [PersonalData]
         public DateTime DateOfBirth { get; set; }
-        public TypeOfUser TypeOfUser { get; set; }
+        //public TypeOfUser TypeOfUser { get; set; }
 
         // stoker/captain properties
         [PersonalData]
@@ -27,12 +27,15 @@ namespace InTandemRegistrationPortal.Models
         [PersonalData]
         public string Weight { get; set; }
         // Captain-specific informaiton
+        //change to bool object instead of string
         [PersonalData]
-        public bool HasSeat { get; set; }
+        public string HasSeat { get; set; }
+        //change to bool object instead of string
         [PersonalData]
-        public bool HasTandem { get; set; }
+        public string HasTandem { get; set; }
+        //change to bool object instead of string
         [PersonalData]
-        public bool HasSingleBike { get; set; }
+        public string HasSingleBike { get; set; }
         // Stoker-specific informaiton
         [PersonalData]
         public string Dog { get; set; }
@@ -41,6 +44,7 @@ namespace InTandemRegistrationPortal.Models
         [PersonalData]
         public string RiderLevel { get; set; }
         [PersonalData]
-        public bool HasBeenTrained { get; set; }
+        //change to bool object instead of string
+        public string HasBeenTrained { get; set; }
     }
 }

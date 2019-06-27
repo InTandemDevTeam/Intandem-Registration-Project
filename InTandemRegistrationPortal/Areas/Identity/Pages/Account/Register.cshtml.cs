@@ -41,6 +41,67 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Height")]
+            public string Height { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Weight")]
+            public string Weight { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Seat>")]
+            public string HasSeat { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Tandem?")]
+            public string HasTandem { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Single Bike?")]
+            public string HasSingleBike { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Dog")]
+            public string Dog { get; set; }
+
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Special Equipment")]
+            public string SpecialEquipment { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Rider Level")]
+            public string RiderLevel { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Has Been Trained?")]
+            public string HasBeenTrained { get; set; }
+
+            [Required]
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -67,7 +128,22 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new InTandemUser { UserName = Input.Email, Email = Input.Email };
+                var user = new InTandemUser {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    DateOfBirth = Input.DateOfBirth,
+                    Height = Input.Height,
+                    Weight = Input.Weight,
+                    HasSeat = Input.HasSeat,
+                    HasTandem = Input.HasTandem,
+                    HasSingleBike = Input.HasSingleBike,
+                    Dog = Input.Dog,
+                    SpecialEquipment = Input.SpecialEquipment,
+                    RiderLevel = Input.RiderLevel,
+                    HasBeenTrained = Input.HasBeenTrained
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

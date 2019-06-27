@@ -41,4 +41,4 @@ The generated database code requires Entity Framework Core Migrations. Run the f
 
 Apps that use ASP.NET Core Identity should also use HTTPS. To enable HTTPS see https://go.microsoft.com/fwlink/?linkid=848054.
 
-Apply migrations to Db created by ApplicationDbContext
+After adding custom user data apply migrations to Db created by ApplicationDbContext
