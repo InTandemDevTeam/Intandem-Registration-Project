@@ -62,8 +62,11 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             public string Weight { get; set; }
 
             [Required]
+            [Display(Name = "Select Type of User")]
+            public TypeOfUser TypeOfUser { get; set; }
+            [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Has Seat>")]
+            [Display(Name = "Has Seat?")]
             public string HasSeat { get; set; }
 
             [Required]
@@ -137,6 +140,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
+                    TypeOfUser = Input.TypeOfUser,
                     HasTandem = Input.HasTandem,
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,

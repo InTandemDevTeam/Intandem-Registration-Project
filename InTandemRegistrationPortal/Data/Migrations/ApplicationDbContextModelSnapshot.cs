@@ -76,6 +76,8 @@ namespace InTandemRegistrationPortal.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
+                    b.Property<int>("TypeOfUser");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
