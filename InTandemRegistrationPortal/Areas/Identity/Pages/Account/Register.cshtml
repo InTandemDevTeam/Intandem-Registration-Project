@@ -7,6 +7,8 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
+    <script src="~/js/register.js" asp-append-version="true"></script>
+    
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -29,64 +31,61 @@
                 <input asp-for="Input.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Height"></label>
-                <input asp-for="Input.Height" class="form-control" />
-                <span asp-validation-for="Input.Height" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Weight"></label>
-                <input asp-for="Input.Weight" class="form-control" />
-                <span asp-validation-for="Input.Weight" class="text-danger"></span>
-            </div>
 
             <br />
+
             <div class="form-group">
-                <label asp-for="Input.TypeOfUser">Select Type of User</label>
+                <label asp-for="Input.TypeOfUser">Type of User</label>
                 <!--<label for="TypeOfUser">Select Type of User</label>-->
-                <select asp-for="Input.TypeOfUser" class="form-control" id="TypeOfUser" name="TypeOfUser">
+                <select asp-for="Input.TypeOfUser" class="form-control" id="TypeOfUserDropdown" onchange="templating()">
                     <!--<select class="form-control" id="TypeOfUser" name="TypeOfUser">-->
-                    <option value="Admin">Admin</option>
+                    <option value="" selected disabled>Select Type of User</option>
                     <option value="Captain">Captain</option>
                     <option value="Stoker">Stoker</option>
                     <option value="Volunteer">Volunteer</option>
                 </select>
             </div>
             <br />
-            <div class="form-group">
-                <label asp-for="Input.HasSeat"></label>
-                <input asp-for="Input.HasSeat" class="form-control" />
-                <span asp-validation-for="Input.HasSeat" class="text-danger"></span>
+            <div id="captain_stoker">
+                <div class="form-group">
+                    <label asp-for="Input.Height"></label>
+                    <input asp-for="Input.Height" class="form-control" />
+                    <span asp-validation-for="Input.Height" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Weight"></label>
+                    <input asp-for="Input.Weight" class="form-control" />
+                    <span asp-validation-for="Input.Weight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HasSeat"></label>
+                    <input asp-for="Input.HasSeat" class="form-control" />
+                    <span asp-validation-for="Input.HasSeat" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.HasTandem"></label>
-                <input asp-for="Input.HasTandem" class="form-control" />
-                <span asp-validation-for="Input.HasTandem" class="text-danger"></span>
+            <div id="captain">
+                <div class="form-group">
+                    <label asp-for="Input.HasTandem"></label>
+                    <input asp-for="Input.HasTandem" class="form-control" />
+                    <span asp-validation-for="Input.HasTandem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HasSingleBike"></label>
+                    <input asp-for="Input.HasSingleBike" class="form-control" />
+                    <span asp-validation-for="Input.HasSingleBike" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.HasSingleBike"></label>
-                <input asp-for="Input.HasSingleBike" class="form-control" />
-                <span asp-validation-for="Input.HasSingleBike" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Dog"></label>
-                <input asp-for="Input.Dog" class="form-control" />
-                <span asp-validation-for="Input.Dog" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.SpecialEquipment"></label>
-                <input asp-for="Input.SpecialEquipment" class="form-control" />
-                <span asp-validation-for="Input.SpecialEquipment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.RiderLevel"></label>
-                <input asp-for="Input.RiderLevel" class="form-control" />
-                <span asp-validation-for="Input.RiderLevel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.HasBeenTrained"></label>
-                <input asp-for="Input.HasBeenTrained" class="form-control" />
-                <span asp-validation-for="Input.HasBeenTrained" class="text-danger"></span>
+            <div id="stoker">
+                <div class="form-group">
+                    <label asp-for="Input.Dog"></label>
+                    <input asp-for="Input.Dog" class="form-control" />
+                    <span asp-validation-for="Input.Dog" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.SpecialEquipment"></label>
+                    <input asp-for="Input.SpecialEquipment" class="form-control" />
+                    <span asp-validation-for="Input.SpecialEquipment" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
@@ -103,12 +102,13 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
+
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
 }

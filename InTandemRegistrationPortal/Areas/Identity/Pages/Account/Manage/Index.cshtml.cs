@@ -63,7 +63,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Has Seat>")]
+            [Display(Name = "Has Seat?")]
             public string HasSeat { get; set; }
 
             [Required]
@@ -86,16 +86,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Special Equipment")]
             public string SpecialEquipment { get; set; }
-
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "Rider Level")]
-            public string RiderLevel { get; set; }
-
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "Has Been Trained?")]
-            public string HasBeenTrained { get; set; }
 
             [Required]
             [Display(Name = "Date of Birth")]
@@ -137,8 +127,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                 HasSingleBike = user.HasSingleBike,
                 Dog = user.Dog,
                 SpecialEquipment = user.SpecialEquipment,
-                RiderLevel = user.RiderLevel,
-                HasBeenTrained = user.HasBeenTrained,
                 Email = email,
                 PhoneNumber = phoneNumber
 
@@ -223,15 +211,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                 user.SpecialEquipment = Input.SpecialEquipment;
             }
 
-            if (Input.RiderLevel != user.RiderLevel)
-            {
-                user.RiderLevel = Input.RiderLevel;
-            }
-
-            if (Input.HasBeenTrained != user.HasBeenTrained)
-            {
-                user.HasBeenTrained = Input.HasBeenTrained;
-            }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
