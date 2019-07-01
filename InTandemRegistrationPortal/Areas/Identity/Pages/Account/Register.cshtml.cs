@@ -62,7 +62,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Select Type of User")]
-            public TypeOfUser TypeOfUser { get; set; }
+            public string TypeOfUser { get; set; }
 
             
             [DataType(DataType.Text)]
