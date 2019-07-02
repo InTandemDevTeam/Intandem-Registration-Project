@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using InTandemRegistrationPortal.Utilities;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -20,17 +21,19 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         private readonly UserManager<InTandemUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly RoleManager<IdentityRole> _roleManager;
         public RegisterModel(
             UserManager<InTandemUser> userManager,
             SignInManager<InTandemUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -50,31 +53,26 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Last name")]
             public string LastName { get; set; }
 
-            
+            [Required]
+            [Display(Name = "Select Type of User")]
+            public string Role { get; set; }
+
             [DataType(DataType.Text)]
             [Display(Name = "Height")]
             public string Height { get; set; }
 
-            
             [DataType(DataType.Text)]
             [Display(Name = "Weight")]
             public string Weight { get; set; }
 
-            [Required]
-            [Display(Name = "Select Type of User")]
-            public string TypeOfUser { get; set; }
-
-            
             [DataType(DataType.Text)]
             [Display(Name = "Has Seat?")]
             public string HasSeat { get; set; }
 
-            
             [DataType(DataType.Text)]
             [Display(Name = "Has Tandem?")]
             public string HasTandem { get; set; }
 
-            
             [DataType(DataType.Text)]
             [Display(Name = "Has Single Bike?")]
             public string HasSingleBike { get; set; }
@@ -109,7 +107,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
+            
         }
 
         public void OnGet(string returnUrl = null)
@@ -131,7 +129,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
-                    TypeOfUser = Input.TypeOfUser,
+                    Role = Input.Role,
                     HasTandem = Input.HasTandem,
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
@@ -140,6 +138,15 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(user.Role))
+                    {
+                        var users = new IdentityRole(user.Role);
+                        var res = await _roleManager.CreateAsync(users);
+                        if (res.Succeeded)
+                        {
+                            await _userManager.AddToRoleAsync(user, user.Role);
+                        }
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

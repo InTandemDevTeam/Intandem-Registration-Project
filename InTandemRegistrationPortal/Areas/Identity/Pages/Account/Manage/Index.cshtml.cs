@@ -17,15 +17,17 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<InTandemUser> _userManager;
         private readonly SignInManager<InTandemUser> _signInManager;
         private readonly IEmailSender _emailSender;
-
+        private readonly RoleManager<IdentityRole> _roleManager;
         public IndexModel(
             UserManager<InTandemUser> userManager,
             SignInManager<InTandemUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         public string Username { get; set; }
@@ -50,6 +52,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Last name")]
             public string LastName { get; set; }
 
+            [DataType(DataType.Text)]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
@@ -99,6 +104,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -112,14 +118,15 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var role = await _userManager.GetRolesAsync(user);
 
             Username = userName;
-
             Input = new InputModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 DateOfBirth = user.DateOfBirth,
+                Role = user.Role,
                 Height = user.Height,
                 Weight = user.Weight,
                 HasSeat = user.HasSeat,
@@ -129,7 +136,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                 SpecialEquipment = user.SpecialEquipment,
                 Email = email,
                 PhoneNumber = phoneNumber
-
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -170,10 +176,15 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
             }
 
-
             if (Input.DateOfBirth != user.DateOfBirth)
             {
                 user.DateOfBirth = Input.DateOfBirth;
+            }
+            //var role = await _userManager.GetRolesAsync(user);
+
+            if (Input.Role != user.Role)
+            {
+                user.Role = Input.Role;
             }
 
             if (Input.Height != user.Height)

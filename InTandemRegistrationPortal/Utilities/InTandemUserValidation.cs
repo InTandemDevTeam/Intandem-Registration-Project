@@ -12,11 +12,11 @@ namespace InTandemRegistrationPortal.Utilities
         //validation should return error message if field is left blank
         //based on user type
 
-        private readonly string User;
+        private readonly string allowedUser;
 
-        public InTandemUserValidation(string User)
+        public InTandemUserValidation(string allowedUser)
         {
-            this.User = User;
+            this.allowedUser = allowedUser;
         }
 
         //input that is entered
@@ -26,7 +26,15 @@ namespace InTandemRegistrationPortal.Utilities
         //by user type
         public override bool IsValid(object value)
         {
-            return base.IsValid(value);
+            //reimplement required attribute chedck
+            if (value == null || value.ToString().Equals(""))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

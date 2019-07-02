@@ -70,13 +70,13 @@ namespace InTandemRegistrationPortal.Data.Migrations
 
                     b.Property<string>("RiderLevel");
 
+                    b.Property<string>("Role");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("SpecialEquipment");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("TypeOfUser");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);

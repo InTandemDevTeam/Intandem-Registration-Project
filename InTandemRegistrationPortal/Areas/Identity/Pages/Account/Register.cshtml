@@ -35,10 +35,8 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="Input.TypeOfUser">Type of User</label>
-                <!--<label for="TypeOfUser">Select Type of User</label>-->
-                <select asp-for="Input.TypeOfUser" class="form-control" id="TypeOfUserDropdown" onchange="templating()">
-                    <!--<select class="form-control" id="TypeOfUser" name="TypeOfUser">-->
+                <label asp-for="Input.Role">Type of User</label>
+                <select asp-for="Input.Role" class="form-control" id="RoleDropdown" onchange="templating()">
                     <option value="" selected disabled>Select Type of User</option>
                     <option value="Captain">Captain</option>
                     <option value="Stoker">Stoker</option>
@@ -46,33 +44,34 @@
                 </select>
             </div>
             <br />
+            <!-- only required fields below are assigned ids to their spans-->
             <div id="captain_stoker">
                 <div class="form-group">
                     <label asp-for="Input.Height"></label>
                     <input asp-for="Input.Height" class="form-control" />
-                    <span asp-validation-for="Input.Height" class="text-danger"></span>
+                    <span id="HeightSpan" asp-validation-for="Input.Height" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Weight"></label>
                     <input asp-for="Input.Weight" class="form-control" />
-                    <span asp-validation-for="Input.Weight" class="text-danger"></span>
+                    <span id="WeightSpan" asp-validation-for="Input.Weight" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSeat"></label>
                     <input asp-for="Input.HasSeat" class="form-control" />
-                    <span asp-validation-for="Input.HasSeat" class="text-danger"></span>
+                    <span id="HasSeatSpan" asp-validation-for="Input.HasSeat" class="text-danger"></span>
                 </div>
             </div>
             <div id="captain">
                 <div class="form-group">
                     <label asp-for="Input.HasTandem"></label>
                     <input asp-for="Input.HasTandem" class="form-control" />
-                    <span asp-validation-for="Input.HasTandem" class="text-danger"></span>
+                    <span id="HasTandemSpan"asp-validation-for="Input.HasTandem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSingleBike"></label>
                     <input asp-for="Input.HasSingleBike" class="form-control" />
-                    <span asp-validation-for="Input.HasSingleBike" class="text-danger"></span>
+                    <span id="HasSingleBikeSpan" asp-validation-for="Input.HasSingleBike" class="text-danger"></span>
                 </div>
             </div>
             <div id="stoker">

@@ -19,6 +19,8 @@ namespace InTandemRegistrationPortal
 {
     public class Startup
     {
+        //private readonly RoleManager<IdentityRole> roleManager;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -41,15 +43,21 @@ namespace InTandemRegistrationPortal
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<InTandemUser, IdentityRole>()
             //services.AddDefaultIdentity<IdentityUser>()
+                //.AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireStokerRole",
+                    policy => policy.RequireRole("Stoker"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +78,30 @@ namespace InTandemRegistrationPortal
             app.UseAuthentication();
 
             app.UseMvc();
+            CreateRoles(serviceProvider).Wait();
+            /*string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer" };
+            foreach (var roleName in roleNames)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }*/
+        }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
+            string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer"};
+            IdentityResult roleResult;
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
         }
     }
 }
