@@ -48,12 +48,17 @@ namespace InTandemRegistrationPortal
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddAuthorization(options =>
+            services.AddMvc()
+            /*.AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");
+            });*/
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            /*services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireStokerRole",
                     policy => policy.RequireRole("Stoker"));
-            });
+            })*/;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +83,7 @@ namespace InTandemRegistrationPortal
             app.UseAuthentication();
 
             app.UseMvc();
-            CreateRoles(serviceProvider).Wait();
+            CreateRoles(serviceProvider);
             /*string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer" };
             foreach (var roleName in roleNames)
             {

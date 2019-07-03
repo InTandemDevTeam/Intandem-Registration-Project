@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InTandemRegistrationPortal.Pages
 {
-    [Authorize(Policy = "RequireStokerRole")]
+    [Authorize (Roles = "Captain, Stoker")]
     public class PrivacyModel : PageModel
     {
         public void OnGet()
