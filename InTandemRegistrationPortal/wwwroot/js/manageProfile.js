@@ -3,19 +3,15 @@
 
 // Write your Javascript code.
 
-// applies only to registration page
+// applies only to manage/index page
 
 // hides all type-specific information until type is selected
-$(document).ready(function () {
-    $("#captain_stoker").hide();
-    $("#captain").hide();
-    $("#stoker").hide();
-});
 
-function templating() {
+
+function changeUserType() {
 
     let e = document.getElementById("RoleDropdown");
-    
+
     if (e !== null) {
         let UserType = e.options[e.selectedIndex].value;
 
@@ -29,13 +25,13 @@ function templating() {
 
         }
         if (UserType === "Captain") {
-            
+
             // show captain+stoker info
             $("#captain_stoker").show();
             // show captain-specific info
             $("#captain").show();
             $("#stoker").hide();
-            
+
         }
         if (UserType === "Volunteer") {
 
@@ -43,7 +39,7 @@ function templating() {
             $("#captain_stoker").hide();
             $("#captain").hide();
             $("#stoker").hide();
-            
+
         }
     }
 }

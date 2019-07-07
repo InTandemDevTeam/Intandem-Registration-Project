@@ -6,6 +6,6 @@
   * Modify HTML on Register page (templating and validation complete, need to change error messages)
   * Implement server-side validation (major problems with validation right now)
   * Implement Roles system for Admin, Stoker, Captain, and Volunteer (mostly complete, roles appear to be working, )
-  * Tweak HTML on Manage page to allow settings to be changed
+  * Impolement templating on Manage page to allow settings to be changed based on Role (HTML tweaking completed)
   * Only grant user access upon email confirmation and admin confirmation
 
