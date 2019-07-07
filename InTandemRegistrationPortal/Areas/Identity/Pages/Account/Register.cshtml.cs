@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using InTandemRegistrationPortal.Utilities;
+using ExpressiveAnnotations.Attributes;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -57,22 +56,27 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Select Type of User")]
             public string Role { get; set; }
 
+            [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'")]
             [DataType(DataType.Text)]
             [Display(Name = "Height")]
             public string Height { get; set; }
 
+            [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'")]
             [DataType(DataType.Text)]
             [Display(Name = "Weight")]
             public string Weight { get; set; }
 
+            [RequiredIf("Role == 'Captain'")]
             [DataType(DataType.Text)]
             [Display(Name = "Has Seat?")]
             public string HasSeat { get; set; }
 
+            [RequiredIf("Role == 'Captain'")]
             [DataType(DataType.Text)]
             [Display(Name = "Has Tandem?")]
             public string HasTandem { get; set; }
 
+            [RequiredIf("Role == 'Captain'", ErrorMessage = "This field is required")]
             [DataType(DataType.Text)]
             [Display(Name = "Has Single Bike?")]
             public string HasSingleBike { get; set; }
