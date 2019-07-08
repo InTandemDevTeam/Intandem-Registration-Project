@@ -40,14 +40,15 @@
                 <label asp-for="Input.LastName"></label>
                 <input asp-for="Input.LastName" class="form-control" />
             </div>
-
-            <div class="form-group">
-                <label asp-for="Input.DateOfBirth"></label>
-                <input asp-for="Input.DateOfBirth" class="form-control" />
-            </div>
+            <!--
+    <div class="form-group">
+        <label asp-for="Input.DateOfBirth"></label>
+        <input asp-for="Input.DateOfBirth" class="form-control" />
+    </div>-->
             <div class="form-group">
                 <label asp-for="Input.Role">Type of User</label>
-                <select asp-for="Input.Role" class="form-control" id="RoleDropdown" onchange="changeUserType()">
+                
+                <select asp-for="Input.Role" id="RoleDropdown" onchange="changeShownFields(document.getElementById('RoleDropdown'))" class="form-control">
                     <option value="Captain">Captain</option>
                     <option value="Stoker">Stoker</option>
                     <option value="Volunteer">Volunteer</option>
@@ -56,15 +57,16 @@
             <div id="captain_stoker">
                 <div class="form-group">
                     <label asp-for="Input.Height"></label>
-                    <input asp-for="Input.Height" class="form-control" />
+                    <input asp-for="Input.Height" class="form-control" id="Height" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Weight"></label>
-                    <input asp-for="Input.Weight" class="form-control" />
+                    <input asp-for="Input.Weight" class="form-control" id="Weight" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSeat"></label>
-                    <select asp-for="Input.HasSeat" class="form-control">
+                    <select asp-for="Input.HasSeat" class="form-control" id="HasSeatDropdown">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -73,14 +75,16 @@
             <div id="captain">
                 <div class="form-group">
                     <label asp-for="Input.HasTandem"></label>
-                    <select asp-for="Input.HasTandem" class="form-control">
+                    <select asp-for="Input.HasTandem" class="form-control" id="HasTandemDropdown">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSingleBike"></label>
-                    <select asp-for="Input.HasSingleBike" class="form-control">
+                    <select asp-for="Input.HasSingleBike" class="form-control" id="HasSingleBikeDropdown">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -89,14 +93,15 @@
             <div id="stoker">
                 <div class="form-group">
                     <label asp-for="Input.Dog"></label>
-                    <select asp-for="Input.Dog" class="form-control">
+                    <select asp-for="Input.Dog" class="form-control" id="DogDropdown">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.SpecialEquipment"></label>
-                    <input asp-for="Input.SpecialEquipment" class="form-control" />
+                    <input asp-for="Input.SpecialEquipment" class="form-control" id="SpecialEquipmentDropdown" />
                 </div>
             </div>
             <div class="form-group">

@@ -44,61 +44,61 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "First name")]
+            [Display(Name = "First name (required)")]
             public string FirstName { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Last name")]
+            [Display(Name = "Last name (required)")]
             public string LastName { get; set; }
 
             [Required(ErrorMessage = "Please select what type of User you are")]
-            [Display(Name = "Select Type of User")]
+            [Display(Name = "What type of user are you? (required)")]
             public string Role { get; set; }
 
             [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please enter your height")]
             [DataType(DataType.Text)]
-            [Display(Name = "Height")]
+            [Display(Name = "Height (required)")]
             public string Height { get; set; }
 
             [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please enter your weight")]
             [DataType(DataType.Text)]
-            [Display(Name = "Weight")]
+            [Display(Name = "Weight (required)")]
             public string Weight { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have your own seat")]
             [DataType(DataType.Text)]
-            [Display(Name = "Do you have your own seat?")]
+            [Display(Name = "Do you have your own seat? (required)")]
             public string HasSeat { get; set; }
 
             [RequiredIf("Role == 'Captain'")]
             [DataType(DataType.Text)]
-            [Display(Name = "Do you have your own tandem bike?")]
+            [Display(Name = "Do you have your own tandem bike? (required)")]
             public string HasTandem { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a bike")]
             [DataType(DataType.Text)]
-            [Display(Name = "Do you have your own single bike?")]
+            [Display(Name = "Do you have your own single bike? (required)")]
             public string HasSingleBike { get; set; }
 
             
             [DataType(DataType.Text)]
-            [Display(Name = "Do you have a guide dog?")]
+            [Display(Name = "Do you have a guide dog? (required)")]
             public string Dog { get; set; }
 
             
             [DataType(DataType.Text)]
-            [Display(Name = "Do you have any special equipment?")]
+            [Display(Name = "Do you have any special equipment? (required)")]
             public string SpecialEquipment { get; set; }
 
             [Required]
-            [Display(Name = "Date of Birth")]
+            [Display(Name = "Date of Birth (required)")]
             [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Email (required)")]
             public string Email { get; set; }
 
             [Required]

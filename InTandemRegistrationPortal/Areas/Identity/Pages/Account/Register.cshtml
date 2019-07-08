@@ -8,7 +8,7 @@
 
 <div class="row">
     <script src="~/js/register.js" asp-append-version="true"></script>
-    
+
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -35,7 +35,7 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="Input.Role">Type of User</label>
+                <label asp-for="Input.Role"></label>
                 <select asp-for="Input.Role" class="form-control" id="RoleDropdown" onchange="templating()">
                     <option value="" selected disabled>Select Type of User</option>
                     <option value="Captain">Captain</option>
@@ -59,9 +59,10 @@
                 <div class="form-group">
                     <label asp-for="Input.HasSeat"></label>
                     <select asp-for="Input.HasSeat" class="form-control">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select>                    
+                    </select>
                     <span asp-validation-for="Input.HasSeat" class="text-danger"></span>
                 </div>
             </div>
@@ -69,6 +70,7 @@
                 <div class="form-group">
                     <label asp-for="Input.HasTandem"></label>
                     <select asp-for="Input.HasTandem" class="form-control">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -77,6 +79,7 @@
                 <div class="form-group">
                     <label asp-for="Input.HasSingleBike"></label>
                     <select asp-for="Input.HasSingleBike" class="form-control">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -87,9 +90,11 @@
                 <div class="form-group">
                     <label asp-for="Input.Dog"></label>
                     <select asp-for="Input.Dog" class="form-control">
+                        <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
-                    </select>                    <span asp-validation-for="Input.Dog" class="text-danger"></span>
+                    </select>                    
+                    <span asp-validation-for="Input.Dog" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.SpecialEquipment"></label>
