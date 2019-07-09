@@ -4,12 +4,15 @@
 // Write your Javascript code.
 
 // applies only to manage/index page
+import { clearFields } from "./clearFields"
+
 
 // hides all type-specific information until type is selected
+//adds event listener to load below code on page load
+
 $(document).ready(function () {
     changeShownFields(document.getElementById("RoleDropdown"));
 });
-//adds event listener to load below code on page load
 
 
 /*function changeUserProfileFields() {
@@ -26,8 +29,13 @@ $(document).ready(function () {
 }*/
 
 function changeShownFields(Dropdown) {
-    //console.log("function has started");
+    console.log("function has started");
     //console.log(Dropdown);
+    //const Captain+StokerFields = $(".captain+stoker-field");
+    //const CaptainFields = $(".captain-field");
+    //const StokerFields = $(".stoker-field");
+
+    //clearFields(e);
     if (Dropdown !== null) {
         let UserType = Dropdown.options[Dropdown.selectedIndex].value;
 
