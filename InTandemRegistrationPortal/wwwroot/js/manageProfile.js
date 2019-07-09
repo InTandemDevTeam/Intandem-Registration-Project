@@ -46,42 +46,20 @@ function changeShownFields(Dropdown) {
             // show stoker-specific info
             $("#stoker").show();
             $("#captain").hide();
-            //HasTandem.selectedIndex = -1;
-            //HasSingleBike.selectedIndex = -1;
         }
         if (UserType === "Captain") {
-
             // show captain+stoker info
             $("#captain_stoker").show();
             // show captain-specific info
             $("#captain").show();
-            $("#stoker").hide();
-            /*if ((Dog !== null) && (SpecialEquipment !== null)) {
-                Dog.value = "";
-                SpecialEquipment.value = "";
-            }*/
-                
+            $("#stoker").hide();  
         }
         if (UserType === "Volunteer") {
 
             // show no specific information for volunteer
             $("#captain_stoker").hide();
-            /*if ((Height !== null) && (Weight !== null) && (HasSeat !== null)) {
-                Height.value = "";
-                Weight.value = "";
-                HasSeat.selectedIndex = -1;
-            }*/
-            
             $("#captain").hide();
-            /*if ((HasTandem !== null) && (HasSingleBike !== null)) {
-                HasTandem.selectedIndex = -1;
-                HasSingleBike.selectedIndex = -1;
-            }*/
             $("#stoker").hide();
-            /*if ((Dog !== null) && (SpecialEquipment !== null)) {
-                Dog.selectedIndex = -1;
-                SpecialEquipment.value = "";
-            }*/
         }
     }
 }
