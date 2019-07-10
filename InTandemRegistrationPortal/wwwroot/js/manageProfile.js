@@ -1,41 +1,60 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿//import { clearFields } from "./clearFields";
+
+//import * from './clearFields.js'
+// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
 
 // applies only to manage/index page
-import { clearFields } from "./clearFields"
 
-
+//let Captain_StokerFields;
+//let CaptainFields;
+//let StokerFields;
+//let UserFields;
+//let RoleDropdown;
 // hides all type-specific information until type is selected
 //adds event listener to load below code on page load
 
 $(document).ready(function () {
-    changeShownFields(document.getElementById("RoleDropdown"));
+    RoleDropdown = document.getElementById("RoleDropdown");
+    //RoleDropdown = $("#RoleDropdown");
+
+    //Captain_StokerFields = $(".captain+stoker-field");
+    //CaptainFields = $(".captain-field");
+    //StokerFields = $(".stoker-field");
+    UserFields = $(".user-field");
+    changeShownFields(RoleDropdown);
+    RoleDropdown.onchange = function () {
+        changeShownFields(RoleDropdown);
+        //clearFields(RoleDropdown);
+    }
+    //console.log(RoleDropdown);
+
+    for (let i = 0; i < UserFields.length; i++) {
+        //console.log(UserFields[i]);
+        if ($(UserFields[i]).hasClass("captain+stoker-field")) {
+            //add event handler
+            //clearField(UserFields[i]);
+            console.log("check for captain+stoker field works")
+        }
+        if ($(UserFields[i]).hasClass("captain-field")) {
+            //add event handler
+            //clearField(UserFields[i]);
+            console.log("check for captain field works")
+        }
+        if ($(UserFields[i]).hasClass("stoker-field")) {
+            //add event handler
+            //clearField(UserFields[i]);
+            console.log("check for stoker field works")
+        }
+
+    }
 });
-
-
-/*function changeUserProfileFields() {
-
-    let Height = document.getElementById("Height");
-    let Weight = document.getElementById("Weight");
-    let HasSeat = document.getElementById("HasSeatDropdown");
-    let HasTandem = document.getElementById("HasTandemDropdown");
-    let HasSingleBike = document.getElementById("HasSingleBikeDropdown");
-    let Dog = document.getElementById("DogDropdown");
-    let SpecialEquipment = document.getElementById("SpecialEquipment");
-    
-    //set index to -1 to set dropdown value to blank
-}*/
 
 function changeShownFields(Dropdown) {
     console.log("function has started");
     //console.log(Dropdown);
-    //const Captain+StokerFields = $(".captain+stoker-field");
-    //const CaptainFields = $(".captain-field");
-    //const StokerFields = $(".stoker-field");
-
-    //clearFields(e);
     if (Dropdown !== null) {
         let UserType = Dropdown.options[Dropdown.selectedIndex].value;
 
@@ -52,14 +71,28 @@ function changeShownFields(Dropdown) {
             $("#captain_stoker").show();
             // show captain-specific info
             $("#captain").show();
-            $("#stoker").hide();  
+            $("#stoker").hide();
         }
-        if (UserType === "Volunteer") {
-
+        if (UserType === "Volunteer"
+            || UserType === ""
+            || UserType === null)
+        {
+            
             // show no specific information for volunteer
             $("#captain_stoker").hide();
             $("#captain").hide();
             $("#stoker").hide();
         }
     }
+}
+
+function clearField(field) {
+    console.log(field);
+    if (field.nodeName === "SELECT") {
+        field.selectedIndex = -1;
+    }
+    if (field.nodeName === "INPUT") {
+        field.value = "";
+    }
+
 }

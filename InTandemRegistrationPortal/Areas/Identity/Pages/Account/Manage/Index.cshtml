@@ -8,7 +8,6 @@
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
-    <script src="~/js/manageProfile.js" asp-append-version="true"></script>
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -41,14 +40,14 @@
                 <input asp-for="Input.LastName" class="form-control" />
             </div>
             <!--
-    <div class="form-group">
-        <label asp-for="Input.DateOfBirth"></label>
-        <input asp-for="Input.DateOfBirth" class="form-control" />
-    </div>-->
+            <div class="form-group">
+                <label asp-for="Input.DateOfBirth"></label>
+                <input asp-for="Input.DateOfBirth" class="form-control" />
+            </div>-->
             <div class="form-group">
                 <label asp-for="Input.Role">Type of User</label>
-                
-                <select asp-for="Input.Role" id="RoleDropdown" onchange="changeShownFields(document.getElementById('RoleDropdown'))" class="form-control">
+                <!--onchange="changeShownFields(document.getElementById('RoleDropdown'))"-->
+                <select asp-for="Input.Role" id="RoleDropdown" class="form-control">
                     <option value="Captain">Captain</option>
                     <option value="Stoker">Stoker</option>
                     <option value="Volunteer">Volunteer</option>
@@ -57,15 +56,15 @@
             <div id="captain_stoker">
                 <div class="form-group">
                     <label asp-for="Input.Height"></label>
-                    <input asp-for="Input.Height" class="form-control captain+stoker-field" />
+                    <input asp-for="Input.Height" class="form-control user-field captain+stoker-field" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Weight"></label>
-                    <input asp-for="Input.Weight" class="form-control captain+stoker-field" />
+                    <input asp-for="Input.Weight" class="form-control user-field captain+stoker-field" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSeat"></label>
-                    <select asp-for="Input.HasSeat" class="form-control captain+stoker-field">
+                    <select asp-for="Input.HasSeat" class="form-control user-field captain+stoker-field">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -75,7 +74,7 @@
             <div id="captain">
                 <div class="form-group">
                     <label asp-for="Input.HasTandem"></label>
-                    <select asp-for="Input.HasTandem" class="form-control captain-field">
+                    <select asp-for="Input.HasTandem" class="form-control user-field captain-field">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -83,7 +82,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSingleBike"></label>
-                    <select asp-for="Input.HasSingleBike" class="form-control captain-field">
+                    <select asp-for="Input.HasSingleBike" class="form-control user-field captain-field">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -93,7 +92,7 @@
             <div id="stoker">
                 <div class="form-group">
                     <label asp-for="Input.Dog"></label>
-                    <select asp-for="Input.Dog" class="form-control stoker-field">
+                    <select asp-for="Input.Dog" class="form-control user-field stoker-field">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -101,7 +100,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.SpecialEquipment"></label>
-                    <input asp-for="Input.SpecialEquipment" class="form-control stoker-field" />
+                    <input asp-for="Input.SpecialEquipment" class="form-control user-field stoker-field" />
                 </div>
             </div>
             <div class="form-group">
@@ -116,4 +115,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/manageProfile.js" asp-append-version="true"></script>
 }
