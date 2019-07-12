@@ -8,53 +8,26 @@
 
 // applies only to manage/index page
 
-//let Captain_StokerFields;
-//let CaptainFields;
-//let StokerFields;
-//let UserFields;
-//let RoleDropdown;
 // hides all type-specific information until type is selected
-//adds event listener to load below code on page load
+// adds event listener to load below code on page load
 
 $(document).ready(function () {
-    RoleDropdown = document.getElementById("RoleDropdown");
-    //RoleDropdown = $("#RoleDropdown");
-
-    //Captain_StokerFields = $(".captain+stoker-field");
-    //CaptainFields = $(".captain-field");
-    //StokerFields = $(".stoker-field");
-    UserFields = $(".user-field");
+    let RoleDropdown = document.getElementById("RoleDropdown");
+    // clears fields not pertaining to user selection on page load
     changeShownFields(RoleDropdown);
+    // adds event handler to user dropdown menu to clear fields on change
     RoleDropdown.onchange = function () {
         changeShownFields(RoleDropdown);
-        //clearFields(RoleDropdown);
     }
-    //console.log(RoleDropdown);
 
-    for (let i = 0; i < UserFields.length; i++) {
-        //console.log(UserFields[i]);
-        if ($(UserFields[i]).hasClass("captain+stoker-field")) {
-            //add event handler
-            //clearField(UserFields[i]);
-            console.log("check for captain+stoker field works")
-        }
-        if ($(UserFields[i]).hasClass("captain-field")) {
-            //add event handler
-            //clearField(UserFields[i]);
-            console.log("check for captain field works")
-        }
-        if ($(UserFields[i]).hasClass("stoker-field")) {
-            //add event handler
-            //clearField(UserFields[i]);
-            console.log("check for stoker field works")
-        }
-
-    }
+    
 });
 
 function changeShownFields(Dropdown) {
-    console.log("function has started");
-    //console.log(Dropdown);
+
+    let CaptainStokerFields = $(".CaptainStokerField");
+    let CaptainFields = $(".CaptainField");
+    let StokerFields = $(".StokerField");
     if (Dropdown !== null) {
         let UserType = Dropdown.options[Dropdown.selectedIndex].value;
 
@@ -65,6 +38,9 @@ function changeShownFields(Dropdown) {
             // show stoker-specific info
             $("#stoker").show();
             $("#captain").hide();
+            // clears information not pertaining to stoker
+            clearMultipleFields(CaptainFields, "CaptainField")
+
         }
         if (UserType === "Captain") {
             // show captain+stoker info
@@ -72,6 +48,8 @@ function changeShownFields(Dropdown) {
             // show captain-specific info
             $("#captain").show();
             $("#stoker").hide();
+            clearMultipleFields(StokerFields, "StokerField")
+            // clears information not pertaining to captain
         }
         if (UserType === "Volunteer"
             || UserType === ""
@@ -82,17 +60,39 @@ function changeShownFields(Dropdown) {
             $("#captain_stoker").hide();
             $("#captain").hide();
             $("#stoker").hide();
+            // clears information not pertaining to volunteer
+            clearMultipleFields(CaptainFields, "CaptainField")
+            clearMultipleFields(StokerFields, "StokerField")
+            clearMultipleFields(CaptainStokerFields, "CaptainStokerField")
         }
     }
 }
 
-function clearField(field) {
-    console.log(field);
+
+function clearSingleField(field) {
+    // if select element is found, its value is cleared
     if (field.nodeName === "SELECT") {
+        console.trace("select field found");
         field.selectedIndex = -1;
     }
+    // if input element is found, its value is cleared
     if (field.nodeName === "INPUT") {
+        console.trace("input field found");
         field.value = "";
     }
 
+}
+function clearMultipleFields(fields, classToCheck) {
+    // first param is data structure containing html elements
+    // loops through array-like jquery object
+    // if element has class passed into function
+    // clear that element's value
+    $(fields).each(function () {
+        if ($(this).hasClass(classToCheck)) {
+            // clears single field
+            clearSingleField(this);
+            console.log("clearSingleField executed");
+            console.log(this);
+        }
+    });
 }

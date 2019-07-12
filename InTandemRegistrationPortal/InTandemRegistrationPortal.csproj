@@ -6,6 +6,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\.eslintrc" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="ExpressiveAnnotations" Version="2.9.6" />
