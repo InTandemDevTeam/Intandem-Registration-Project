@@ -14,7 +14,8 @@ using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.AspNetCore.Identity.UI.Services;
+using InTandemRegistrationPortal.Services;
 namespace InTandemRegistrationPortal
 {
     public class Startup
@@ -41,14 +42,16 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<InTandemUser, IdentityRole>()
-            //services.AddDefaultIdentity<IdentityUser>()
-                //.AddRoles<IdentityRole>()
+            services.AddIdentity<InTandemUser, IdentityRole>(/*(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            }*/)
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
-            services.AddMvc()
+            /*services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddMvc()*/
             /*.AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");

@@ -1,16 +1,15 @@
 ﻿//import { clearFields } from "./clearFields";
-
+//import clearMultipleFields from "./clearMultipleInputs.js";
 //import * from './clearFields.js'
 // Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
-
 // Write your Javascript code.
 
 // applies only to manage/index page
 
 // hides all type-specific information until type is selected
 // adds event listener to load below code on page load
-
+console.log("manage page reached");
 $(document).ready(function () {
     let RoleDropdown = document.getElementById("RoleDropdown");
     // clears fields not pertaining to user selection on page load
@@ -80,7 +79,6 @@ function clearSingleField(field) {
         console.trace("input field found");
         field.value = "";
     }
-
 }
 function clearMultipleFields(fields, classToCheck) {
     // first param is data structure containing html elements

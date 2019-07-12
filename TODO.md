@@ -13,6 +13,7 @@
     * HTML tweaking completed 
     * proper fields now shown based on role
   * Only grant user access upon email confirmation and admin confirmation
+    * email confirmation needs debugging
   * Refactor javascript code
     * place functions into separate modules
     * call all needed code from site.js based on page loaded
