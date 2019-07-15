@@ -25,7 +25,8 @@ namespace InTandemRegistrationPortal.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Joe@contoso.com", "Joe Smith"),
+                // change to custom email address here, preferably to the email of admin
+                From = new EmailAddress("faizan.jamilwork@gmail.com", "Faizan Jamil"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

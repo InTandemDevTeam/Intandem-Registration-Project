@@ -160,8 +160,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
+                    string msgBody = "Thank you for creating an account with InTandem. \n";
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        msgBody + $"In order to access the web portal, please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

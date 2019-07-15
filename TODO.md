@@ -6,7 +6,6 @@
   * Modify HTML on Register page (templating and validation complete, need to change error messages)
     * templating (complete)
     * client-side validation (complete)
-    * clear fields based on user selection 
   * Implement server-side validation (major problems with validation right now)
   * Implement Roles system for Admin, Stoker, Captain, and Volunteer (mostly complete, roles appear to be working, )
   * Implement templating on Manage page to allow settings to be changed based on Role 
@@ -15,7 +14,7 @@
   * Only grant user access upon email confirmation and admin confirmation
     * email confirmation needs debugging (complete)
     * basic email confirmation system implemented (complete)
-    * need to send from custom email that is not joe@contoso.com
+    * need to send from custom email that is not joe@contoso.com (done, will need to be changed prior to deployment)
     * require admin approval before account is allowed access
   * Refactor javascript code
     * place functions into separate modules

@@ -20,8 +20,6 @@ namespace InTandemRegistrationPortal
 {
     public class Startup
     {
-        //private readonly RoleManager<IdentityRole> roleManager;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -52,7 +50,7 @@ namespace InTandemRegistrationPortal
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddMvc()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*.AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");
