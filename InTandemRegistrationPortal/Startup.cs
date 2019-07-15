@@ -42,21 +42,21 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<InTandemUser, IdentityRole>(/*(config =>
+            services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
-            }*/)
+            })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            /*services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddMvc()*/
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*.AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");
             });*/
-            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireStokerRole",
