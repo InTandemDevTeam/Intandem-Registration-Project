@@ -40,6 +40,9 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<InTandemRegistrationPortalContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
@@ -98,7 +101,7 @@ namespace InTandemRegistrationPortal
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
-            string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer"};
+            string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer" };
             IdentityResult roleResult;
             foreach (var roleName in roleNames)
             {
@@ -108,6 +111,24 @@ namespace InTandemRegistrationPortal
                     roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
                 }
             }
+            //Task<InTandemUser> adminUser = UserManager.FindByEmailAsync(email);
+            /*var poweruser = new InTandemUser
+            {
+                UserName = Configuration["AppSettings:Email"],
+                Email = Configuration["AppSettings:Email"]
+            };
+            string userPWD = Configuration["AppSettings:Password"];
+            var _user = await UserManager.FindByEmailAsync(Configuration["AdminCredentials:Email"]);
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(poweruser, "Admin");
+
+                }
+            }*/
         }
     }
 }

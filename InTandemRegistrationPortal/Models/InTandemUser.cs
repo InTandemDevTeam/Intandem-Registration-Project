@@ -40,5 +40,7 @@ namespace InTandemRegistrationPortal.Models
         [PersonalData]
         //change to bool object instead of string
         public string HasBeenTrained { get; set; }
+
+        public bool HasBeenApproved { get; set; }
     }
 }

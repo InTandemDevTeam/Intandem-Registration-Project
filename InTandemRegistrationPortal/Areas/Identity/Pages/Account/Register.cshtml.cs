@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ExpressiveAnnotations.Attributes;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -121,9 +123,11 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
+                var context = new InTandemRegistrationPortalContext();
                 var user = new InTandemUser {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
@@ -137,7 +141,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasTandem = Input.HasTandem,
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
-                    SpecialEquipment = Input.SpecialEquipment
+                    SpecialEquipment = Input.SpecialEquipment,
+                    HasBeenApproved = false
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -161,9 +166,24 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
+                    // proof of concept code for sending two emails
+                    if (user.HasBeenApproved == false)
+                    {
+                        var admins = context.Users
+                            .Where(s => s.Role == "Admin")
+                            .Include("Email")
+                            .ToList();
+                        foreach (InTandemUser admin in admins)
+                        {
+                            if (admin.Role.Equals("Admin"))
+                            {
+                                await _emailSender.SendEmailAsync(admin.Email, "Confirm this user",
+                                msgBody + $"Please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                            }
+                        }
+                    }
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         msgBody + $"In order to access the web portal, please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }

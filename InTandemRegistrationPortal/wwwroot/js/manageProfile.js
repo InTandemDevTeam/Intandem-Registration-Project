@@ -52,7 +52,8 @@ function changeShownFields(Dropdown) {
         }
         if (UserType === "Volunteer"
             || UserType === ""
-            || UserType === null)
+            || UserType === null
+            || UserType === "Admin")
         {
             
             // show no specific information for volunteer
