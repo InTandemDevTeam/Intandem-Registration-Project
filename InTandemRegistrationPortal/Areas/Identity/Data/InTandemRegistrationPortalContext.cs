@@ -11,9 +11,9 @@ namespace InTandemRegistrationPortal.Models
 {
     public class InTandemRegistrationPortalContext : IdentityDbContext<InTandemUser>
     {
-        public InTandemRegistrationPortalContext()
+        /*public InTandemRegistrationPortalContext()
         {
-        }
+        }*/
 
         public InTandemRegistrationPortalContext(DbContextOptions<InTandemRegistrationPortalContext> options)
             : base(options)
