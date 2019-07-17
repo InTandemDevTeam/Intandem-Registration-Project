@@ -127,7 +127,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var context = new InTandemRegistrationPortalContext();
+                //var context = new InTandemRegistrationPortalContext();
                 var user = new InTandemUser {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
@@ -167,7 +167,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
                     // proof of concept code for sending two emails
-                    if (user.HasBeenApproved == false)
+                    /*if (user.HasBeenApproved == false)
                     {
                         var admins = context.Users
                             .Where(s => s.Role == "Admin")
@@ -181,7 +181,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                                 msgBody + $"Please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                             }
                         }
-                    }
+                    }*/
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         msgBody + $"In order to access the web portal, please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                     //await _signInManager.SignInAsync(user, isPersistent: false);

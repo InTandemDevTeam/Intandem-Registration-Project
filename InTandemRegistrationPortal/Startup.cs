@@ -40,9 +40,10 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<InTandemRegistrationPortalContext>(options =>
+            /*services.AddDbContext<InTandemRegistrationPortalContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            */
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
