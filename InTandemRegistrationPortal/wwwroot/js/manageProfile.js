@@ -18,8 +18,6 @@ $(document).ready(function () {
     RoleDropdown.onchange = function () {
         changeShownFields(RoleDropdown);
     }
-
-
 });
 
 function changeShownFields(Dropdown) {
