@@ -15,9 +15,9 @@
     * email confirmation needs debugging (complete)
     * basic email confirmation system implemented (complete)
     * need to send from custom email that is not joe@contoso.com (done, will need to be changed prior to deployment)
-    * require admin approval before account is allowed access
+    * require admin approval before account is allowed access (cannot retrieve user emails)
   * Refactor javascript code
     * place functions into separate modules
     * call all needed code from site.js based on page loaded
     * add event handlers for elements in js, remove event handlers from HTML (done)
-    * clear unneeded inputs based on user selection on Manage and Registration page (done for Manage page)
+    * clear and repopulate inputs based on user selection on Manage and Registration page (debugging needed)

@@ -39,14 +39,8 @@
                 <label asp-for="Input.LastName"></label>
                 <input asp-for="Input.LastName" class="form-control" />
             </div>
-            <!--
-            <div class="form-group">
-                <label asp-for="Input.DateOfBirth"></label>
-                <input asp-for="Input.DateOfBirth" class="form-control" />
-            </div>-->
             <div class="form-group">
                 <label asp-for="Input.Role">Type of User</label>
-                <!--onchange="changeShownFields(document.getElementById('RoleDropdown'))"-->
                 <select asp-for="Input.Role" id="RoleDropdown" class="form-control">
                     <option value="Captain">Captain</option>
                     <option value="Stoker">Stoker</option>
@@ -116,7 +110,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/manageProfile.js" asp-append-version="true"></script>
-    <!--<script src="~/js/clearSingleField.js" type="module" asp-append-version="true"></script>
-    <script src="~/js/clearMultipleInputs.js" type="module" asp-append-version="true"></script>
-    -->
 }
