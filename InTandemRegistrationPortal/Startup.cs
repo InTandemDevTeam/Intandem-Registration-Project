@@ -40,15 +40,15 @@ namespace InTandemRegistrationPortal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<InTandemUser, IdentityRole>(config =>
+            services.AddIdentity<InTandemUser, IdentityRole>(/*config =>
             {
-                config.SignIn.RequireConfirmedEmail = true;
-            })
+                config.SignIn.RequireConfirmedEmail = false;
+            }*/)
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);
+            //services.AddTransient<IEmailSender, EmailSender>();
+            //services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddMvc()
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*.AddRazorPagesOptions(options =>

@@ -148,6 +148,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasBeenApproved = false
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 IList<InTandemUser> admins = await _userManager.GetUsersInRoleAsync("Admin");
                 if (result.Succeeded)
                 {
@@ -172,21 +173,21 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     // proof of concept code for sending two emails
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
-                    if (user.HasBeenApproved == false)
-                    {
-                        foreach (InTandemUser admin in admins)
-                        {
-                            await _emailSender.SendEmailAsync("fjamil@intandembike.org", "Confirm this user",
-                            msgBody + $"Please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-/*                            if (admin.Role.Equals("Admin"))
-                            {
-                                //Console.WriteLine(admin.Email);
-                            }
-*/                      }
-                    }
+//                    if (user.HasBeenApproved == false)
+//                    {
+//                        foreach (InTandemUser admin in admins)
+//                        {
+//                            await _emailSender.SendEmailAsync("fjamil@intandembike.org", "Confirm this user",
+//                            msgBody + $"Please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+///*                            if (admin.Role.Equals("Admin"))
+//                            {
+//                                //Console.WriteLine(admin.Email);
+//                            }
+//*/                      }
+//                    }
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         msgBody + $"In order to access the web portal, please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

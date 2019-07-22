@@ -8,10 +8,13 @@
 // function without three parameters, look at jQuery Docs
 // hides all type-specific information until type is selected
 // adds event listener to load below code on page load
-let cachedCaptainValues;
-let cachedCaptainStokerValues;
-let cachedStokerValues;
-console.log("register page reached");
+// will have to store data in fields in structure that can be updated
+// without adding or removing items, without touching the length
+// will have to add checks on .each calls to not push empty values to arrays
+let cachedCaptainValues = [];
+let cachedCaptainStokerValues = [];
+let cachedStokerValues = [];
+//console.log("register page reached");
 $(document).ready(function () {
     const RoleDropdown = document.getElementById("RoleDropdown");
     // clears fields not pertaining to user selection on page load
@@ -28,13 +31,15 @@ function changeShownFields(Dropdown) {
     const CaptainFields = $(".CaptainField");
     const StokerFields = $(".StokerField");
     $(".CaptainStokerField").each(function () {
-        if (this.nodeName === "SELECT") {
-            cachedCaptainStokerValues.push(this.options[this.selectedIndex]);
+        if ((this.nodeName === "SELECT") && (this.value !== "")) {
+            cachedCaptainStokerValues.push($(this).prop("selectedIndex"));
+            //console.log($(this).prop("selectedIndex"));
         }
-        if (this.nodeName === "INPUT") {
+        if ((this.nodeName === "INPUT") && (this.value !== "")) {
             cachedCaptainStokerValues.push(this.value);
         }
     });
+    //console.table(cachedCaptainStokerValues);
     $(".CaptainField").each(function () {
         if (this.nodeName === "SELECT") {
             cachedCaptainValues.push(this.options[this.selectedIndex]);
@@ -51,29 +56,33 @@ function changeShownFields(Dropdown) {
             cachedStokerValues.push(this.value);
         }
     });
+    console.table(cachedCaptainStokerValues);
+    /*for (let i = 0; i < cachedCaptainStokerValues.length; i++) {
+        console.log("index: " + i + "value: " + cachedCaptainStokerValues[i]);
+    }*/
     if (Dropdown !== null) {
         const UserType = Dropdown.options[Dropdown.selectedIndex].value;
         if (UserType === "Stoker") {
 
             // show captain+stoker info
-            changeMultipleFields(CaptainFields, cachedCaptainStokerValues)
+            //changeMultipleFields(CaptainFields, cachedCaptainStokerValues)
             $("#captain_stoker").show();
             // show stoker-specific info
-            changeMultipleFields(CaptainFields, cachedStokerValues)
+            //changeMultipleFields(CaptainFields, cachedStokerValues)
             $("#stoker").show();
-            changeMultipleFields(CaptainFields, "clear")
             $("#captain").hide();
+            changeMultipleFields(CaptainFields, "clear")
             // clears information not pertaining to stoker
 
         }
         if (UserType === "Captain") {
             // show captain+stoker info
             $("#captain_stoker").show();
-            changeMultipleFields(CaptainStokerFields, cachedCaptainStokerValues)
+            //changeMultipleFields(CaptainStokerFields, cachedCaptainStokerValues)
 
             // show captain-specific info
             $("#captain").show();
-            changeMultipleFields(StokerFields, cachedCaptainValues)
+            //changeMultipleFields(StokerFields, cachedCaptainValues)
 
             // hides/clears information not pertaining to captain
             $("#stoker").hide();
@@ -102,6 +111,7 @@ function changeMultipleFields(fields, newValues) {
     // first param is data structure containing html elements
     // loops through array-like jquery object
     // assumed that indeces of both parameters correspond exactly to a given element and its cached value
+    //console.trace("changeMultipleFields executed");
     $(fields).each(function (index) {
         // if <select> element is detected
         if (this.nodeName === "SELECT") {
