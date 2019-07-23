@@ -15,7 +15,7 @@
     * email confirmation needs debugging (complete)
     * basic email confirmation system implemented (complete)
     * need to send from custom email that is not joe@contoso.com (done, will need to be changed prior to deployment)
-    * require admin approval before account is allowed access (cannot retrieve user emails)
+    * require admin approval before account is allowed access (emails are sent to admins)
   * Refactor javascript code
     * place functions into separate modules
     * call all needed code from site.js based on page loaded
