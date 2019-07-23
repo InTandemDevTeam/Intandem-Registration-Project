@@ -47,7 +47,7 @@ namespace InTandemRegistrationPortal
 
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
-                config.SignIn.RequireConfirmedEmail = true;
+                config.SignIn.RequireConfirmedEmail = false;
             })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
