@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InTandemRegistrationPortal.Pages
 {
-    [Authorize (Roles = "Captain, Stoker")]
+    [AllowAnonymous]
     public class PrivacyModel : PageModel
     {
         public void OnGet()

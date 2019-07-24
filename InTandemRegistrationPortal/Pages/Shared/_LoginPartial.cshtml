@@ -1,24 +1,26 @@
+<!-- imports and injection needed for razor code below-->
 @using Microsoft.AspNetCore.Identity
 @using InTandemRegistrationPortal.Models;
 @inject SignInManager<InTandemUser> SignInManager
 @inject UserManager<InTandemUser> UserManager
 
 <ul class="navbar-nav">
+
 @if (SignInManager.IsSignedIn(User))
 {
-    @if((UserManager.GetUserAsync(User).Result.Role) == "Admin")
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Users">Users</a>
-        </li>
-    }
-            
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>
+    <!-- razor code below, if user is signed in and an admin, display a link to users page-->
+    @if((UserManager.GetUserAsync(User).Result.Role) == "Admin")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Users">Users</a>
+        </li>
+    }
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
     </li>
 }

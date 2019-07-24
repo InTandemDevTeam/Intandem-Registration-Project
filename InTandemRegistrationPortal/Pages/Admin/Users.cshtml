@@ -1,0 +1,56 @@
+﻿@page
+@model InTandemRegistrationPortal.Pages.Admin.UsersModel
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Users[0].LastName)*@
+                Last Name
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Users[0].FirstName)*@
+                First Name
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Users[0].HasBeenApproved)*@
+                Approved
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            @if (item.HasBeenApproved == false)
+            {
+                // display pending in place of false
+                <td>Pending</td>
+            }
+            else
+            {
+                // display yes in place of true
+                <td>Yes</td>
+            }
+
+            <td>
+                @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |*@
+                @*<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
