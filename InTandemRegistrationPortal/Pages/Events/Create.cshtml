@@ -1,0 +1,89 @@
+﻿@page
+@model Rides2.Pages.Events.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>RideEvents</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RideEvents.EventName" class="control-label"></label>
+                <input asp-for="RideEvents.EventName" class="form-control" />
+                <span asp-validation-for="RideEvents.EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.EventSDate" class="control-label"></label>
+                <input asp-for="RideEvents.EventSDate" class="form-control" />
+                <span asp-validation-for="RideEvents.EventSDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.Description" class="control-label"></label>
+                <input asp-for="RideEvents.Description" class="form-control" />
+                <span asp-validation-for="RideEvents.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.Location" class="control-label"></label>
+                <input asp-for="RideEvents.Location" class="form-control" />
+                <span asp-validation-for="RideEvents.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.Distance" class="control-label"></label>
+                <input asp-for="RideEvents.Distance" class="form-control" />
+                <span asp-validation-for="RideEvents.Distance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.EventType" class="control-label"></label>
+                <input asp-for="RideEvents.EventType" class="form-control" />
+                <span asp-validation-for="RideEvents.EventType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.RideLeader" class="control-label"></label>
+                <input asp-for="RideEvents.RideLeader" class="form-control" />
+                <span asp-validation-for="RideEvents.RideLeader" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.EventRatio" class="control-label"></label>
+                <input asp-for="RideEvents.EventRatio" class="form-control" />
+                <span asp-validation-for="RideEvents.EventRatio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.MaxSignup" class="control-label"></label>
+                <input asp-for="RideEvents.MaxSignup" class="form-control" />
+                <span asp-validation-for="RideEvents.MaxSignup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.MaxSignUpType" class="control-label"></label>
+                <input asp-for="RideEvents.MaxSignUpType" class="form-control" />
+                <span asp-validation-for="RideEvents.MaxSignUpType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.Status" class="control-label"></label>
+                <input asp-for="RideEvents.Status" class="form-control" />
+                <span asp-validation-for="RideEvents.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RideEvents.bActive" class="control-label"></label>
+                <input asp-for="RideEvents.bActive" class="form-control" />
+                <span asp-validation-for="RideEvents.bActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
