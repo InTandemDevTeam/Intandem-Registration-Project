@@ -12,8 +12,10 @@ namespace InTandemRegistrationPortal.Models
         public string LastName { get; set; }
         [PersonalData]
         public DateTime DateOfBirth { get; set; }
+        [PersonalData]
         public string Role { get; set; }
-
+        [PersonalData]
+        public DateTime DateRegistered { get; set; }
         // stoker/captain properties
 
         [PersonalData]

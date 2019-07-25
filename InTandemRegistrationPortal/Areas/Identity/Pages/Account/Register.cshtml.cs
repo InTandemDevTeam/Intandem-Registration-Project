@@ -50,6 +50,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
         public InTandemUser InTandemUser { get; set; }
 
+        public DateTime DateRegistered { get; set; }
         public class InputModel
         {
             [Required]
@@ -141,6 +142,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Email = Input.Email,
                     DateOfBirth = Input.DateOfBirth,
+                    DateRegistered = DateTime.Today,
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
