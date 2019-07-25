@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,17 +18,17 @@ namespace InTandemRegistrationPortal.Pages.Admin
             _context = context;
         }
         [BindProperty]
-        public InTandemUser User { get; set; }
+        public InTandemUser CurrentUser { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
+            if ((id == null) || (id.Equals("")))
             {
                 return NotFound();
             }
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id.ToString());
+            CurrentUser = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (User == null)
+            if (CurrentUser == null)
             {
                 return NotFound();
             }
