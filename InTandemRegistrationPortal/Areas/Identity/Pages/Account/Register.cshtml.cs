@@ -151,7 +151,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
                     SpecialEquipment = Input.SpecialEquipment,
-                    HasBeenApproved = false
+                    HasBeenApproved = null
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users

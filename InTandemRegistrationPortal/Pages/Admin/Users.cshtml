@@ -55,19 +55,21 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
-                    @if (item.HasBeenApproved == false)
+                    @if (item.HasBeenApproved == true)
                     {
-                        // display pending in place of false
-                        <td>Pending</td>
+                        // display "Approved" in place of true
+                        <td>Approved</td>
+                    }
+                    else if (item.HasBeenApproved == false)
+                    {
+                        // display "Denied" in place of false
+                        <td>Denied</td>
                     }
                     else
                     {
-                        // display yes in place of true
-                        <td>Yes</td>
+                        <td>Pending</td>
                     }
-
                     <td>
-                        @*<a asp-page="~/Pages/Admin/Details" asp-route-id="@item.Id">Details</a>*@
                         <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                         <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     </td>

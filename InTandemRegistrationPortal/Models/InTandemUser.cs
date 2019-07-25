@@ -43,6 +43,6 @@ namespace InTandemRegistrationPortal.Models
         //change to bool object instead of string
         public string HasBeenTrained { get; set; }
 
-        public bool HasBeenApproved { get; set; }
+        public bool? HasBeenApproved { get; set; }
     }
 }

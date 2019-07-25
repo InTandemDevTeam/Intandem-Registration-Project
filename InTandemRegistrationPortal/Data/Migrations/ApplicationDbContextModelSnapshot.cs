@@ -42,7 +42,7 @@ namespace InTandemRegistrationPortal.Data.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<bool>("HasBeenApproved");
+                    b.Property<bool?>("HasBeenApproved");
 
                     b.Property<string>("HasBeenTrained");
 
