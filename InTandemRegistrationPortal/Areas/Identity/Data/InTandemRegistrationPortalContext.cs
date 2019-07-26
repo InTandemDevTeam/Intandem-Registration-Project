@@ -8,6 +8,8 @@ namespace InTandemRegistrationPortal.Models
         public InTandemRegistrationPortalContext()
         {
         }
+        public DbSet<RideEvents> RideEvents { get; set; }
+
 
         public InTandemRegistrationPortalContext(DbContextOptions<InTandemRegistrationPortalContext> options)
             : base(options)

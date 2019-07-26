@@ -98,6 +98,53 @@ namespace InTandemRegistrationPortal.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("InTandemRegistrationPortal.Models.RideEvents", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<decimal?>("Distance")
+                        .HasColumnType("decimal(18, 1)");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("EventRatio")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("EventSDate");
+
+                    b.Property<int>("EventType");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int?>("MaxSignUpType");
+
+                    b.Property<int?>("MaxSignup");
+
+                    b.Property<string>("RideLeader")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("Status");
+
+                    b.Property<bool?>("bActive")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.ToTable("RideEvents");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

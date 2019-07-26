@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Rides2.Models;
+using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Data;
 
-namespace Rides2.Pages.Events
+namespace InTandemRegistrationPortal.Pages.Events
 {
     public class EditModel : PageModel
     {
-        private readonly Rides2.Models.Rides2Context _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(Rides2.Models.Rides2Context context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }

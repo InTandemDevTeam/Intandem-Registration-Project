@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rides2.Models
+namespace InTandemRegistrationPortal.Models
 {
     public class RideEvents
     {
@@ -46,86 +46,86 @@ namespace Rides2.Models
         public bool? bActive { get; set; }
 
     } // class RideEvent
-    public class AspNetRoles
-    {
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required]
-        public string Id { get; set; }
+    //public class AspNetRoles
+    //{
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required]
+    //    public string Id { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Name { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string Name { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = true)]
-        [Required(AllowEmptyStrings = true)]
-        public string NormalizedName { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string NormalizedName { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = true)]
-        [Required(AllowEmptyStrings = true)]
-        public string ConcurrencyStamp { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string ConcurrencyStamp { get; set; }
 
-    } // class AspNetRoles
-    public class AspNetUsers
-    {
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required]
-        public string Id { get; set; }
+    //} // class AspNetRoles
+    //public class AspNetUsers
+    //{
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required]
+    //    public string Id { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string UserName { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string UserName { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string NormalizedUserName { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string NormalizedUserName { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Email { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string Email { get; set; }
 
-        [Required]
-        public bool? EmailConfirmed { get; set; }
+    //    [Required]
+    //    public bool? EmailConfirmed { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string PasswordHash { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string PasswordHash { get; set; }
 
-        [Column(TypeName = "varchar(200)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-                public string SecurityStamp  { get; set;}
+    //    [Column(TypeName = "varchar(200)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    //    [Required(AllowEmptyStrings = true)]
+    //            public string SecurityStamp  { get; set;}
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = true)]
-        [Required(AllowEmptyStrings = true)]
-        public string ConcurrencyStamp { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string ConcurrencyStamp { get; set; }
 
-        [Column(TypeName = "varchar(256)")]
-        [DisplayFormat(ConvertEmptyStringToNull = true)]
-        [Required(AllowEmptyStrings = true)]
-        public string PhoneNumber  { get; set; }
+    //    [Column(TypeName = "varchar(256)")]
+    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
+    //    [Required(AllowEmptyStrings = true)]
+    //    public string PhoneNumber  { get; set; }
 
-        public bool? PhoneNumberConfirmed  { get; set; }
+    //    public bool? PhoneNumberConfirmed  { get; set; }
 
-        public bool?  TwoFactorEnabled { get; set; }
+    //    public bool?  TwoFactorEnabled { get; set; }
 
-        public DateTimeOffset  LockoutEnd { get; set; }
+    //    public DateTimeOffset  LockoutEnd { get; set; }
 
-        [Required]
-        public bool?  LockoutEnabled { get; set; }
+    //    [Required]
+    //    public bool?  LockoutEnabled { get; set; }
 
-        [Required]
-        public int AccessFailedCount { get; set; }
+    //    [Required]
+    //    public int AccessFailedCount { get; set; }
 
 
-    } // class AspNetUsers
+    //} // class AspNetUsers
 
 
     

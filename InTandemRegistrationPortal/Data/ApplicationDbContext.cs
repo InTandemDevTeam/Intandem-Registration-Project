@@ -10,5 +10,6 @@ namespace InTandemRegistrationPortal.Data
             : base(options)
         {
         }
+        public DbSet<RideEvents> RideEvents { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Rides2.Models;
+using InTandemRegistrationPortal.Models;
 
-namespace Rides2.Pages.Events
+namespace InTandemRegistrationPortal.Pages.Events
 {
     public class NewModel : PageModel
     {
@@ -16,9 +16,9 @@ namespace Rides2.Pages.Events
                     public string lblActiveText = "false";
         public bool bActiveState = false;
         public string sTemp = "";
-        private readonly Rides2.Models.Rides2Context _context;
+        private readonly InTandemRegistrationPortal.Models.InTandemRegistrationPortalContext _context;
 
-        public NewModel(Rides2.Models.Rides2Context context)
+        public NewModel(InTandemRegistrationPortal.Models.InTandemRegistrationPortalContext context)
         {
             _context = context;
         }

@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Rides2.Models;
+using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Data;
 
-namespace Rides2.Pages.Events
+namespace InTandemRegistrationPortal.Pages.Events
 {
     public class CreateModel : PageModel
     {
-        private readonly Rides2.Models.Rides2Context _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(Rides2.Models.Rides2Context context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }

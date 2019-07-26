@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Rides2.Models;
+using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Data;
 
-namespace Rides2.Pages.Events
+namespace InTandemRegistrationPortal.Pages.Events
 {
     public class IndexModel : PageModel
     {
-        private readonly Rides2.Models.Rides2Context _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(Rides2.Models.Rides2Context context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
