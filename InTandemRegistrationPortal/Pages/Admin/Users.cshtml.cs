@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
@@ -20,7 +21,9 @@ namespace InTandemRegistrationPortal.Pages.Admin
 
         public async Task OnGetAsync()
         {
-            Users = await _context.Users.ToListAsync();
+            Users = await _context.Users
+                .Where(r => r.Role != "Admin")
+                .ToListAsync();
         }
     }
 }

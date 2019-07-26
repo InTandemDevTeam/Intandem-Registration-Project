@@ -22,11 +22,11 @@ namespace InTandemRegistrationPortal.Models
         public string Height { get; set; }
         [PersonalData]
         public string Weight { get; set; }
-        // Captain-specific informaiton
         //change to bool object instead of string
         [PersonalData]
         public string HasSeat { get; set; }
         //change to bool object instead of string
+        // Captain-specific information
         [PersonalData]
         public string HasTandem { get; set; }
         //change to bool object instead of string

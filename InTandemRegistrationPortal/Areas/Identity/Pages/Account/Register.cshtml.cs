@@ -82,12 +82,12 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Do you have your own seat? (required)")]
             public string HasSeat { get; set; }
 
-            [RequiredIf("Role == 'Captain'")]
+            [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a tandem bike")]
             [DataType(DataType.Text)]
             [Display(Name = "Do you have your own tandem bike? (required)")]
             public string HasTandem { get; set; }
 
-            [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a bike")]
+            [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a single bike")]
             [DataType(DataType.Text)]
             [Display(Name = "Do you have your own single bike? (required)")]
             public string HasSingleBike { get; set; }

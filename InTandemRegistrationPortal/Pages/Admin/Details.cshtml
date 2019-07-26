@@ -12,57 +12,108 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Student.LastName)*@
             Last Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentUser.LastName)
         </dd>
         <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Student.FirstMidName)*@
             First Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentUser.FirstName)
         </dd>
         <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Student.EnrollmentDate)*@
             Date Registered
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentUser.DateRegistered)
         </dd>
         <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Student.EnrollmentDate)*@
             Role
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentUser.Role)
         </dd>
         <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Student.EnrollmentDate)*@
             Email
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CurrentUser.Email)
         </dd>
-        @*@if (Model.CurrentUser.HasBeenTrained.Equals("Yes"))
+
+        @if ((Model.CurrentUser.Role == "Captain") ||
+       (Model.CurrentUser.Role == "Stoker"))
+        {
+            <dt class="col-sm-2">
+                Height
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CurrentUser.Height)
+            </dd>
+            <dt class="col-sm-2">
+                Weight
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CurrentUser.Weight)
+            </dd>
+            <dt class="col-sm-2">
+                Has Seat?
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CurrentUser.HasSeat)
+            </dd>
+            @if (Model.CurrentUser.Role == "Stoker")
             {
+                <dt class="col-sm-2">
+                    Do you have a guide dog?
+                </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
-                    <!--uncomment below when HasBeenTrained is bool type-->
-                    Yes
+                    @Html.DisplayFor(model => model.CurrentUser.Dog)
+                </dd>
+                <dt class="col-sm-2">
+                    Do you have any special equipment?
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CurrentUser.SpecialEquipment)
+                </dd>
+            }
+            @if (Model.CurrentUser.Role == "Captain")
+            {
+                <dt class="col-sm-2">
+                    Do you have your own tandem bike?
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CurrentUser.HasTandem)
+                </dd>
+                <dt class="col-sm-2">
+                    Do you have your own single bike?
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CurrentUser.HasSingleBike)
                 </dd>
 
-            }
-            else
-            {
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
-                    <!--uncomment below when HasBeenTrained is bool type-->
-                    No
-                </dd>
-            }*@
+                }
+        }
+
+
+        @*@if (Model.CurrentUser.HasBeenTrained.Equals("Yes"))
+        {
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
+                <!--uncomment below when HasBeenTrained is bool type-->
+                Yes
+            </dd>
+
+        }
+        else
+        {
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
+                <!--uncomment below when HasBeenTrained is bool type-->
+                No
+            </dd>
+        }*@
     </dl>
     <a asp-page="./Users" asp-route-id="">Back to List</a>
 </div>
