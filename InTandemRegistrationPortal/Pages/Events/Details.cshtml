@@ -1,0 +1,91 @@
+﻿@page
+@model InTandemRegistrationPortal.Pages.Events.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RideEvents</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.EventName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.EventName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.EventSDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.EventSDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.Location)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.Location)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.Distance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.Distance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.EventType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.EventType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.RideLeader)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.RideLeader)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.EventRatio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.EventRatio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.MaxSignup)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.MaxSignup)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.MaxSignUpType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.MaxSignUpType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RideEvents.bActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RideEvents.bActive)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.RideEvents.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
