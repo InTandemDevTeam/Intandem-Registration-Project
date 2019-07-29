@@ -44,5 +44,10 @@ namespace InTandemRegistrationPortal.Models
         public string HasBeenTrained { get; set; }
 
         public bool? HasBeenApproved { get; set; }
+
+        public static implicit operator InTandemUser(int? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

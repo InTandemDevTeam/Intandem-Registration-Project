@@ -15,106 +15,109 @@
             Last Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentUser.LastName)
+            @Html.DisplayFor(model => model.InTandemUser.LastName)
         </dd>
         <dt class="col-sm-2">
             First Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentUser.FirstName)
+            @Html.DisplayFor(model => model.InTandemUser.FirstName)
         </dd>
         <dt class="col-sm-2">
             Date Registered
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentUser.DateRegistered)
+            @Html.DisplayFor(model => model.InTandemUser.DateRegistered)
         </dd>
         <dt class="col-sm-2">
             Role
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentUser.Role)
+            @Html.DisplayFor(model => model.InTandemUser.Role)
         </dd>
         <dt class="col-sm-2">
             Email
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentUser.Email)
+            @Html.DisplayFor(model => model.InTandemUser.Email)
         </dd>
 
-        @if ((Model.CurrentUser.Role == "Captain") ||
-       (Model.CurrentUser.Role == "Stoker"))
+        @if ((Model.InTandemUser.Role == "Captain") ||
+            (Model.InTandemUser.Role == "Stoker"))
         {
             <dt class="col-sm-2">
                 Height
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrentUser.Height)
+                @Html.DisplayFor(model => model.InTandemUser.Height)
             </dd>
             <dt class="col-sm-2">
                 Weight
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrentUser.Weight)
+                @Html.DisplayFor(model => model.InTandemUser.Weight)
             </dd>
             <dt class="col-sm-2">
                 Has Seat?
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrentUser.HasSeat)
+                @Html.DisplayFor(model => model.InTandemUser.HasSeat)
             </dd>
-            @if (Model.CurrentUser.Role == "Stoker")
+            @if (Model.InTandemUser.Role == "Stoker")
             {
                 <dt class="col-sm-2">
                     Do you have a guide dog?
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.Dog)
+                    @Html.DisplayFor(model => model.InTandemUser.Dog)
                 </dd>
                 <dt class="col-sm-2">
                     Do you have any special equipment?
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.SpecialEquipment)
+                    @Html.DisplayFor(model => model.InTandemUser.SpecialEquipment)
                 </dd>
             }
-            @if (Model.CurrentUser.Role == "Captain")
+            @if (Model.InTandemUser.Role == "Captain")
             {
                 <dt class="col-sm-2">
                     Do you have your own tandem bike?
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.HasTandem)
+                    @Html.DisplayFor(model => model.InTandemUser.HasTandem)
                 </dd>
                 <dt class="col-sm-2">
                     Do you have your own single bike?
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CurrentUser.HasSingleBike)
+                    @Html.DisplayFor(model => model.InTandemUser.HasSingleBike)
                 </dd>
 
-                }
+            }
         }
 
-
-        @*@if (Model.CurrentUser.HasBeenTrained.Equals("Yes"))
-        {
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
-                <!--uncomment below when HasBeenTrained is bool type-->
-                Yes
-            </dd>
-
-        }
-        else
-        {
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrentUser.HasBeenTrained)
-                <!--uncomment below when HasBeenTrained is bool type-->
-                No
-            </dd>
-        }*@
     </dl>
+    @if(Model.InTandemUser.HasBeenApproved == null)
+    {
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.HasBeenApproved"></label>
+                <select asp-for="Input.HasBeenApproved" class="form-control">
+                    <option value="" selected disabled>Select Yes or No</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="Input.HasBeenApproved" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    }
     <a asp-page="./Users" asp-route-id="">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

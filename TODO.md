@@ -16,8 +16,9 @@
     * basic email confirmation system implemented (complete)
     * need to send from custom email that is not joe@contoso.com (done, will need to be changed prior to deployment)
   * require approval from admins 
-    * display table of all users (done, will need to exclude admins prior to deployment)
-    * display detials of selected user (will need to show events)
+    * display table of all users (done)
+    * display detials of selected user (done, will need to show events)
+    * approval and denial funcitonality added
   * Refactor javascript code
     * place functions into separate modules
     * call all needed code from site.js based on page loaded
