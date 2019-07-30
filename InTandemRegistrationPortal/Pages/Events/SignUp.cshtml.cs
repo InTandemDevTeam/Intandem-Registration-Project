@@ -4,8 +4,7 @@ using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace InTandemRegistrationPortal.Pages.Events
@@ -47,5 +46,6 @@ namespace InTandemRegistrationPortal.Pages.Events
             FullName = InTandemUser.FirstName + " " + InTandemUser.LastName;
             return Page();
         }
+
     }
 }

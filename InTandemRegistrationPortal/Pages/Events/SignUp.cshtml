@@ -1,4 +1,4 @@
-﻿@page "{idsdsfdsfsdsfdasdffffdfsdfdsdfsdfsdf}"
+﻿@page "{id}"
 @model InTandemRegistrationPortal.Pages.Events.SignUpModel
 @{
     ViewData["Title"] = "SignUp";
@@ -91,7 +91,7 @@
         }
 
     </dl>
-    @if (Model.InTandemUser.HasBeenApproved == null)
+    @*@if (Model.InTandemUser.HasBeenApproved == null)
     {
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -108,7 +108,7 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
-    }
+    }*@
     <a asp-page="./Users" asp-route-id="">Back to List</a>
 </div>
 

@@ -56,6 +56,7 @@ namespace InTandemRegistrationPortal.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
+            var test = InTandemUser;
             string UserId = (await _context.Users.FirstOrDefaultAsync(m => m.Id == id)).Id;
             InTandemUser user = _userManager.FindByIdAsync(UserId).Result;
             //InTandemUser user = _userManager.FindByIdAsync((await _context.Users.FirstOrDefaultAsync(m => m.Id == id))?.Id).Result;
