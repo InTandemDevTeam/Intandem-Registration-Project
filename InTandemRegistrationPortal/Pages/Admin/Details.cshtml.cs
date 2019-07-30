@@ -25,7 +25,10 @@ namespace InTandemRegistrationPortal.Pages.Admin
         [BindProperty]
 
         public InputModel Input { get; set; }
+
         public InTandemUser InTandemUser { get; set; }
+
+        public string FullName { get; set; }
 
         public class InputModel {
             [Required]
@@ -42,26 +45,38 @@ namespace InTandemRegistrationPortal.Pages.Admin
             InTandemUser = await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
-
             if (InTandemUser == null)
             {
                 return NotFound();
             }
+            //create full name to get on Details page
+            FullName = InTandemUser.FirstName + " " + InTandemUser.LastName;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            InTandemUser something = _userManager.FindByIdAsync((await _context.Users.FirstOrDefaultAsync(m => m.Id == id))?.Id).Result;
+            string UserId = (await _context.Users.FirstOrDefaultAsync(m => m.Id == id)).Id;
+            InTandemUser user = _userManager.FindByIdAsync(UserId).Result;
+            //InTandemUser user = _userManager.FindByIdAsync((await _context.Users.FirstOrDefaultAsync(m => m.Id == id))?.Id).Result;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            // if the model state is valid and the user exists, continue
             if (ModelState.IsValid)
             {
-                something.HasBeenApproved = Input.HasBeenApproved;
-                await _userManager.UpdateAsync(something);
-                await _context.SaveChangesAsync();
+                if (!UserExists(UserId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    user.HasBeenApproved = Input.HasBeenApproved;
+                    await _userManager.UpdateAsync(user);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             //_context.Attach(InTandemUser).State = EntityState.Modified;
