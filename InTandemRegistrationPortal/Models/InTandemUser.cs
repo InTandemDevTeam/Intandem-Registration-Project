@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 
 // model to be added onto later
 namespace InTandemRegistrationPortal.Models
@@ -45,5 +46,6 @@ namespace InTandemRegistrationPortal.Models
 
         public bool? HasBeenApproved { get; set; }
 
+        public ICollection<RideRegistration> RideREgistrations { get; set; }
     }
 }

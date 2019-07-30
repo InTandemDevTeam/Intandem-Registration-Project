@@ -9,6 +9,7 @@ namespace InTandemRegistrationPortal.Models
         {
         }
         public DbSet<RideEvents> RideEvents { get; set; }
+        public DbSet<RideRegistration> RideRegistrations { get; set; }
 
 
         public InTandemRegistrationPortalContext(DbContextOptions<InTandemRegistrationPortalContext> options)

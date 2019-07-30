@@ -1,20 +1,18 @@
 ﻿using ExpressiveAnnotations.Attributes;
+using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using InTandemRegistrationPortal.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -180,7 +178,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     // proof of concept code for sending two emails
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
-                    if (user.HasBeenApproved == false)
+                    if (user.HasBeenApproved == null)
                     {
                         foreach (InTandemUser admin in admins)
                         {

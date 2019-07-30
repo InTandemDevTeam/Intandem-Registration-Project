@@ -15,7 +15,7 @@ namespace InTandemRegistrationPortal.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -147,6 +147,25 @@ namespace InTandemRegistrationPortal.Data.Migrations
                     b.ToTable("RideEvents");
                 });
 
+            modelBuilder.Entity("InTandemRegistrationPortal.Models.RideRegistration", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InTandemUserId");
+
+                    b.Property<int>("RideEventsID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InTandemUserId");
+
+                    b.HasIndex("RideEventsID");
+
+                    b.ToTable("RideRegistrations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -255,6 +274,18 @@ namespace InTandemRegistrationPortal.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("InTandemRegistrationPortal.Models.RideRegistration", b =>
+                {
+                    b.HasOne("InTandemRegistrationPortal.Models.InTandemUser", "InTandemUser")
+                        .WithMany("RideREgistrations")
+                        .HasForeignKey("InTandemUserId");
+
+                    b.HasOne("InTandemRegistrationPortal.Models.RideEvents", "RideEvents")
+                        .WithMany("RideREgistrations")
+                        .HasForeignKey("RideEventsID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -45,12 +46,15 @@ namespace InTandemRegistrationPortal.Models
         [Required]
         public bool? bActive { get; set; }
 
+        // below is needed to create cross table
+        public ICollection<RideRegistration> RideREgistrations { get; set; }
+
     } // class RideEvent
-    //public class AspNetRoles
-    //{
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required]
-    //    public string Id { get; set; }
+      //public class AspNetRoles
+      //{
+      //    [DisplayFormat(ConvertEmptyStringToNull = false)]
+      //    [Required]
+      //    public string Id { get; set; }
 
     //    [Column(TypeName = "varchar(256)")]
     //    [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -128,5 +132,5 @@ namespace InTandemRegistrationPortal.Models
     //} // class AspNetUsers
 
 
-    
+
 } // namespace Models
