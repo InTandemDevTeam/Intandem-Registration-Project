@@ -15,18 +15,18 @@
             <!--use placeholder attribute like so: placeholder="Enter first name"-->
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.FirstName"></label>
+                <label asp-for="Input.FirstName" class="control-label"></label>
                 <input asp-for="Input.FirstName" class = "form-control" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.LastName"></label>
+                <label asp-for="Input.LastName" class="control-label"></label>
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Input.DateOfBirth"></label>
+                <label asp-for="Input.DateOfBirth" class="control-label"></label>
                 <input asp-for="Input.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
@@ -34,7 +34,7 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="Input.Role"></label>
+                <label asp-for="Input.Role" class="control-label"></label>
                 <select asp-for="Input.Role" class="form-control" id="RoleDropdown" onchange="templating()">
                     <option value="" selected disabled>Select Type of User</option>
                     <option value="Captain">Captain</option>
@@ -47,17 +47,17 @@
             <!--fields are assigned classes based on divs to allow JS to work-->
             <div id="captain_stoker">
                 <div class="form-group">
-                    <label asp-for="Input.Height"></label>
+                    <label asp-for="Input.Height" class="control-label"></label>
                     <input asp-for="Input.Height" class="form-control CaptainStokerField" />
                     <span asp-validation-for="Input.Height" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Weight"></label>
+                    <label asp-for="Input.Weight" class="control-label"></label>
                     <input asp-for="Input.Weight" class="form-control CaptainStokerField" />
                     <span asp-validation-for="Input.Weight" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.HasSeat"></label>
+                    <label asp-for="Input.HasSeat" class="control-label"></label>
                     <select asp-for="Input.HasSeat" class="form-control CaptainStokerField">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
@@ -68,7 +68,7 @@
             </div>
             <div id="captain">
                 <div class="form-group">
-                    <label asp-for="Input.HasTandem"></label>
+                    <label asp-for="Input.HasTandem" class="control-label"></label>
                     <select asp-for="Input.HasTandem" class="form-control CaptainField">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
@@ -77,7 +77,7 @@
                     <span asp-validation-for="Input.HasTandem" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.HasSingleBike"></label>
+                    <label asp-for="Input.HasSingleBike" class="control-label"></label>
                     <select asp-for="Input.HasSingleBike" class="form-control CaptainField">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
@@ -88,7 +88,7 @@
             </div>
             <div id="stoker">
                 <div class="form-group">
-                    <label asp-for="Input.Dog"></label>
+                    <label asp-for="Input.Dog" class="control-label"></label>
                     <select asp-for="Input.Dog" class="form-control StokerField">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
@@ -97,23 +97,23 @@
                     <span asp-validation-for="Input.Dog" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.SpecialEquipment"></label>
+                    <label asp-for="Input.SpecialEquipment" class="control-label"></label>
                     <input asp-for="Input.SpecialEquipment" class="form-control StokerField" />
                     <span asp-validation-for="Input.SpecialEquipment" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label asp-for="Input.Email" class="control-label"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
+                <label asp-for="Input.Password" class="control-label"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
+                <label asp-for="Input.ConfirmPassword" class="control-label"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
