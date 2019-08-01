@@ -1,6 +1,7 @@
 ﻿using ExpressiveAnnotations.Attributes;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Pages.Admin;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,7 +20,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             UserManager<InTandemUser> userManager,
             ApplicationDbContext context)
         {
-            _userManager = userManager;
+            
             _context = context;
         }
         [BindProperty]

@@ -38,7 +38,7 @@ namespace InTandemRegistrationPortal.Pages.Admin
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if ((id == null) || (id.Equals("")))
+            if ((id == null) || (id.Equals(""))
             {
                 return NotFound();
             }
