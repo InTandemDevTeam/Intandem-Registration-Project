@@ -41,9 +41,9 @@ namespace InTandemRegistrationPortal
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<InTandemRegistrationPortalContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<InTandemRegistrationPortalContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {

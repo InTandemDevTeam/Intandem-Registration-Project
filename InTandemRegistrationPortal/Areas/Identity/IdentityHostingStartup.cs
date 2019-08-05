@@ -11,14 +11,14 @@ namespace InTandemRegistrationPortal.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<InTandemRegistrationPortalContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("InTandemRegistrationPortalContextConnection")));
+            //builder.ConfigureServices((context, services) => {
+            //    services.AddDbContext<InTandemRegistrationPortalContext>(options =>
+            //        options.UseSqlServer(
+            //            context.Configuration.GetConnectionString("InTandemRegistrationPortalContextConnection")));
 
-                /*services.AddDefaultIdentity<InTandemUser>()
-                    .AddEntityFrameworkStores<InTandemRegistrationPortalContext>();*/
-            });
+            //    /*services.AddDefaultIdentity<InTandemUser>()
+            //        .AddEntityFrameworkStores<InTandemRegistrationPortalContext>();*/
+            //});
         }
     }
 }

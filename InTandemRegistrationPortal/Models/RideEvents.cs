@@ -47,7 +47,7 @@ namespace InTandemRegistrationPortal.Models
         public bool? bActive { get; set; }
 
         // below is needed to create cross table
-        public ICollection<RideRegistration> RideREgistrations { get; set; }
+        public ICollection<RideRegistration> RideRegistrations { get; set; }
 
     } // class RideEvent
       //public class AspNetRoles

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{signup:bool}"
 @model InTandemRegistrationPortal.Pages.Events.DetailsModel
 
 @{
@@ -12,80 +12,91 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.EventName)
+            @Html.DisplayNameFor(model => model.RideEvent.EventName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.EventName)
+            @Html.DisplayFor(model => model.RideEvent.EventName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.EventSDate)
+            @Html.DisplayNameFor(model => model.RideEvent.EventSDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.EventSDate)
+            @Html.DisplayFor(model => model.RideEvent.EventSDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.Description)
+            @Html.DisplayNameFor(model => model.RideEvent.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.Description)
+            @Html.DisplayFor(model => model.RideEvent.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.Location)
+            @Html.DisplayNameFor(model => model.RideEvent.Location)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.Location)
+            @Html.DisplayFor(model => model.RideEvent.Location)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.Distance)
+            @Html.DisplayNameFor(model => model.RideEvent.Distance)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.Distance)
+            @Html.DisplayFor(model => model.RideEvent.Distance)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.EventType)
+            @Html.DisplayNameFor(model => model.RideEvent.EventType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.EventType)
+            @Html.DisplayFor(model => model.RideEvent.EventType)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.RideLeader)
+            @Html.DisplayNameFor(model => model.RideEvent.RideLeader)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.RideLeader)
+            @Html.DisplayFor(model => model.RideEvent.RideLeader)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.EventRatio)
+            @Html.DisplayNameFor(model => model.RideEvent.EventRatio)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.EventRatio)
+            @Html.DisplayFor(model => model.RideEvent.EventRatio)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.MaxSignup)
+            @Html.DisplayNameFor(model => model.RideEvent.MaxSignup)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.MaxSignup)
+            @Html.DisplayFor(model => model.RideEvent.MaxSignup)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.MaxSignUpType)
+            @Html.DisplayNameFor(model => model.RideEvent.MaxSignUpType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.MaxSignUpType)
+            @Html.DisplayFor(model => model.RideEvent.MaxSignUpType)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.Status)
+            @Html.DisplayNameFor(model => model.RideEvent.Status)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.Status)
+            @Html.DisplayFor(model => model.RideEvent.Status)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RideEvents.bActive)
+            @Html.DisplayNameFor(model => model.RideEvent.bActive)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.RideEvents.bActive)
+            @Html.DisplayFor(model => model.RideEvent.bActive)
         </dd>
     </dl>
 </div>
+@if(Model.WantToSignUp == true && Model.HasSignedUp == false)
+{
+    <p>Do you want to sign up for this event?</p>
+    <form method="post">
+        <div class="form-group">
+            <input type="submit" value="Yes" asp-page-handler="Yes" asp-route-id="@Model.RideEvent.ID" class="btn btn-success" />
+            <input type="submit" value="No" asp-page-handler="No" class="btn btn-danger" />
+        </div>
+    </form>
+}
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.RideEvents.ID">Edit</a> |
+    
+    <a asp-page="./Edit" asp-route-id="@Model.RideEvent.ID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

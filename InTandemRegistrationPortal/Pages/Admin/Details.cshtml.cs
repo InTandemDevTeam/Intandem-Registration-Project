@@ -27,7 +27,6 @@ namespace InTandemRegistrationPortal.Pages.Admin
         public InputModel Input { get; set; }
 
         public InTandemUser InTandemUser { get; set; }
-
         public string FullName { get; set; }
 
         public class InputModel {
@@ -38,13 +37,14 @@ namespace InTandemRegistrationPortal.Pages.Admin
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if ((id == null) || (id.Equals(""))
+            if ((id == null) || (id.Equals("")))
             {
                 return NotFound();
             }
             InTandemUser = await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (InTandemUser == null)
             {
                 return NotFound();
@@ -56,7 +56,6 @@ namespace InTandemRegistrationPortal.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            var test = InTandemUser;
             string UserId = (await _context.Users.FirstOrDefaultAsync(m => m.Id == id)).Id;
             InTandemUser user = _userManager.FindByIdAsync(UserId).Result;
             //InTandemUser user = _userManager.FindByIdAsync((await _context.Users.FirstOrDefaultAsync(m => m.Id == id))?.Id).Result;

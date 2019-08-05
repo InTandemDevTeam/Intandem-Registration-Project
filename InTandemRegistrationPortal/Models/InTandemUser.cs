@@ -46,6 +46,6 @@ namespace InTandemRegistrationPortal.Models
 
         public bool? HasBeenApproved { get; set; }
 
-        public ICollection<RideRegistration> RideREgistrations { get; set; }
+        public ICollection<RideRegistration> RideRegistrations { get; set; }
     }
 }

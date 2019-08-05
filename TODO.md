@@ -24,3 +24,7 @@
     * call all needed code from site.js based on page loaded
     * add event handlers for elements in js, remove event handlers from HTML (done)
     * clear and repopulate inputs based on user selection on Manage and Registration page (debugging needed)
+  * events page
+    * cross table created and records registrations, stores user and event id
+    * need to categorize and show events based on status
+    * need to tweak links shown based on if user is signed in
