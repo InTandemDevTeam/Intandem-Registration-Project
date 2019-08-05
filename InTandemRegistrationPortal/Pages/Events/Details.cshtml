@@ -96,7 +96,9 @@
     </form>
 }
 <div>
-    
-    <a asp-page="./Edit" asp-route-id="@Model.RideEvent.ID">Edit</a> |
+    @if (Model.InTandemUser != null)
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.RideEvent.ID">Edit</a>
+    }
     <a asp-page="./Index">Back to List</a>
 </div>

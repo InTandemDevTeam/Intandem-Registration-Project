@@ -45,7 +45,13 @@ namespace InTandemRegistrationPortal.Models
         public string HasBeenTrained { get; set; }
 
         public bool? HasBeenApproved { get; set; }
-
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
         public ICollection<RideRegistration> RideRegistrations { get; set; }
     }
 }

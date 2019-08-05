@@ -4,7 +4,6 @@ using InTandemRegistrationPortal.Pages.Admin;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InTandemRegistrationPortal.Pages.Events
@@ -38,20 +37,24 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return NotFound();
             }
 
-            bool DoesUserExist = await _context.RideRegistrations
-                .AsNoTracking()
-                .AnyAsync(m => m.InTandemUserId.Equals(InTandemUser.Id));
-            bool DoesEventExist = await _context.RideRegistrations
-                .AsNoTracking()
-                .AnyAsync(m => m.RideEventsID == RideEvent.ID);
-            if (DoesUserExist && DoesEventExist)
+            if (InTandemUser != null)
             {
-                HasSignedUp = true;
+                bool DoesUserExist = await _context.RideRegistrations
+                    .AsNoTracking()
+                    .AnyAsync(m => m.InTandemUserId.Equals(InTandemUser.Id));
+                bool DoesEventExist = await _context.RideRegistrations
+                    .AsNoTracking()
+                    .AnyAsync(m => m.RideEventsID == RideEvent.ID);
+                if (DoesUserExist && DoesEventExist)
+                {
+                    HasSignedUp = true;
+                }
+                else
+                {
+                    HasSignedUp = false;
+                }
             }
-            else
-            {
-                HasSignedUp = false;
-            }
+            
             return Page();
         }
         public async Task<IActionResult> OnPostYesAsync(int? id)

@@ -7,23 +7,31 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using InTandemRegistrationPortal.Models;
 using InTandemRegistrationPortal.Data;
+using Microsoft.AspNetCore.Authorization;
+using InTandemRegistrationPortal.Pages.Admin;
+using Microsoft.AspNetCore.Identity;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {
-    public class IndexModel : PageModel
+    [AllowAnonymous]
+    public class IndexModel : UserPageModel
     {
-        private readonly ApplicationDbContext _context;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(UserManager<InTandemUser> userManager, 
+            ApplicationDbContext context) :
+            base(userManager, context)
         {
-            _context = context;
         }
 
         public IList<RideEvents> RideEvents { get;set; }
 
         public async Task OnGetAsync()
         {
-            RideEvents = await _context.RideEvents.ToListAsync();
+            await GetCurrentUser();
+            RideEvents = await _context.RideEvents
+                //.Include(r => r.RideRegistrations)
+                //.ThenInclude(r => r.InTandemUser)
+                .ToListAsync();
         }
     }
 }

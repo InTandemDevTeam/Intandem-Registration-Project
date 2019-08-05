@@ -1,15 +1,19 @@
 ﻿@page
 @model InTandemRegistrationPortal.Pages.Events.IndexModel
-
+@using InTandemRegistrationPortal.Models
+@inject SignInManager<InTandemUser> SignInManager
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Events</h2>
+@if (Model.InTandemUser != null && (Model.InTandemUser.Role == "Admin" || Model.InTandemUser.Role == "Captain"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -53,51 +57,65 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.RideEvents) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventSDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Distance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RideLeader)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventRatio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxSignup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxSignUpType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bActive)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.RideEvents)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventSDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RideLeader)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventRatio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxSignup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxSignUpType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bActive)
+                </td>
+                <td>
+                    @if (Model.InTandemUser != null)
+                    {
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (Model.InTandemUser.Role == "Admin" || Model.InTandemUser.Role == "Captain")
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                                @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
+                            }
+                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="false">Details</a>
+                    }
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

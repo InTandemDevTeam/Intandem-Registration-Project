@@ -28,3 +28,9 @@
     * cross table created and records registrations, stores user and event id
     * need to categorize and show events based on status
     * need to tweak links shown based on if user is signed in
+  * miscellaneous changes
+    * disable two factor authentication
+    * implement authorization on events pages
+    * change navbar links
+    * prompt for phone number and years of experience on register page
+    * show expertise on users page for admins

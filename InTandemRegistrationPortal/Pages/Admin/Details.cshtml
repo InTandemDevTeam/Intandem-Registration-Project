@@ -15,7 +15,7 @@
             Full Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FullName)
+            @Html.DisplayFor(model => model.InTandemUser.FullName)
         </dd>
         <dt class="col-sm-2">
             Date Registered
@@ -96,16 +96,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.HasBeenApproved"></label>
-                <select asp-for="Input.HasBeenApproved" class="form-control">
-                    <option value="" selected disabled>Select Yes or No</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-                <span asp-validation-for="Input.HasBeenApproved" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Yes" asp-page-handler="Yes" asp-route-id="@Model.InTandemUser.Id" class="btn btn-success" />
+                <input type="submit" value="No" asp-page-handler="No" class="btn btn-danger" />
             </div>
         </form>
     }
