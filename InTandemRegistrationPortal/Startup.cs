@@ -37,17 +37,10 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDbContext<IdentityDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-
-            //services.AddDbContext<InTandemRegistrationPortalContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
-                config.SignIn.RequireConfirmedEmail = false;
+                config.SignIn.RequireConfirmedEmail = true;
             })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -90,14 +83,6 @@ namespace InTandemRegistrationPortal
 
             app.UseMvc();
             CreateRoles(serviceProvider);
-            /*string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer" };
-            foreach (var roleName in roleNames)
-            {
-                if (!await roleManager.RoleExistsAsync(roleName))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
-                }
-            }*/
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {

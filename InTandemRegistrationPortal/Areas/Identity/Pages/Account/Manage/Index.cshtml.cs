@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ExpressiveAnnotations.Attributes;
+using InTandemRegistrationPortal.Data;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
 {
@@ -17,6 +18,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<InTandemUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+
         public IndexModel(
             UserManager<InTandemUser> userManager,
             SignInManager<InTandemUser> signInManager,
@@ -28,6 +30,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             _emailSender = emailSender;
             _roleManager = roleManager;
         }
+
 
         public string Username { get; set; }
 

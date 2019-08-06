@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -131,7 +132,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
-            returnUrl = returnUrl ?? Url.Content("~/Identity/Account/Login");
             if (ModelState.IsValid)
             {
                 var user = new InTandemUser {
@@ -178,6 +178,13 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     // proof of concept code for sending two emails
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
+                    string userid = (await _context.Users
+                        .FirstOrDefaultAsync(u => u.Email == user.Email)).Id;
+                    //string queryURL = QueryHelpers.AddQueryString("~/Identity/Account/ResendConfirmationEmail", "id", userid);
+                    returnUrl = returnUrl ??
+                        //queryURL;
+                        Url.Content($"~/Identity/Account/ResendConfirmationEmail/{userid}");
+
                     if (user.HasBeenApproved == null)
                     {
                         foreach (InTandemUser admin in admins)

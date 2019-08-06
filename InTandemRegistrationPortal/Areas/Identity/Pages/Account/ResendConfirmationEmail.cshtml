@@ -1,0 +1,18 @@
+﻿@page "{id}"
+@model InTandemRegistrationPortal.Areas.Identity.Pages.Account.ResendConfirmationEmailModel
+@{
+    ViewData["Title"] = "ResendConfirmationEmail";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Confirmation Email Sent</h1>
+<p>An email has been sent to @Model.InTandemUser.Email</p>
+<br />
+
+<form method="post">
+    <div class="form-group">
+        <p>If you have not received a confirmation email,</p>
+        <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">click here</button>
+    </div>
+</form>
+
