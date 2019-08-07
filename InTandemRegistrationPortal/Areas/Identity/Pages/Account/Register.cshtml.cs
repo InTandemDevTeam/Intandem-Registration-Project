@@ -77,6 +77,10 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "What type of user are you? (required)")]
             public string Role { get; set; }
 
+            [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please answer whether you have completed training")]
+            [Display(Name = "Have you already completed training? ")]
+            public bool? HasBeenTrained { get; set; }
+
             [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please enter your height")]
             [DataType(DataType.Text)]
             [Display(Name = "Height (required)")]
@@ -112,10 +116,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Do you have any special equipment? (required)")]
             public string SpecialEquipment { get; set; }
 
-            [Required]
-            [Display(Name = "Date of Birth (required)")]
-            [DataType(DataType.Date)]
-            public DateTime DateOfBirth { get; set; }
 
             [Required]
             [EmailAddress]
@@ -150,12 +150,12 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     UserName = Input.Email,
                     Email = Input.Email,
-                    DateOfBirth = Input.DateOfBirth,
                     DateRegistered = DateTime.Today,
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
                     Role = Input.Role,
+                    HasBeenTrained = Input.HasBeenTrained,
                     HasTandem = Input.HasTandem,
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,

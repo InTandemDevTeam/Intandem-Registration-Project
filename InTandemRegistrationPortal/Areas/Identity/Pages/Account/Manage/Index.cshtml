@@ -48,6 +48,14 @@
                     <option value="Volunteer">Volunteer</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.HasSingleBike"></label>
+                <select asp-for="Input.HasSingleBike" class="form-control UserField">
+                    <option value="" selected disabled>Select Yes or No</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
             <div id="captain_stoker">
                 <div class="form-group">
                     <label asp-for="Input.Height"></label>
@@ -56,6 +64,14 @@
                 <div class="form-group">
                     <label asp-for="Input.Weight"></label>
                     <input asp-for="Input.Weight" class="form-control UserField CaptainStokerField" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HasBeenTrained"></label>
+                    <select asp-for="Input.HasBeenTrained" class="form-control UserField CaptainStokerField">
+                        <option value="" selected disabled>Select Yes or No</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.HasSeat"></label>
@@ -70,14 +86,6 @@
                 <div class="form-group">
                     <label asp-for="Input.HasTandem"></label>
                     <select asp-for="Input.HasTandem" class="form-control UserField CaptainField">
-                        <option value="" selected disabled>Select Yes or No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.HasSingleBike"></label>
-                    <select asp-for="Input.HasSingleBike" class="form-control UserField CaptainField">
                         <option value="" selected disabled>Select Yes or No</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>

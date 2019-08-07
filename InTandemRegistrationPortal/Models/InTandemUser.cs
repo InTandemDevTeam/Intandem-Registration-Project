@@ -42,7 +42,7 @@ namespace InTandemRegistrationPortal.Models
         public string RiderLevel { get; set; }
         [PersonalData]
         //change to bool object instead of string
-        public string HasBeenTrained { get; set; }
+        public bool? HasBeenTrained { get; set; }
 
         public bool? HasBeenApproved { get; set; }
         public string FullName

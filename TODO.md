@@ -30,8 +30,8 @@
     * need to tweak links shown based on if user is signed in
   * miscellaneous changes
     * disable two factor authentication (done)
-    * implement authorization on events pages
+    * implement authorization on events pages (need to transfer over auth handler code from avnish's repo)
     * change navbar links
-    * prompt for phone number and years of experience on register page
+    * prompt for phone number and years of experience on register page 
     * show expertise on users page for admins
     * allow verification email to be resent in case of error (done)

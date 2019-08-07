@@ -58,6 +58,10 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Role")]
             public string Role { get; set; }
 
+            [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please answer whether you have completed training")]
+            [Display(Name = "Have you already completed training? ")]
+            public bool? HasBeenTrained { get; set; }
+
             [RequiredIf(@"Role == 'Captain' || Role == 'Stoker'", ErrorMessage = "Please enter your height")]
             [DataType(DataType.Text)]
             [Display(Name = "Height")]
@@ -120,8 +124,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                DateOfBirth = user.DateOfBirth,
                 Role = user.Role,
+                HasBeenTrained = user.HasBeenTrained,
                 Height = user.Height,
                 Weight = user.Weight,
                 HasSeat = user.HasSeat,
@@ -171,10 +175,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
             }
 
-            if (Input.DateOfBirth != user.DateOfBirth)
-            {
-                user.DateOfBirth = Input.DateOfBirth;
-            }
             //var role = await _userManager.GetRolesAsync(user);
 
             if (Input.Role != user.Role)
