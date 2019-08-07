@@ -93,11 +93,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             public string SpecialEquipment { get; set; }
 
             [Required]
-            [Display(Name = "Date of Birth")]
-            [DataType(DataType.Date)]
-            public DateTime DateOfBirth { get; set; }
-
-            [Required]
             [EmailAddress]
             public string Email { get; set; }
 

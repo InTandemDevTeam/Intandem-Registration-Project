@@ -74,6 +74,7 @@ namespace InTandemRegistrationPortal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            CreateRoles(serviceProvider).Wait();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -82,20 +83,20 @@ namespace InTandemRegistrationPortal
             app.UseAuthentication();
 
             app.UseMvc();
-            CreateRoles(serviceProvider);
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
-            string[] roleNames = { "Admin", "Captain", "Stoker", "Volunteer" };
-            IdentityResult roleResult;
-            foreach (var roleName in roleNames)
+            string[] roleNames = {"Admin", "Captain", "Stoker", "Volunteer"};
+            IdentityResult result;
+            foreach (string roleName in roleNames)
             {
                 var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                IdentityRole role = new IdentityRole(roleName);
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    result = await RoleManager.CreateAsync(role);
                 }
             }
             //Task<InTandemUser> adminUser = UserManager.FindByEmailAsync(email);

@@ -1,4 +1,5 @@
 ﻿using ExpressiveAnnotations.Attributes;
+using InTandemRegistrationPortal.Authorization;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -49,6 +51,10 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
         public InTandemUser InTandemUser { get; set; }
 
+        public SelectList Roles => new SelectList(_roleManager.Roles
+                    .Where(x => x.Name != Constants.AdministratorsRole)
+                    .ToDictionary(k => k.Name, v => v.Name), "Key", "Value");
+
         public DateTime DateRegistered { get; set; }
         public class InputModel
         {
@@ -61,6 +67,11 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Last name (required)")]
             public string LastName { get; set; }
+
+            [Required]
+            [Phone]
+            [Display(Name = "Phone number (required)")]
+            public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "Please select what type of User you are")]
             [Display(Name = "What type of user are you? (required)")]
@@ -149,7 +160,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
                     SpecialEquipment = Input.SpecialEquipment,
-                    HasBeenApproved = null
+                    HasBeenApproved = null,
+                    PhoneNumber = Input.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users
@@ -179,10 +191,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
                     string msgBody = "Thank you for creating an account with InTandem. \n";
                     string userid = (await _context.Users
+                        .AsNoTracking()
                         .FirstOrDefaultAsync(u => u.Email == user.Email)).Id;
-                    //string queryURL = QueryHelpers.AddQueryString("~/Identity/Account/ResendConfirmationEmail", "id", userid);
                     returnUrl = returnUrl ??
-                        //queryURL;
                         Url.Content($"~/Identity/Account/ResendConfirmationEmail/{userid}");
 
                     if (user.HasBeenApproved == null)
