@@ -40,7 +40,7 @@ namespace InTandemRegistrationPortal
 
             services.AddIdentity<InTandemUser, IdentityRole>(config =>
             {
-                config.SignIn.RequireConfirmedEmail = true;
+                config.SignIn.RequireConfirmedEmail = false;
             })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -88,7 +88,7 @@ namespace InTandemRegistrationPortal
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
-            string[] roleNames = {"Admin", "Captain", "Stoker", "Volunteer"};
+            string[] roleNames = {"Administrator", "Captain", "Stoker", "Volunteer"};
             IdentityResult result;
             foreach (string roleName in roleNames)
             {

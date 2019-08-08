@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Data;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {
@@ -16,9 +17,9 @@ namespace InTandemRegistrationPortal.Pages.Events
                     public string lblActiveText = "false";
         public bool bActiveState = false;
         public string sTemp = "";
-        private readonly InTandemRegistrationPortal.Models.InTandemRegistrationPortalContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public NewModel(InTandemRegistrationPortal.Models.InTandemRegistrationPortalContext context)
+        public NewModel(ApplicationDbContext context)
         {
             _context = context;
         }

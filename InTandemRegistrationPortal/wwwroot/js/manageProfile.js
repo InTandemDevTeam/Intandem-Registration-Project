@@ -51,7 +51,7 @@ function changeShownFields(Dropdown) {
         if (UserType === "Volunteer"
             || UserType === ""
             || UserType === null
-            || UserType === "Admin") {
+            || UserType === "Administrator") {
 
             // show no specific information for volunteer
             $("#captain_stoker").hide();

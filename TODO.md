@@ -35,3 +35,5 @@
     * prompt for phone number and years of experience on register page 
     * show expertise on users page for admins
     * allow verification email to be resent in case of error (done)
+    * add reason why event was cancelled (added to user model)
+    * add field for captains to say if they came from NY Cares (done)

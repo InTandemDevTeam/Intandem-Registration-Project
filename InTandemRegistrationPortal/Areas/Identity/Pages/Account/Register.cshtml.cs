@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         public InTandemUser InTandemUser { get; set; }
 
         public SelectList Roles => new SelectList(_roleManager.Roles
-                    .Where(x => x.Name != Constants.AdministratorsRole)
+                    //.Where(x => x.Name != Constants.AdministratorsRole)
                     .ToDictionary(k => k.Name, v => v.Name), "Key", "Value");
 
         public DateTime DateRegistered { get; set; }
@@ -91,25 +92,29 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [Display(Name = "Weight (required)")]
             public string Weight { get; set; }
 
+            [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you came here from NY Cares")]
+            [Display(Name = "Did you come here through New York Cares?")]
+            public bool? FromNYCares { get; set; }
+
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have your own seat")]
             [DataType(DataType.Text)]
             [Display(Name = "Do you have your own seat? (required)")]
-            public string HasSeat { get; set; }
+            public bool? HasSeat { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a tandem bike")]
             [DataType(DataType.Text)]
             [Display(Name = "Do you have your own tandem bike? (required)")]
-            public string HasTandem { get; set; }
+            public bool? HasTandem { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a single bike")]
             [DataType(DataType.Text)]
             [Display(Name = "Do you have your own single bike? (required)")]
-            public string HasSingleBike { get; set; }
+            public bool? HasSingleBike { get; set; }
 
             
             [DataType(DataType.Text)]
             [Display(Name = "Do you have a guide dog? (required)")]
-            public string Dog { get; set; }
+            public bool? Dog { get; set; }
 
             
             [DataType(DataType.Text)]
@@ -150,7 +155,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     UserName = Input.Email,
                     Email = Input.Email,
-                    DateRegistered = DateTime.Today,
+                    DateRegistered = DateTime.Today.Date,
+                    //.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
@@ -161,7 +167,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     Dog = Input.Dog,
                     SpecialEquipment = Input.SpecialEquipment,
                     HasBeenApproved = null,
-                    PhoneNumber = Input.PhoneNumber
+                    PhoneNumber = Input.PhoneNumber,
+                    FromNYCares = Input.FromNYCares,
+                    TotalMilesTraveled = 0
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users

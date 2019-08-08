@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ExpressiveAnnotations.Attributes;
 using InTandemRegistrationPortal.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
 {
@@ -42,6 +44,11 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        public SelectList Roles => new SelectList(_roleManager.Roles
+                    //.Where(x => x.Name != Constants.AdministratorsRole)
+                    .ToDictionary(k => k.Name, v => v.Name), "Key", "Value");
+
+
         public class InputModel
         {
             [Required]
@@ -73,23 +80,22 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage
             public string Weight { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have your own seat")]
-            [DataType(DataType.Text)]
             [Display(Name = "Do you have your own seat?")]
-            public string HasSeat { get; set; }
+            public bool? HasSeat { get; set; }
 
             [RequiredIf("Role == 'Captain'")]
-            [DataType(DataType.Text)]
             [Display(Name = "Do you have your own tandem bike?")]
-            public string HasTandem { get; set; }
+            public bool? HasTandem { get; set; }
+
+
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have a bike")]
-            [DataType(DataType.Text)]
             [Display(Name = "Do you have your own single bike?")]
-            public string HasSingleBike { get; set; }
+            public bool? HasSingleBike { get; set; }
 
             [DataType(DataType.Text)]
             [Display(Name = "Do you have a guide dog?")]
-            public string Dog { get; set; }
+            public bool? Dog { get; set; }
 
 
             [DataType(DataType.Text)]

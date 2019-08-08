@@ -24,7 +24,8 @@ namespace InTandemRegistrationPortal.Pages.Admin
         public async Task OnGetAsync()
         {
             Users = await _context.Users
-                .Where(r => r.Role != "Admin")
+                .AsNoTracking()
+                .Where(r => r.Role != "Administrator")
                 .ToListAsync();
             
             //FullName = Users.FirstName + "" + InTandemUser.LastName;

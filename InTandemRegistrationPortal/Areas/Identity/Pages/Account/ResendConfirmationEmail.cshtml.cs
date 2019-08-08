@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using InTandemRegistrationPortal.Areas.Identity.Pages.Account.Manage;
-using InTandemRegistrationPortal.Data;
+﻿using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
-using InTandemRegistrationPortal.Pages.Admin;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -59,7 +54,6 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             {
                 return Page();
             }
-            //var user = InTandemUser;
             var user = await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id.Equals(id));

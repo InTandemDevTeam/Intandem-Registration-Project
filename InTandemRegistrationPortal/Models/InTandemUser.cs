@@ -18,33 +18,34 @@ namespace InTandemRegistrationPortal.Models
         [PersonalData]
         public DateTime DateRegistered { get; set; }
         // stoker/captain properties
-
+        
         [PersonalData]
         public string Height { get; set; }
         [PersonalData]
         public string Weight { get; set; }
-        //change to bool object instead of string
         [PersonalData]
-        public string HasSeat { get; set; }
-        //change to bool object instead of string
+        public bool? HasSeat { get; set; }
+        [PersonalData]
+        public bool? HasBeenTrained { get; set; }
+
+        [PersonalData]
+        public int TotalMilesTraveled { get; set; } 
         // Captain-specific information
         [PersonalData]
-        public string HasTandem { get; set; }
-        //change to bool object instead of string
+        public bool? FromNYCares { get; set; }
         [PersonalData]
-        public string HasSingleBike { get; set; }
+        public bool? HasTandem { get; set; }
+        [PersonalData]
+        public bool? HasSingleBike { get; set; }
         // Stoker-specific informaiton
         [PersonalData]
-        public string Dog { get; set; }
+        public bool? Dog { get; set; }
         [PersonalData]
         public string SpecialEquipment { get; set; }
         [PersonalData]
         public string RiderLevel { get; set; }
-        [PersonalData]
-        //change to bool object instead of string
-        public bool? HasBeenTrained { get; set; }
-
         public bool? HasBeenApproved { get; set; }
+
         public string FullName
         {
             get

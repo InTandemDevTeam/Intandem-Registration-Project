@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using InTandemRegistrationPortal.Data;
 
 namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 {
@@ -17,11 +18,15 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<InTandemUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
-        public LoginModel(SignInManager<InTandemUser> signInManager, ILogger<LoginModel> logger)
+        private readonly ApplicationDbContext _context;
+        public LoginModel(
+            SignInManager<InTandemUser> signInManager, 
+            ILogger<LoginModel> logger,
+            ApplicationDbContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -88,15 +93,23 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
+                if (!UserExists(Input.Email))
+                {
+                    ModelState.AddModelError(string.Empty, "User with this email does not exist");
+                }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");                    
                     return Page();
                 }
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+        private bool UserExists(string email)
+        {
+            return _context.Users.Any(e => e.Email.Equals(email));
         }
     }
 }

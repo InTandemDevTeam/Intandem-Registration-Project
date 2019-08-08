@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190808164619_AddedFieldsForRideRegistraitonsAndUser.cs" />
+    <Compile Remove="Data\Migrations\20190808164619_AddedFieldsForRideRegistraitonsAndUser.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\.eslintrc" />
   </ItemGroup>
 
