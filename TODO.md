@@ -39,3 +39,4 @@
     * add field for captains to say if they came from NY Cares (done)
     * made Users table column names dynamic (done)
     * removed duplicate DbContext (done)
+    * made name of fields on user details page dynamic (done)

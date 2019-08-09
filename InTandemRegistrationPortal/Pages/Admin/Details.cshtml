@@ -12,32 +12,34 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            Full Name
+            @Html.DisplayNameFor(model => model.InTandemUser.FullName)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InTandemUser.FullName)
         </dd>
         <dt class="col-sm-2">
-            Date Registered
+            @Html.DisplayNameFor(model => model.InTandemUser.DateRegistered)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InTandemUser.DateRegistered)
         </dd>
         <dt class="col-sm-2">
-            Email
+            @Html.DisplayNameFor(model => model.InTandemUser.Email)
+
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InTandemUser.Email)
         </dd>
         <dt class="col-sm-2">
-            Role
+            @Html.DisplayNameFor(model => model.InTandemUser.Role)
+
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InTandemUser.Role)
         </dd>
 
         <dt class="col-sm-2">
-            Do you have your own single bike?
+            @Html.DisplayNameFor(model => model.InTandemUser.HasSingleBike)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InTandemUser.HasSingleBike)
@@ -46,25 +48,26 @@
           (Model.InTandemUser.Role == "Stoker"))
         {
             <dt class="col-sm-2">
-                Height
+                @Html.DisplayNameFor(model => model.InTandemUser.Height)
+
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InTandemUser.Height)
             </dd>
             <dt class="col-sm-2">
-                Weight
+                @Html.DisplayNameFor(model => model.InTandemUser.Weight)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InTandemUser.Weight)
             </dd>
             <dt class="col-sm-2">
-                Has Seat?
+                @Html.DisplayNameFor(model => model.InTandemUser.HasSeat)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InTandemUser.HasSeat)
             </dd>            
             <dt class="col-sm-2">
-                Has Been Trained?
+                @Html.DisplayNameFor(model => model.InTandemUser.HasBeenTrained)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InTandemUser.HasBeenTrained)
@@ -72,13 +75,13 @@
             @if (Model.InTandemUser.Role == "Stoker")
             {
                 <dt class="col-sm-2">
-                    Do you have a guide dog?
+                    @Html.DisplayNameFor(model => model.InTandemUser.Dog)
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.InTandemUser.Dog)
                 </dd>
                 <dt class="col-sm-2">
-                    Do you have any special equipment?
+                    @Html.DisplayNameFor(model => model.InTandemUser.SpecialEquipment)
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.InTandemUser.SpecialEquipment)
@@ -87,13 +90,13 @@
             @if (Model.InTandemUser.Role == "Captain")
             {
                 <dt class="col-sm-2">
-                    Do you have your own tandem bike?
+                    @Html.DisplayNameFor(model => model.InTandemUser.HasTandem)
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.InTandemUser.HasTandem)
                 </dd>
                 <dt class="col-sm-2">
-                    Did you come here through New York Cares?
+                    @Html.DisplayNameFor(model => model.InTandemUser.FromNYCares)
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.InTandemUser.FromNYCares)

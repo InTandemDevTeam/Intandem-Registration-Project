@@ -69,6 +69,7 @@ namespace InTandemRegistrationPortal.Models
         [Display(Name = "Approval status")]
         public bool? HasBeenApproved { get; set; }
 
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
