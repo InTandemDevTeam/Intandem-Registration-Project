@@ -96,7 +96,13 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                 if (!UserExists(Input.Email))
                 {
                     ModelState.AddModelError(string.Empty, "User with this email does not exist");
+                    return Page();
                 }
+                //if(UserHasBeenApproved(Input.Email) == false || UserHasBeenApproved(Input.Email) == null)
+                //{
+                //    ModelState.AddModelError(string.Empty, "Administrator approval is required");
+                //    return Page();
+                //}
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");                    
@@ -110,6 +116,10 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         private bool UserExists(string email)
         {
             return _context.Users.Any(e => e.Email.Equals(email));
+        }
+        private bool? UserHasBeenApproved(string email)
+        {
+            return _context.Users.FirstOrDefault(e => e.Email.Equals(email)).HasBeenApproved;
         }
     }
 }

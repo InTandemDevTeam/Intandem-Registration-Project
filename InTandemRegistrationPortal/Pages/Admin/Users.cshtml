@@ -11,32 +11,33 @@
         <thead>
             <tr>
                 <th>
-                    Name
+                    @Html.DisplayNameFor(model => model.Users[0].FullName)
                 </th>
                 <th>
-                    Date Registered
+                    @Html.DisplayNameFor(model => model.Users[0].DateRegistered)
                 </th>
                 <th>
-                    Role
+                    @Html.DisplayNameFor(model => model.Users[0].Role)
                 </th>
                 <th>
-                    Email
+                    @Html.DisplayNameFor(model => model.Users[0].Email)
                 </th>
                 <th>
-                    Approved
+                    @Html.DisplayNameFor(model => model.Users[0].HasBeenTrained)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].HasBeenApproved)
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Users)
             {
-                string FullName = item.FirstName + " " + item.LastName;
                 <tr>
                     <td>
                         <a asp-page="./Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => FullName)
+                            @Html.DisplayFor(modelItem => item.FullName)
                         </a>
-                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DateRegistered)
@@ -46,6 +47,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HasBeenTrained)
                     </td>
                     @if (item.HasBeenApproved == true)
                     {

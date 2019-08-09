@@ -1,5 +1,4 @@
 ﻿using ExpressiveAnnotations.Attributes;
-using InTandemRegistrationPortal.Authorization;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -8,12 +7,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -93,7 +90,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             public string Weight { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you came here from NY Cares")]
-            [Display(Name = "Did you come here through New York Cares?")]
+            [Display(Name = "Did you come here through New York Cares? (required)")]
             public bool? FromNYCares { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have your own seat")]
@@ -173,7 +170,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users
-                    .Where(r => r.Role == "Admin")
+                    .Where(r => r.Role == "Administrator")
                     .ToListAsync(); 
                 if (result.Succeeded)
                 {
@@ -208,8 +205,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     {
                         foreach (InTandemUser admin in admins)
                         {
-                            await _emailSender.SendEmailAsync(admin.Email, "Admin email",
-                            msgBody + $"Admin, please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                            await _emailSender.SendEmailAsync(admin.Email, "Administrator email",
+                            msgBody + $"Administrator, please confirm this account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         }
                     }

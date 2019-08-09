@@ -19,8 +19,6 @@ namespace InTandemRegistrationPortal.Pages.Admin
         }
         public IList<InTandemUser> Users { get; set; }
 
-        public string FullName { get; set; }
-
         public async Task OnGetAsync()
         {
             Users = await _context.Users
@@ -28,7 +26,6 @@ namespace InTandemRegistrationPortal.Pages.Admin
                 .Where(r => r.Role != "Administrator")
                 .ToListAsync();
             
-            //FullName = Users.FirstName + "" + InTandemUser.LastName;
         }
     }
 }

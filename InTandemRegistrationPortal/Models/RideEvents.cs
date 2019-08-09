@@ -10,14 +10,16 @@ namespace InTandemRegistrationPortal.Models
         public int ID { get; set; }
         [Column(TypeName = "varchar(300)")]
         [Required]
+        [Display(Name = "Name")]
         public string EventName { get; set; }
         [Display(Name = "Event Date")]
         [DataType(DataType.Date)]
         public DateTime EventSDate { get; set; }
 
         [Column(TypeName = "varchar(500)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(AllowEmptyStrings = true)]
+        [Display(Name = "Description")]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Description { get; set; }
 
         [Column(TypeName = "varchar(200)")]
@@ -28,109 +30,38 @@ namespace InTandemRegistrationPortal.Models
         [Column(TypeName = "decimal(18, 1)")]
         public decimal? Distance { get; set; }
 
+        [Display(Name = "Type of event")]
         public int EventType { get; set; }
 
         [Column(TypeName = "varchar(150)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(AllowEmptyStrings = true)]
+        [Display(Name = "Ride Leader(s)")]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string RideLeader { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(AllowEmptyStrings = true)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string EventRatio { get; set; }
-
+        
         public int? MaxSignup { get; set; }
+        // limited by bikes, stoker, or people
         public int? MaxSignUpType { get; set; }
+        // cancelled, incomplete, pending, passed
+        // admin has not decided this is not ready
+        // upcoming (ready), passed, incomplete, cancelled
+        // auto mark as passed the day after
+        // for calander and registration pages, users should not be offered rides that are incomplete or cancelled
+        // cannot register for incomplete or cancelled rides
+        // calendar should show rides that are cancelled
         public int Status { get; set; }
+        // is active
         [Required]
         public bool? bActive { get; set; }
 
+        // ride cancellation field
+        public string ReasonForCancellation { get; set; }
         // below is needed to create cross table
         public ICollection<RideRegistration> RideRegistrations { get; set; }
-
-    } // class RideEvent
-      //public class AspNetRoles
-      //{
-      //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-      //    [Required]
-      //    public string Id { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string Name { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string NormalizedName { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string ConcurrencyStamp { get; set; }
-
-    //} // class AspNetRoles
-    //public class AspNetUsers
-    //{
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required]
-    //    public string Id { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string UserName { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string NormalizedUserName { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string Email { get; set; }
-
-    //    [Required]
-    //    public bool? EmailConfirmed { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string PasswordHash { get; set; }
-
-    //    [Column(TypeName = "varchar(200)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = false)]
-    //    [Required(AllowEmptyStrings = true)]
-    //            public string SecurityStamp  { get; set;}
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string ConcurrencyStamp { get; set; }
-
-    //    [Column(TypeName = "varchar(256)")]
-    //    [DisplayFormat(ConvertEmptyStringToNull = true)]
-    //    [Required(AllowEmptyStrings = true)]
-    //    public string PhoneNumber  { get; set; }
-
-    //    public bool? PhoneNumberConfirmed  { get; set; }
-
-    //    public bool?  TwoFactorEnabled { get; set; }
-
-    //    public DateTimeOffset  LockoutEnd { get; set; }
-
-    //    [Required]
-    //    public bool?  LockoutEnabled { get; set; }
-
-    //    [Required]
-    //    public int AccessFailedCount { get; set; }
-
-
-    //} // class AspNetUsers
-
-
-
+    }
 } // namespace Models

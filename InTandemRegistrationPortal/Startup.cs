@@ -113,7 +113,7 @@ namespace InTandemRegistrationPortal
                 if (createPowerUser.Succeeded)
                 {
                     //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(poweruser, "Admin");
+                    await UserManager.AddToRoleAsync(poweruser, "Administrator");
 
                 }
             }*/

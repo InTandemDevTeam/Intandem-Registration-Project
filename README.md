@@ -11,13 +11,15 @@ Contains all code related to the new registration section for the InTandem websi
 
 ### To avoid any database-realted errors
 
-Run the following two commands in the NuGet Package Manager (PMC) in Visual Studio 2019 (found in Tools > NuGet Package Manager > Package Manger Console)
+Run the following command in the NuGet Package Manager (PMC) in Visual Studio 2019 (found in Tools > NuGet Package Manager > Package Manger Console)
 
-    PM> Update-Database -Context InTandemRegistrationPortal.Models.InTandemRegistrationPortalContext
-    
-    PM> Update-Database -Context InTandemRegistrationPortal.Data.ApplicationDbContext
+    PM> Update-Database 
 
-These two commands will create two different databases each based around the two different data contexts in this project. Note that this will create two databases, one with the project name as the title and one with aspnet prefixed with the project title. The latter is the database that is being actively used and changed by the project.
+This command will create the database that this web application uses
+
+If you encounter any database-realted errors, you may drop the database by using the folliwing command in the PMC to see if it fixes the error
+
+    PM> Drop-Database
 
 In order to be able to deploy this web application the **Expressive Attributes** package must be installed
 Run the following command to install it in the Package Manager Console\

@@ -25,9 +25,9 @@
     * add event handlers for elements in js, remove event handlers from HTML (done)
     * clear and repopulate inputs based on user selection on Manage and Registration page (debugging needed)
   * events page
-    * cross table created and records registrations, stores user and event id
+    * cross table created and records registrations, stores user and event id (done)
     * need to categorize and show events based on status
-    * need to tweak links shown based on if user is signed in
+    * need to tweak links shown based on if user is signed in (done)
   * miscellaneous changes
     * disable two factor authentication (done)
     * implement authorization on events pages (need to transfer over auth handler code from avnish's repo)
@@ -35,5 +35,7 @@
     * prompt for phone number and years of experience on register page 
     * show expertise on users page for admins
     * allow verification email to be resent in case of error (done)
-    * add reason why event was cancelled (added to user model)
+    * add reason why event was cancelled (done)
     * add field for captains to say if they came from NY Cares (done)
+    * made Users table column names dynamic (done)
+    * removed duplicate DbContext (done)
