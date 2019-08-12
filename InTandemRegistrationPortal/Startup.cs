@@ -1,6 +1,8 @@
+using InTandemRegistrationPortal.Authorization;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using InTandemRegistrationPortal.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +49,9 @@ namespace InTandemRegistrationPortal
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddMvc()
+            services.AddMvc();
+            services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
+
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*.AddRazorPagesOptions(options =>
             {
@@ -57,7 +61,7 @@ namespace InTandemRegistrationPortal
             {
                 options.AddPolicy("RequireStokerRole",
                     policy => policy.RequireRole("Stoker"));
-            })*/;
+            })*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -63,5 +63,6 @@ namespace InTandemRegistrationPortal.Models
         public string ReasonForCancellation { get; set; }
         // below is needed to create cross table
         public ICollection<RideRegistration> RideRegistrations { get; set; }
+        
     }
 } // namespace Models
