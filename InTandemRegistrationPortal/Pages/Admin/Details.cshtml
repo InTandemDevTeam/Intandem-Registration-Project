@@ -108,6 +108,7 @@
     </dl>
     @if(Model.InTandemUser.HasBeenApproved == null)
     {
+        <p>Will you approve this user?</p>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

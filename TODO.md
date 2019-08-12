@@ -40,3 +40,4 @@
     * made Users table column names dynamic (done)
     * removed duplicate DbContext (done)
     * made name of fields on user details page dynamic (done)
+    * allow user to input and change username (done)

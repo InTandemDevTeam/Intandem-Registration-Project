@@ -42,8 +42,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [DataType(DataType.Text)]
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -78,7 +79,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -93,7 +94,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
-                if (!UserExists(Input.Email))
+                if (!UserExists(Input.UserName))
                 {
                     ModelState.AddModelError(string.Empty, "User with this email does not exist");
                     return Page();
@@ -113,9 +114,9 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-        private bool UserExists(string email)
+        private bool UserExists(string userName)
         {
-            return _context.Users.Any(e => e.Email.Equals(email));
+            return _context.Users.Any(e => e.UserName.Equals(userName));
         }
         private bool? UserHasBeenApproved(string email)
         {

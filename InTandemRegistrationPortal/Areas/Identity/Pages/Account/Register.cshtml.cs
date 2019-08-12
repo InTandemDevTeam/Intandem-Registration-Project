@@ -117,7 +117,11 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Do you have any special equipment? (required)")]
             public string SpecialEquipment { get; set; }
-
+            
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Username (required)")]
+            public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
@@ -150,7 +154,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                 var user = new InTandemUser {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    UserName = Input.Email,
+                    UserName = Input.UserName,
                     Email = Input.Email,
                     DateRegistered = DateTime.Today.Date,
                     //.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
