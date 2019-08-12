@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,13 +14,11 @@ namespace InTandemRegistrationPortal.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [PersonalData]
-        public DateTime DateOfBirth { get; set; }
-        [PersonalData]
         [Display(Name = "Role")]
         public string Role { get; set; }
         [PersonalData]
         [Display(Name = "Date Registered")]
-        public DateTime DateRegistered { get; set; }
+        public string DateRegistered { get; set; }
         // stoker/captain properties
         
         [PersonalData]
@@ -47,7 +44,6 @@ namespace InTandemRegistrationPortal.Models
         // Captain-specific information
         [PersonalData]
         [Display(Name = "Did you come here through New York Cares?")]
-
         public bool? FromNYCares { get; set; }
         [PersonalData]
         [Display(Name = "Do you have your own tandem bike?")]
@@ -55,6 +51,10 @@ namespace InTandemRegistrationPortal.Models
         [PersonalData]
         [Display(Name = "Do you have your own single bike?")]
         public bool? HasSingleBike { get; set; }
+        // in years
+        [PersonalData]
+        [Display(Name = "How many years experience do you have biking?")]
+        public int? RiderLevel { get; set; }
         // Stoker-specific informaiton
         [PersonalData]
         [Display(Name = "Do you have a guide dog?")]
@@ -64,8 +64,6 @@ namespace InTandemRegistrationPortal.Models
         [Display(Name = "Do you have any special equipment?")]
 
         public string SpecialEquipment { get; set; }
-        [PersonalData]
-        public string RiderLevel { get; set; }
         [Display(Name = "Approval status")]
         public bool? HasBeenApproved { get; set; }
 

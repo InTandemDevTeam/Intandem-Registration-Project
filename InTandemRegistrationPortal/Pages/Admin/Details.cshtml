@@ -90,16 +90,22 @@
             @if (Model.InTandemUser.Role == "Captain")
             {
                 <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.InTandemUser.FromNYCares)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.InTandemUser.FromNYCares)
+                </dd>
+                <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.InTandemUser.HasTandem)
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.InTandemUser.HasTandem)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.InTandemUser.FromNYCares)
+                    @Html.DisplayNameFor(model => model.InTandemUser.RiderLevel)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.InTandemUser.FromNYCares)
+                    @Html.DisplayFor(model => model.InTandemUser.RiderLevel)
                 </dd>
 
             }

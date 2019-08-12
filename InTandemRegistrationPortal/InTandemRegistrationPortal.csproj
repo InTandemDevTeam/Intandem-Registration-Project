@@ -9,6 +9,8 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20190808164619_AddedFieldsForRideRegistraitonsAndUser.cs" />
     <Compile Remove="Data\Migrations\20190808164619_AddedFieldsForRideRegistraitonsAndUser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190812173711_ChangedRiderLevelToInt.cs" />
+    <Compile Remove="Data\Migrations\20190812173711_ChangedRiderLevelToInt.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

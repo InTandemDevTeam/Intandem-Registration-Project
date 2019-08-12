@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     //.Where(x => x.Name != Constants.AdministratorsRole)
                     .ToDictionary(k => k.Name, v => v.Name), "Key", "Value");
 
-        public DateTime DateRegistered { get; set; }
+        public string DateRegistered { get; set; }
         public class InputModel
         {
             [Required]
@@ -92,6 +93,10 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you came here from NY Cares")]
             [Display(Name = "Did you come here through New York Cares? (required)")]
             public bool? FromNYCares { get; set; }
+
+            [RequiredIf("Role == 'Captain'", ErrorMessage = "Please specify if you have any experience biking")]
+            [Display(Name = "How many years experience do you have biking? (required)")]
+            public int? RiderLevel { get; set; }
 
             [RequiredIf("Role == 'Captain'", ErrorMessage = "Please answer whether you have your own seat")]
             [DataType(DataType.Text)]
@@ -156,8 +161,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     UserName = Input.UserName,
                     Email = Input.Email,
-                    DateRegistered = DateTime.Today.Date,
-                    //.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
+                    DateRegistered = DateTime.Today.Date
+                    .ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,
@@ -170,6 +175,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasBeenApproved = null,
                     PhoneNumber = Input.PhoneNumber,
                     FromNYCares = Input.FromNYCares,
+                    RiderLevel = Input.RiderLevel,
                     TotalMilesTraveled = 0
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
