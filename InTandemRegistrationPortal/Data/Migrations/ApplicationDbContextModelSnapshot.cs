@@ -102,6 +102,25 @@ namespace InTandemRegistrationPortal.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("InTandemRegistrationPortal.Models.ManagerAssignment", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventID");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EventID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ManagerAssignments");
+                });
+
             modelBuilder.Entity("InTandemRegistrationPortal.Models.RideEvents", b =>
                 {
                     b.Property<int>("ID")
@@ -282,6 +301,18 @@ namespace InTandemRegistrationPortal.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("InTandemRegistrationPortal.Models.ManagerAssignment", b =>
+                {
+                    b.HasOne("InTandemRegistrationPortal.Models.RideEvents", "Event")
+                        .WithMany("ManagerAssignments")
+                        .HasForeignKey("EventID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InTandemRegistrationPortal.Models.InTandemUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("InTandemRegistrationPortal.Models.RideRegistration", b =>

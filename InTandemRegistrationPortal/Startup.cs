@@ -51,6 +51,7 @@ namespace InTandemRegistrationPortal
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddMvc();
             services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
 
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             /*.AddRazorPagesOptions(options =>

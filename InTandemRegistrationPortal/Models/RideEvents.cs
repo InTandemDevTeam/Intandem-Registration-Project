@@ -61,6 +61,9 @@ namespace InTandemRegistrationPortal.Models
 
         // ride cancellation field
         public string ReasonForCancellation { get; set; }
+
+        public ICollection<ManagerAssignment> ManagerAssignments { get; set; }
+
         // below is needed to create cross table
         public ICollection<RideRegistration> RideRegistrations { get; set; }
         

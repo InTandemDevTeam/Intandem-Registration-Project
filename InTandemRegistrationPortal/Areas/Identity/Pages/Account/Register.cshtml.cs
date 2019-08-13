@@ -161,8 +161,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     UserName = Input.UserName,
                     Email = Input.Email,
-                    DateRegistered = DateTime.Today.Date
-                    .ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
+                    DateRegistered = DateTime.Today.Date.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
                     Height = Input.Height,
                     Weight = Input.Weight,
                     HasSeat = Input.HasSeat,

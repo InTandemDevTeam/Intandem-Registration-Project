@@ -30,6 +30,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.RideEvents[0].Location)
                 </th>
+                <th>
+                    Leader(s)
+                </th>
                 @*<th>
                     @Html.DisplayNameFor(model => model.RideEvents[0].Distance)
                 </th>*@
@@ -60,64 +63,71 @@
         <tbody>
             @foreach (var item in Model.RideEvents)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EventName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EventSDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Distance)
-                    </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EventType)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.RideLeader)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EventRatio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaxSignup)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaxSignUpType)
-                    </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.bActive)
-                    </td>*@
-                    <td>
-                        @if (Model.InTandemUser != null)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventSDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @{
+                        var managersList = item.ManagerAssignments.Select(x => x.User.FullName);
+                        var managers = string.Join(", ", managersList);
+                    }
+                    @managers
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Distance)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventType)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.RideLeader)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventRatio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxSignup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxSignUpType)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.bActive)
+        </td>*@
+                <td>
+                    @if (Model.InTandemUser != null)
+                    {
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            @if (SignInManager.IsSignedIn(User))
+                            @if (Model.InTandemUser.Role == "Administrator" || Model.InTandemUser.Role == "Captain")
                             {
-                                @if (Model.InTandemUser.Role == "Administrator" || Model.InTandemUser.Role == "Captain")
-                                {
-                                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
-                                    <a asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
-                                    @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
-                                }
-                                <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
+                                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                                <a asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
+                                @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
                             }
+                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
                         }
-                        else
-                        {
-                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="false">Details</a>
-                        }
+                    }
+                    else
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="false">Details</a>
+                    }
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
