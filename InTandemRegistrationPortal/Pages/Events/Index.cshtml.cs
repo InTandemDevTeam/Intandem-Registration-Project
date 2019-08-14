@@ -30,8 +30,8 @@ namespace InTandemRegistrationPortal.Pages.Events
             await GetCurrentUser();
             RideEvents = await _context.RideEvents
                 .AsNoTracking()
-                .Include(r => r.ManagerAssignments)
-                    .ThenInclude(r => r.User)
+                .Include(r => r.RideLeaderAssignments)
+                    .ThenInclude(r => r.InTandemUser)
                 .ToListAsync();
         }
     }

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {
-    [Authorize(Roles = "Captain, Admin")]
+    
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -76,7 +76,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
-        public async Task<IActionResult> OnPostNoAsync()
+        public IActionResult OnPostNo()
         {
             return RedirectToPage("./Index");
         }

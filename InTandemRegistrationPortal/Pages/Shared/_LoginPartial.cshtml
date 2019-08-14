@@ -1,6 +1,7 @@
 <!-- imports and injection needed for razor code below-->
 @using Microsoft.AspNetCore.Identity
 @using InTandemRegistrationPortal.Models;
+@using InTandemRegistrationPortal.Authorization
 @inject SignInManager<InTandemUser> SignInManager
 @inject UserManager<InTandemUser> UserManager
 
@@ -12,7 +13,7 @@
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>
     <!-- razor code below, if user is signed in and an admin, display a link to users page-->
-    @if((UserManager.GetUserAsync(User).Result.Role) == "Administrator")
+    @if(UserManager.GetUserAsync(User).Result.Role.Equals(Constants.AdministratorsRole))
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Users">Users</a>

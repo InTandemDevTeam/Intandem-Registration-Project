@@ -30,7 +30,7 @@ namespace InTandemRegistrationPortal.Authorization
                 return Task.CompletedTask;
 
             var userId = _userManager.GetUserId(context.User);
-            if (!resource.ManagerAssignments.Any(x => x.UserID == userId))
+            if (!resource.RideLeaderAssignments.Any(x => x.InTandemUserId == userId))
                 context.Succeed(requirement);
 
             return Task.CompletedTask;

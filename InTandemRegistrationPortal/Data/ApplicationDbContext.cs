@@ -12,6 +12,6 @@ namespace InTandemRegistrationPortal.Data
         }
         public DbSet<RideEvents> RideEvents { get; set; }
         public DbSet<RideRegistration> RideRegistrations { get; set; }
-        public DbSet<ManagerAssignment> ManagerAssignments { get; set; }
+        public DbSet<RideLeaderAssignment> RideLeaderAssignments { get; set; }
     }
 }

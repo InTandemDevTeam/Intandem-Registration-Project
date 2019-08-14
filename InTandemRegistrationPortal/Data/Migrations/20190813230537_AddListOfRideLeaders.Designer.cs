@@ -4,14 +4,16 @@ using InTandemRegistrationPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InTandemRegistrationPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190813230537_AddListOfRideLeaders")]
+    partial class AddListOfRideLeaders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,15 +155,15 @@ namespace InTandemRegistrationPortal.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("InTandemUserId");
+                    b.Property<int>("EventID");
 
-                    b.Property<int>("RideEventsID");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InTandemUserId");
+                    b.HasIndex("EventID");
 
-                    b.HasIndex("RideEventsID");
+                    b.HasIndex("UserID");
 
                     b.ToTable("RideLeaderAssignments");
                 });
@@ -301,14 +303,14 @@ namespace InTandemRegistrationPortal.Data.Migrations
 
             modelBuilder.Entity("InTandemRegistrationPortal.Models.RideLeaderAssignment", b =>
                 {
-                    b.HasOne("InTandemRegistrationPortal.Models.InTandemUser", "User")
-                        .WithMany()
-                        .HasForeignKey("InTandemUserId");
-
                     b.HasOne("InTandemRegistrationPortal.Models.RideEvents", "Event")
                         .WithMany("RideLeaderAssignments")
-                        .HasForeignKey("RideEventsID")
+                        .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InTandemRegistrationPortal.Models.InTandemUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("InTandemRegistrationPortal.Models.RideRegistration", b =>

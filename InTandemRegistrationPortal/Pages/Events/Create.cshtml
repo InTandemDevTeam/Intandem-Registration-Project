@@ -44,9 +44,10 @@
                 <span asp-validation-for="RideEvents.EventType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RideEvents.RideLeader" class="control-label"></label>
-                <input asp-for="RideEvents.RideLeader" class="form-control" />
-                <span asp-validation-for="RideEvents.RideLeader" class="text-danger"></span>
+                <label asp-for="Input.SelectedUser" class="control-label"></label>
+                <select asp-for="Input.SelectedUser" asp-items="Model.Users" class="form-control">
+                    <option value="" selected disabled>Select User</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="RideEvents.EventRatio" class="control-label"></label>

@@ -33,11 +33,13 @@ namespace InTandemRegistrationPortal.Models
         [Display(Name = "Type of event")]
         public int EventType { get; set; }
 
-        [Column(TypeName = "varchar(150)")]
-        [Required(AllowEmptyStrings = true)]
-        [Display(Name = "Ride Leader(s)")]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string RideLeader { get; set; }
+        //[Column(TypeName = "varchar(150)")]
+        //[Required(AllowEmptyStrings = true)]
+        //[Display(Name = "Ride Leader(s)")]
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        public ICollection<RideLeaderAssignment> RideLeaderAssignments { get; set; }
+
+        //public string RideLeader { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         [Required(AllowEmptyStrings = true)]
@@ -62,7 +64,6 @@ namespace InTandemRegistrationPortal.Models
         // ride cancellation field
         public string ReasonForCancellation { get; set; }
 
-        public ICollection<ManagerAssignment> ManagerAssignments { get; set; }
 
         // below is needed to create cross table
         public ICollection<RideRegistration> RideRegistrations { get; set; }
