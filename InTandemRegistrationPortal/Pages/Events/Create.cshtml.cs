@@ -35,11 +35,10 @@ namespace InTandemRegistrationPortal.Pages.Events
         public InputModel Input { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public SelectList Users => new SelectList(_userManager.Users
-            .ToList());
+            .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
         //public SelectList Users => new SelectList(_context.Users
         //    .AsNoTracking()
         //    .ToList());
-        //.ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
         public class InputModel
         {
             public string SelectedUser { get; set; }
@@ -54,10 +53,9 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return Page();
             }
-            var test = Input.SelectedUser;
             var selectedUser = await _context.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.UserName == test);
+                .FirstOrDefaultAsync(m => m.FullName == Input.SelectedUser);
             _context.RideEvents.Add(RideEvents);
             RideLeaderAssignment = new RideLeaderAssignment
             {

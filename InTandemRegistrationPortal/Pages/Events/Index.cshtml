@@ -85,9 +85,6 @@
                         }
                     </td>
                     <td>                  
-                       
-                            
-
                             @if (User.IsInRole(Constants.AdministratorsRole))
                             {
                                 <a asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
