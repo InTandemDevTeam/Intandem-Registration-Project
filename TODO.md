@@ -27,7 +27,7 @@
   * miscellaneous changes
     * disable two factor authentication (done)
     * change navbar links
-    * prompt for phone number and years of experience on register page 
+    * prompt for phone number and years of experience on register page (done)
     * show expertise on users page for admins
     * allow verification email to be resent in case of error (done)
     * add field for captains to say if they came from NY Cares (done)
@@ -42,8 +42,8 @@
   * need to categorize and show events based on status
   * need to tweak links shown based on if user is signed in (done)
   * add reason why event was cancelled (done)  
-  * implement authorization on events pages (need to transfer over auth handler code from avnish's repo)
-  * show list of ride leaders (done, in theory)
-  * give ride leaders ability to edit event
-  * implement assigning ride leaders
+  * implement authorization on events pages (in progress, need to see why roles check doesn't work)
+  * show list of ride leaders (done)
+  * give ride leaders ability to edit event (done)
+  * implement assigning ride leaders (done with single ride leader)
   * implement paging, sorting, searching, and filtering on events page
