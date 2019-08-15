@@ -1,0 +1,125 @@
+﻿@page
+@model InTandemRegistrationPortal.Pages.Events.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using InTandemRegistrationPortal.Models
+@using Microsoft.AspNetCore.Authorization
+@using InTandemRegistrationPortal.Authorization
+@using System.Security.Claims
+@inject SignInManager<InTandemUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Events</h2>
+@if (Model.InTandemUser != null && (Model.InTandemUser.Role == "Administrator" || Model.InTandemUser.Role == "Captain"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].EventName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].EventSDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].Location)
+                </th>
+                <th>
+                    Leader(s)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].EventType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RideEvents[0].Status)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RideEvents)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventSDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @{
+                            var managersList = item.RideLeaderAssignments.Select(x => x.InTandemUser.FullName);
+                            var managers = string.Join(", ", managersList);
+                        }
+                        @managers
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventType)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                        }
+                    </td>
+                    <td>                  
+                            @if (User.IsInRole(Constants.AdministratorsRole))
+                            {
+                                <a asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
+                            }
+
+                  
+                    </td>
+                    <td>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Register)).Succeeded)
+                        {
+                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
+                        }
+                    </td>
+                    @*<td>
+                        @if (Model.InTandemUser != null)
+                        {
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                @if (Model.InTandemUser.Role.Equals(Constants.AdministratorsRole) || Model.InTandemUser.Role.Equals(Constants.CaptainsRole))
+                                {
+                                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                                    <a asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
+                                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                                }
+                                <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="true">Register</a>
+                            }
+                        }
+                        else
+                        {
+                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-signup="false">Details</a>
+                        }
+
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

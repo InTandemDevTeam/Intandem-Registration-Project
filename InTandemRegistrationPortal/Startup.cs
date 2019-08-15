@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using InTandemRegistrationPortal.Authorization;
+using InTandemRegistrationPortal.Data;
+using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using InTandemRegistrationPortal.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using System;
+using System.Threading.Tasks;
 namespace InTandemRegistrationPortal
 {
     public class Startup
@@ -38,16 +39,34 @@ namespace InTandemRegistrationPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddIdentity<InTandemUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false;
+            })
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddMvc();
+            services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            /*.AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");
+            });*/
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireStokerRole",
+                    policy => policy.RequireRole("Stoker"));
+            })*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +79,7 @@ namespace InTandemRegistrationPortal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            CreateRoles(serviceProvider).Wait();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -68,6 +88,40 @@ namespace InTandemRegistrationPortal
             app.UseAuthentication();
 
             app.UseMvc();
+        }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
+            string[] roleNames = {"Administrator", "Captain", "Stoker", "Volunteer"};
+            IdentityResult result;
+            foreach (string roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                IdentityRole role = new IdentityRole(roleName);
+                if (!roleExist)
+                {
+                    result = await RoleManager.CreateAsync(role);
+                }
+            }
+            //Task<InTandemUser> adminUser = UserManager.FindByEmailAsync(email);
+            /*var poweruser = new InTandemUser
+            {
+                UserName = Configuration["AppSettings:Email"],
+                Email = Configuration["AppSettings:Email"]
+            };
+            string userPWD = Configuration["AppSettings:Password"];
+            var _user = await UserManager.FindByEmailAsync(Configuration["AdminCredentials:Email"]);
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(poweruser, "Administrator");
+
+                }
+            }*/
         }
     }
 }
