@@ -171,7 +171,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
                     SpecialEquipment = Input.SpecialEquipment,
-                    HasBeenApproved = null,
+                    HasBeenApproved = false,
                     PhoneNumber = Input.PhoneNumber,
                     FromNYCares = Input.FromNYCares,
                     RiderLevel = Input.RiderLevel,

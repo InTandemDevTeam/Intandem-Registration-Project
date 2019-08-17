@@ -21,7 +21,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
 
         [BindProperty]
-        public RideEvents RideEvents { get; set; }
+        public RideEvent RideEvents { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,7 +30,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return NotFound();
             }
 
-            RideEvents = await _context.RideEvents.FirstOrDefaultAsync(m => m.ID == id);
+            RideEvents = await _context.RideEvent.FirstOrDefaultAsync(m => m.ID == id);
 
             if (RideEvents == null)
             {
@@ -69,7 +69,7 @@ namespace InTandemRegistrationPortal.Pages.Events
 
         private bool RideEventsExists(int id)
         {
-            return _context.RideEvents.Any(e => e.ID == id);
+            return _context.RideEvent.Any(e => e.ID == id);
         }
     }
 }

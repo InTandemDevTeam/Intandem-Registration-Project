@@ -10,8 +10,8 @@ namespace InTandemRegistrationPortal.Data
             : base(options)
         {
         }
-        public DbSet<RideEvents> RideEvents { get; set; }
-        public DbSet<RideRegistration> RideRegistrations { get; set; }
-        public DbSet<RideLeaderAssignment> RideLeaderAssignments { get; set; }
+        public DbSet<RideEvent> RideEvent { get; set; }
+        public DbSet<RideRegistration> RideRegistration { get; set; }
+        public DbSet<RideLeaderAssignment> RideLeaderAssignment { get; set; }
     }
 }

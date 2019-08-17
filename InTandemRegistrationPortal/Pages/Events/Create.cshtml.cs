@@ -30,7 +30,7 @@ namespace InTandemRegistrationPortal.Pages.Events
 
 
         [BindProperty]
-        public RideEvents RideEvents { get; set; }
+        public RideEvent RideEvents { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
@@ -56,13 +56,13 @@ namespace InTandemRegistrationPortal.Pages.Events
             var selectedUser = await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.FullName == Input.SelectedUser);
-            _context.RideEvents.Add(RideEvents);
+            _context.RideEvent.Add(RideEvents);
             RideLeaderAssignment = new RideLeaderAssignment
             {
-                InTandemUserId = selectedUser.Id,
-                RideEventsID = RideEvents.ID
+                InTandemUserID = selectedUser.Id,
+                RideEventID = RideEvents.ID
             };
-            _context.RideLeaderAssignments.Add(RideLeaderAssignment);
+            _context.RideLeaderAssignment.Add(RideLeaderAssignment);
 
             await _context.SaveChangesAsync();
             

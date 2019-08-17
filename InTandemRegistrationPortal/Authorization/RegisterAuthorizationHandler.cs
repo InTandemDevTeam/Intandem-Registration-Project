@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace InTandemRegistrationPortal.Authorization
 {
     public class RegisterAuthorizationHandler :
-        AuthorizationHandler<OperationAuthorizationRequirement, RideEvents>
+        AuthorizationHandler<OperationAuthorizationRequirement, RideEvent>
     {
         protected readonly UserManager<InTandemUser> _userManager;
 
@@ -18,7 +18,7 @@ namespace InTandemRegistrationPortal.Authorization
         }
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-            OperationAuthorizationRequirement requirement, RideEvents resource)
+            OperationAuthorizationRequirement requirement, RideEvent resource)
         {
             if (context.User == null || resource == null)
                 return Task.CompletedTask;
@@ -30,7 +30,7 @@ namespace InTandemRegistrationPortal.Authorization
                 return Task.CompletedTask;
 
             var userId = _userManager.GetUserId(context.User);
-            if (!resource.RideLeaderAssignments.Any(x => x.InTandemUserId == userId))
+            if (!resource.RideLeaderAssignments.Any(x => x.InTandemUserID == userId))
                 context.Succeed(requirement);
 
             return Task.CompletedTask;

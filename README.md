@@ -37,3 +37,12 @@ In order to be able to send account confirmation emails via SendGrid, run the fo
 If you would like to use your own SendGrid account, replace the API key and your username in the commands above
 
 These two commands create secrets used by Visual Studio, they are stored in secrets.json which is located in `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>`
+
+
+###Setup Seed Data Account
+
+In order to be able to sign in as the seeded users, you will need to set up a password using the Secrets Tool:
+
+    1. In commmand prompt, go to the same directory as Program.cs in your solution.
+	2. Enter: "dotnet user-secrets set SeedUserPW <pw>" - where <pw> is a password of your choice.  Note - this must be a combination of lower-case, upper-case, numbers and non-alpha characters, else the seeding may fail.
+	3. To verify this password, in the IDE, right-click the Project and select "Manage User Secrets" - this will reveal a JSON with this password.  Note that this is stored on your hard drive and will never be checked into GitHib.

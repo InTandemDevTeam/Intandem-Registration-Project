@@ -19,7 +19,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
         [BindProperty]
         public InputModel Input { get; set; }
-        public RideEvents RideEvent { get; set; }
+        public RideEvent RideEvent { get; set; }
         public RideRegistration RideRegistration { get; set; }
         public class InputModel
         {
@@ -31,7 +31,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            RideEvent = await _context.RideEvents.FirstOrDefaultAsync(m => m.ID == id);
+            RideEvent = await _context.RideEvent.FirstOrDefaultAsync(m => m.ID == id);
             if (RideEvent == null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            RideEvent = await _context.RideEvents.FirstOrDefaultAsync(m => m.ID == id);
+            RideEvent = await _context.RideEvent.FirstOrDefaultAsync(m => m.ID == id);
             if (RideEvent == null)
             {
                 return NotFound();

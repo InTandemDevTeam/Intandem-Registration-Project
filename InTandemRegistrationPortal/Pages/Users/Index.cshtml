@@ -1,0 +1,51 @@
+﻿@page
+@model InTandemRegistrationPortal.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Users</h2>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Roles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles)
+                </td>
+                <td>
+                    @if (item.HasBeenApproved)
+                    {
+                        <span class="badge badge-pill badge-success">APPROVED</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-primary">PENDING</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

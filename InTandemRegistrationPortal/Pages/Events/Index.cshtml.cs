@@ -10,6 +10,7 @@ using InTandemRegistrationPortal.Data;
 using Microsoft.AspNetCore.Authorization;
 using InTandemRegistrationPortal.Pages.Admin;
 using Microsoft.AspNetCore.Identity;
+using InTandemRegistrationPortal.Authorization;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {
@@ -23,12 +24,12 @@ namespace InTandemRegistrationPortal.Pages.Events
         {
         }
 
-        public IList<RideEvents> RideEvents { get;set; }
+        public IList<RideEvent> RideEvents { get;set; }
 
         public async Task OnGetAsync()
         {
             await GetCurrentUser();
-            RideEvents = await _context.RideEvents
+            RideEvents = await _context.RideEvent
                 .AsNoTracking()
                 .Include(r => r.RideLeaderAssignments)
                     .ThenInclude(r => r.InTandemUser)

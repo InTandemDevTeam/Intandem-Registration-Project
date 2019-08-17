@@ -17,7 +17,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         {
         }
         [BindProperty]
-        public RideEvents RideEvent { get; set; }
+        public RideEvent RideEvent { get; set; }
         public bool HasSignedUp { get; set; }
         public RideRegistration RideRegistration { get; set; }
         public bool WantToSignUp { get; set; }
@@ -30,7 +30,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return NotFound();
             }
 
-            RideEvent = await _context.RideEvents.FirstOrDefaultAsync(m => m.ID == id);
+            RideEvent = await _context.RideEvent.FirstOrDefaultAsync(m => m.ID == id);
 
             if (RideEvent == null)
             {
@@ -39,12 +39,12 @@ namespace InTandemRegistrationPortal.Pages.Events
 
             if (InTandemUser != null)
             {
-                bool DoesUserExist = await _context.RideRegistrations
+                bool DoesUserExist = await _context.RideRegistration
                     .AsNoTracking()
-                    .AnyAsync(m => m.InTandemUserId.Equals(InTandemUser.Id));
-                bool DoesEventExist = await _context.RideRegistrations
+                    .AnyAsync(m => m.InTandemUserID.Equals(InTandemUser.Id));
+                bool DoesEventExist = await _context.RideRegistration
                     .AsNoTracking()
-                    .AnyAsync(m => m.RideEventsID == RideEvent.ID);
+                    .AnyAsync(m => m.RideEventID == RideEvent.ID);
                 if (DoesUserExist && DoesEventExist)
                 {
                     HasSignedUp = true;
@@ -59,7 +59,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
         public async Task<IActionResult> OnPostYesAsync(int? id)
         {
-            var RideEvent = await _context.RideEvents
+            var RideEvent = await _context.RideEvent
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             await GetCurrentUser();
@@ -67,12 +67,12 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 RideRegistration = new RideRegistration
                 {
-                    InTandemUserId = InTandemUser.Id,
-                    RideEventsID = RideEvent.ID
+                    InTandemUserID = InTandemUser.Id,
+                    RideEventID = RideEvent.ID
                 };
 
             }
-            _context.RideRegistrations.Add(RideRegistration);
+            _context.RideRegistration.Add(RideRegistration);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }

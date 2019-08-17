@@ -35,7 +35,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         }
 
         [BindProperty]
-        public RideEvents RideEvents { get; set; }
+        public RideEvent RideEvents { get; set; }
         public SelectList Users => new SelectList(_context.Users
             .AsNoTracking()
             .ToList());
@@ -55,7 +55,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return Page();
             }
 
-            _context.RideEvents.Add(RideEvents);
+            _context.RideEvent.Add(RideEvents);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
