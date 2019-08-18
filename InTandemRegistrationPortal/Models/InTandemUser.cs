@@ -77,7 +77,7 @@ namespace InTandemRegistrationPortal.Models
         public string SpecialEquipment { get; set; }
 
         [Display(Name = "Approval status")]
-        public bool HasBeenApproved { get; set; }
+        public bool? HasBeenApproved { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName

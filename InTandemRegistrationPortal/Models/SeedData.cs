@@ -96,6 +96,9 @@ namespace InTandemRegistrationPortal.Models
             if (user == null)
             {
                 user = new InTandemUser { FirstName = firstName, LastName = lastName, UserName = userName, Email = emailAddress };
+                if ((user.FirstName != "Volunteer") && (user.FirstName != "Admin"))
+                    user.HasBeenApproved = false;
+
                 var result = await userManager.CreateAsync(user, testUserPw);
             }
 

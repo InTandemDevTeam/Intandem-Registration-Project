@@ -36,13 +36,16 @@
                     @Html.DisplayFor(modelItem => item.Roles)
                 </td>
                 <td>
-                    @if (item.HasBeenApproved)
+                    @if (item.HasBeenApproved.HasValue)
                     {
-                        <span class="badge badge-pill badge-success">APPROVED</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-pill badge-primary">PENDING</span>
+                        @if (item.HasBeenApproved.Value)
+                        {
+                            <span class="badge badge-pill badge-success">APPROVED</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-primary">PENDING</span>
+                        }
                     }
                 </td>
             </tr>

@@ -1,4 +1,5 @@
 ﻿using ExpressiveAnnotations.Attributes;
+using InTandemRegistrationPortal.Authorization;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -156,7 +157,8 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new InTandemUser {
+                var user = new InTandemUser
+                {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     UserName = Input.UserName,
@@ -171,12 +173,15 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                     HasSingleBike = Input.HasSingleBike,
                     Dog = Input.Dog,
                     SpecialEquipment = Input.SpecialEquipment,
-                    HasBeenApproved = false,
+                    HasBeenApproved = null,
                     PhoneNumber = Input.PhoneNumber,
                     FromNYCares = Input.FromNYCares,
                     RiderLevel = Input.RiderLevel,
                     TotalMilesTraveled = 0
                 };
+                if (Input.Role == Constants.CaptainsRole || Input.Role == Constants.StokersRole)
+                    user.HasBeenApproved = false;
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users
                     .Where(r => r.Role == "Administrator")
