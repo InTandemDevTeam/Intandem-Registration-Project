@@ -185,18 +185,24 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var admins = await _context.Users
                     .Where(r => r.Role == "Administrator")
-                    .ToListAsync(); 
+                    .AsNoTracking()
+                    .ToListAsync();
                 if (result.Succeeded)
                 {
                     if (!await _roleManager.RoleExistsAsync(user.Role))
                     {
-                        var users = new IdentityRole(user.Role);
-                        var res = await _roleManager.CreateAsync(users);
+                        var newRole = new IdentityRole(user.Role);
+                        var res = await _roleManager.CreateAsync(newRole);
                         if (res.Succeeded)
                         {
                             await _userManager.AddToRoleAsync(user, user.Role);
                         }
                     }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, user.Role);
+                    }
+                  
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

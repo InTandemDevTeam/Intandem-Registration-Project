@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
+using InTandemRegistrationPortal.Services;
+using InTandemRegistrationPortal.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,21 +13,18 @@ namespace InTandemRegistrationPortal.Pages.Admin
     public class UsersModel : PageModel
     {
         //instances variables
-        private readonly ApplicationDbContext _context;
+        private readonly UserService _service;
         public UsersModel(
-            ApplicationDbContext context)
+            UserService service)
         {
-            _context = context;
+            _service = service;
         }
-        public IList<InTandemUser> Users { get; set; }
+        public IList<UserViewModel> Users { get; set; }
 
         public async Task OnGetAsync()
         {
-            Users = await _context.Users
-                .AsNoTracking()
-                .Where(r => r.Role != "Administrator")
-                .ToListAsync();
-            
+            Users = await _service.GetAllUsersAsync();
+
         }
     }
 }

@@ -27,6 +27,7 @@ namespace InTandemRegistrationPortal.Services
                         select new UserViewModel
                         {
                             Name = user.FullName,
+                            Id = user.Id,
                             Email = user.Email,
                             Roles = string.Join(',', _userManager.GetRolesAsync(user).Result),
                             HasBeenApproved = user.HasBeenApproved,

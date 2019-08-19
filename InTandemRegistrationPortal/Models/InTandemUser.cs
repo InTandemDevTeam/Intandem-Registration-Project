@@ -21,7 +21,9 @@ namespace InTandemRegistrationPortal.Models
 
         [PersonalData]
         [Display(Name = "Date Registered")]
-        public string DateRegistered { get; set; }  // TODO: Why is this a string?
+        public string DateRegistered { get; set; }  
+        // TODO: Why is this a string?
+        // is string to format date according to how it is displayed in US
 
 
         // stoker/captain properties
