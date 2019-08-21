@@ -1,54 +1,78 @@
 ﻿@page
 @model InTandemRegistrationPortal.Pages.Users.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Users</h2>
-<br />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Users[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Users[0].Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Users[0].Roles)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Users)
-        {
+<h1>Users</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Roles)
-                </td>
-                <td>
-                    @if (item.HasBeenApproved.HasValue)
-                    {
-                        @if (item.HasBeenApproved.Value)
-                        {
-                            <span class="badge badge-pill badge-success">APPROVED</span>
-                        }
-                        else
-                        {
-                            <span class="badge badge-pill badge-primary">PENDING</span>
-                        }
-                    }
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].Name)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Users[0].DateRegistered)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].Roles)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].Email)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Users[0].HasBeenTrained)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].HasBeenApproved)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.DateRegistered)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Roles)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.HasBeenTrained)
+                    </td>*@
+                    @if (item.HasBeenApproved == true)
+                    {
+                        // display "Approved" in place of true
+                        <td>Approved</td>
+                    }
+                    else if (item.HasBeenApproved == false)
+                    {
+                        // display "Denied" in place of false
+                        <td>Denied</td>
+                    }
+                    else
+                    {
+                        <td>Pending</td>
+                    }
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+
+            
+            }
+        </tbody>
+    </table>
+</div>

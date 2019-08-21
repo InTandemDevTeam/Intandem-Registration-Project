@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InTandemRegistrationPortal.Models;
 using InTandemRegistrationPortal.Data;
 using Microsoft.AspNetCore.Authorization;
-using InTandemRegistrationPortal.Pages.Admin;
+using InTandemRegistrationPortal.Pages.Users;
 using Microsoft.AspNetCore.Identity;
 using InTandemRegistrationPortal.Authorization;
 

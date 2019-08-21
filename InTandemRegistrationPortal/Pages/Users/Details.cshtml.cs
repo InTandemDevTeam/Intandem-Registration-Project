@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InTandemRegistrationPortal.Pages.Admin
+namespace InTandemRegistrationPortal.Pages.Users
 {
     public class DetailsModel : PageModel
     {

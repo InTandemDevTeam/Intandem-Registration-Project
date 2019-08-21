@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace InTandemRegistrationPortal.Pages.Admin
+namespace InTandemRegistrationPortal.Pages.Users
 {
     public class DeleteModel : PageModel
     {

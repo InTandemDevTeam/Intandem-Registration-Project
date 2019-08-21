@@ -21,6 +21,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\" />
     <Folder Include="Pages\Shared\Components\" />
   </ItemGroup>
 

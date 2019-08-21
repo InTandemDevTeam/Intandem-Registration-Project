@@ -1,6 +1,6 @@
 ﻿using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
-using InTandemRegistrationPortal.Pages.Admin;
+using InTandemRegistrationPortal.Pages.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

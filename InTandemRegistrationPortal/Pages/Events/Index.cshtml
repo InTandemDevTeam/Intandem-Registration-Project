@@ -4,17 +4,15 @@
 @using InTandemRegistrationPortal.Models
 @using Microsoft.AspNetCore.Authorization
 @using InTandemRegistrationPortal.Authorization
-@using System.Security.Claims
 @inject SignInManager<InTandemUser> SignInManager
 @inject IAuthorizationService AuthorizationService
-
 @{
     ViewData["Title"] = "Events";
 }
 
 <h2>Upcoming Rides and Events</h2>
 <br />
-@if (Model.InTandemUser != null && (Model.InTandemUser.Role == "Administrator" || Model.InTandemUser.Role == "Captain"))
+@if (User.IsInRole(Constants.AdministratorsRole))
 {
     <p>
         <a asp-page="Create">Create New</a>
