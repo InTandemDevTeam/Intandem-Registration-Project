@@ -47,3 +47,4 @@
   * give ride leaders ability to edit event (done)
   * implement assigning ride leaders (done with single ride leader)
   * implement paging, sorting, searching, and filtering on events page
+  * implement changing ride leaders (done with single ride leader)

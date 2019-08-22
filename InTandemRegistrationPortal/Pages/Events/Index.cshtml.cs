@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using InTandemRegistrationPortal.Data;
 using InTandemRegistrationPortal.Models;
-using InTandemRegistrationPortal.Data;
-using Microsoft.AspNetCore.Authorization;
 using InTandemRegistrationPortal.Pages.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using InTandemRegistrationPortal.Authorization;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {

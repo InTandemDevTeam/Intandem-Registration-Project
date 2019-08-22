@@ -18,9 +18,6 @@ namespace InTandemRegistrationPortal.Pages.Events
         public CreateModel(UserManager<InTandemUser> userManager,
             ApplicationDbContext context)
 
-        //public CreateModel(UserManager<InTandemUser> userManager,
-        //    ApplicationDbContext context) :
-        //    base(userManager, context)
         {
             _context = context;
             _userManager = userManager;
@@ -36,9 +33,6 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public SelectList Users => new SelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
-        //public SelectList Users => new SelectList(_context.Users
-        //    .AsNoTracking()
-        //    .ToList());
         public class InputModel
         {
             public string SelectedUser { get; set; }

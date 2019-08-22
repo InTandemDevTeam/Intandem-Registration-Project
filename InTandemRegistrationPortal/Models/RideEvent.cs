@@ -45,6 +45,7 @@ namespace InTandemRegistrationPortal.Models
 
         //public string RideLeader { get; set; }
 
+        // event ratio to be for phase 2
         [Column(TypeName = "varchar(50)")]
         [Required(AllowEmptyStrings = true)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -57,6 +58,7 @@ namespace InTandemRegistrationPortal.Models
         // cancelled, incomplete, pending, passed
         // admin has not decided this is not ready
         // upcoming (ready), passed, incomplete, cancelled
+        // confirmed
         // auto mark as passed the day after
         // for calander and registration pages, users should not be offered rides that are incomplete or cancelled
         // cannot register for incomplete or cancelled rides
