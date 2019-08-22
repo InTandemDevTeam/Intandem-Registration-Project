@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,11 +32,11 @@ namespace InTandemRegistrationPortal.Pages.Events
         [BindProperty]
         public InputModel Input { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
-        public SelectList Users => new SelectList(_userManager.Users
+        public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
         public class InputModel
         {
-            public string SelectedUser { get; set; }
+            public IList<string> SelectedUser { get; set; }
         }
         public IActionResult OnGet()
         {
@@ -47,17 +48,20 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return Page();
             }
-            var selectedUser = await _context.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.FullName == Input.SelectedUser);
+            var testvar = Input.SelectedUser;
             _context.RideEvent.Add(RideEvents);
-            RideLeaderAssignment = new RideLeaderAssignment
+            foreach (var user in Input.SelectedUser)
             {
-                InTandemUserID = selectedUser.Id,
-                RideEventID = RideEvents.ID
-            };
-            _context.RideLeaderAssignment.Add(RideLeaderAssignment);
-
+                var selectedUser = await _context.Users
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(m => m.FullName == user);
+                RideLeaderAssignment = new RideLeaderAssignment
+                {
+                    InTandemUserID = selectedUser.Id,
+                    RideEventID = RideEvents.ID
+                };
+                _context.RideLeaderAssignment.Add(RideLeaderAssignment);
+            }
             await _context.SaveChangesAsync();
             
 

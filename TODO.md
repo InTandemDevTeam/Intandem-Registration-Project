@@ -45,6 +45,8 @@
   * implement authorization on events pages (in progress, need to see why roles check doesn't work)
   * show list of ride leaders (done)
   * give ride leaders ability to edit event (done)
-  * implement assigning ride leaders (done with single ride leader)
+  * implement assigning multiple ride leaders
   * implement paging, sorting, searching, and filtering on events page
-  * implement changing ride leaders (done with single ride leader)
+  * implement adding more ride leaders (done)
+  * implement deselecting ride leaders
+  * make sure selecting and viewing selection of multiple ride leaders is accessible

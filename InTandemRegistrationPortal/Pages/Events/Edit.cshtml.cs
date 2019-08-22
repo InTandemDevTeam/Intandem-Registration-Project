@@ -29,11 +29,11 @@ namespace InTandemRegistrationPortal.Pages.Events
         [BindProperty]
         public InputModel Input { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
-        public SelectList Users => new SelectList(_userManager.Users
+        public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
         public class InputModel
         {
-            public string SelectedUser { get; set; }
+            public IList<string> SelectedUser { get; set; }
         }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -47,13 +47,11 @@ namespace InTandemRegistrationPortal.Pages.Events
                 .Include(r => r.RideLeaderAssignments)
                     .ThenInclude(r => r.InTandemUser)
                 .FirstOrDefaultAsync(m => m.ID == id);
+            IList<string> assignedLeaders = RideEvent.RideLeaderAssignments.Select(RideLeaderAssignment => RideLeaderAssignment.InTandemUser.FullName).ToList();
 
-            // FirstOrDefault is NOT MEANT TO STAY IN PRODUCTION CODE
-            // for multiple ride leaders, will iterate through list and populate listbox
             Input = new InputModel
             {
-                SelectedUser = RideEvent.RideLeaderAssignments.FirstOrDefault().InTandemUser.FullName
-
+                SelectedUser = assignedLeaders
             };
             if (RideEvent == null)
             {
@@ -64,36 +62,47 @@ namespace InTandemRegistrationPortal.Pages.Events
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            var SelectedInTandemUser = await _context.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.FullName.Equals(Input.SelectedUser));
+            List<InTandemUser> SelectedInTandemUsers = new List<InTandemUser> { };
+            foreach (var user in Input.SelectedUser)
+            {
+                SelectedInTandemUsers.Add(_context.Users
+                .FirstOrDefault(u => u.FullName == user));
+            }
+                
+
             var RideEventToUpdate = await _context.RideEvent
                 .AsNoTracking()
                 .Include(r => r.RideLeaderAssignments)
                     .ThenInclude(r => r.InTandemUser)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            //RideEventToUpdate.RideLeaderAssignments.FirstOrDefault().InTandemUser = SelectedInTandemUser;
-            //RideEventToUpdate.RideLeaderAssignments.FirstOrDefault().InTandemUser = SelectedInTandemUser;
-            //RideEventToUpdate.RideLeaderAssignments.FirstOrDefault().InTandemUserID = SelectedInTandemUser.Id;
-            foreach(var leader in RideEventToUpdate.RideLeaderAssignments)
-            {
+            
+            //takes list of names of ride leaders selected and adds them to a list of ride leader assignments
 
-                if (!Input.SelectedUser.Equals(leader.InTandemUser.FullName))
+            foreach (var leaderToBeAssigned in SelectedInTandemUsers)
+            {
+                // if the leader is not already assigned to the ride, assign them to the ride
+                if (!RideEventToUpdate.RideLeaderAssignments.Any(u => u.InTandemUser.FullName.Equals(leaderToBeAssigned.FullName)))
                 {
-                    leader.InTandemUser = SelectedInTandemUser;
-                    leader.InTandemUserID = SelectedInTandemUser.Id;
+                    var NewLeaderAdded = new RideLeaderAssignment
+                    {
+                        InTandemUser = leaderToBeAssigned,
+                        InTandemUserID = leaderToBeAssigned.Id
+                    };
+                    RideEventToUpdate.RideLeaderAssignments.Add(NewLeaderAdded);
                 }
             }
-            
-            //RideEventToUpdate.RideLeaderAssignments.FirstOrDefault(a => a.InTandemUserID.Equals(SelectedInTandemUser.Id))
+            //default entity tracking does not include navigation properties
+
             if (RideEventToUpdate == null)
             {
                 return NotFound();
             }
+            // TruUpDateModelAsync is used to prevent overposting
             if (await TryUpdateModelAsync<RideEvent>(
                 RideEventToUpdate,
                 "RideEvent",
@@ -105,41 +114,13 @@ namespace InTandemRegistrationPortal.Pages.Events
                 i => i.IsActive
                 ))
             {
-                //if (String.IsNullOrWhiteSpace(
-                //    instructorToUpdate.OfficeAssignment?.Location))
-                //{
-                //    instructorToUpdate.OfficeAssignment = null;
-                //}
-                //UpdateInstructorCourses(_context, selectedCourses, instructorToUpdate);
+               
                 _context.Update(RideEventToUpdate);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-            //default entity tracking does not include navigation properties
-            //_context.Attach(RideEvents).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!RideEventsExists(RideEvents.ID))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
 
             return RedirectToPage("./Index");
-        }
-
-        private bool RideEventsExists(int id)
-        {
-            return _context.RideEvent.Any(e => e.ID == id);
         }
     }
 }
