@@ -47,6 +47,5 @@
   * give ride leaders ability to edit event (done)
   * implement assigning multiple ride leaders
   * implement paging, sorting, searching, and filtering on events page
-  * implement adding more ride leaders (done)
-  * implement deselecting ride leaders
+  * implement adding/changing ride leaders after event creation (done)
   * make sure selecting and viewing selection of multiple ride leaders is accessible
