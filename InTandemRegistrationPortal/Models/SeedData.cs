@@ -40,27 +40,21 @@ namespace InTandemRegistrationPortal.Models
                         EventDate = DateTime.Today.AddDays(30),
                         Description = "Description for Central Park Ride in 1 month's time",
                         Location = "Central Park NYC",
-                        EventName = "Central Park Ride",
-                        EventRatio = "1:2",
-                        IsActive = true
+                        EventName = "Central Park Ride"
                     };
                     var fb = new RideEvent
                     {
                         EventDate = DateTime.Today.AddDays(60),
                         Description = "Description for 5 Borough Ride in 2 month's time",
                         Location = "All 5 Boroughs!",
-                        EventName = "5 Borough Ride",
-                        EventRatio = "1:1",
-                        IsActive = true
+                        EventName = "5 Borough Ride"
                     };
                     var se = new RideEvent
                     {
                         EventDate = DateTime.Today.AddDays(1),
                         Description = "Description for Social Event tomorrow",
                         Location = "Brooklyn Bridge Park",
-                        EventName = "Social Picnic",
-                        EventRatio = "N/A",
-                        IsActive = true
+                        EventName = "Social Picnic"
                     };
 
                     context.RideEvent.AddRange(cpr, fb, se);

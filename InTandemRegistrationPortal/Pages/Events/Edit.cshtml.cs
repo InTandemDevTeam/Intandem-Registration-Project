@@ -40,7 +40,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return NotFound();
             }
-
+            // get RideEvent as well as the leader assignments
             RideEvent = await _context.RideEvent
                 .AsNoTracking()
                 .Include(r => r.RideLeaderAssignments)
@@ -132,9 +132,8 @@ namespace InTandemRegistrationPortal.Pages.Events
                 i => i.EventName, i => i.EventDate, 
                 i => i.EventType, i => i.Description, 
                 i => i.Location, i => i.Distance, 
-                i => i.RideLeaderAssignments, i => i.EventRatio,
-                i => i.MaxSignup, i => i.Status,
-                i => i.IsActive
+                i => i.RideLeaderAssignments,
+                i => i.MaxSignup, i => i.Status
                 ))
             {
                

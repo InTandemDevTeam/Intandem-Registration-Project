@@ -5,6 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InTandemRegistrationPortal.Models
 {
+    //public enum Status
+    //{
+    //    Upcoming, Incomplete, Passed, Cancelled
+    //}
+
     public class RideEvent
     {
         //primary key
@@ -43,14 +48,9 @@ namespace InTandemRegistrationPortal.Models
         //navigation property
         public ICollection<RideLeaderAssignment> RideLeaderAssignments { get; set; }
 
-        //public string RideLeader { get; set; }
 
         // event ratio to be for phase 2
-        [Column(TypeName = "varchar(50)")]
-        [Required(AllowEmptyStrings = true)]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string EventRatio { get; set; }
-
+        
         public int? MaxSignup { get; set; }
         // limited by bikes, stoker, or people
 
@@ -66,14 +66,11 @@ namespace InTandemRegistrationPortal.Models
 
         public int Status { get; set; }
 
-        // is active
-        [Required]
-        public bool IsActive { get; set; }
-
         // ride cancellation field
         public string ReasonForCancellation { get; set; }
         // navigation property
         // below is needed to create cross table
         public ICollection<RideRegistration> RideRegistrations { get; set; }
-    }
+    } // class RideEvent
+
 } // namespace Models

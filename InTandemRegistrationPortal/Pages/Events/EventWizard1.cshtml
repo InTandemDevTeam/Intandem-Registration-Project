@@ -1,0 +1,57 @@
+﻿@page
+@model InTandemRegistrationPortal.Pages.Events.EventWizard1Model
+@{
+    ViewData["Title"] = "EventWizard1";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h4>RideEvents</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.EventName" class="control-label"></label>
+                <input asp-for="EventWizard1.EventName" class="form-control" />
+                <span asp-validation-for="EventWizard1.EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.EventDate" class="control-label"></label>
+                <input asp-for="EventWizard1.EventDate" class="form-control" />
+                <span asp-validation-for="EventWizard1.EventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.Description" class="control-label"></label>
+                <input asp-for="EventWizard1.Description" class="form-control" />
+                <span asp-validation-for="EventWizard1.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.Location" class="control-label"></label>
+                <input asp-for="EventWizard1.Location" class="form-control" />
+                <span asp-validation-for="EventWizard1.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.Distance" class="control-label"></label>
+                <input asp-for="EventWizard1.Distance" class="form-control" />
+                <span asp-validation-for="EventWizard1.Distance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventWizard1.EventType" class="control-label"></label>
+                <input asp-for="EventWizard1.EventType" class="form-control" />
+                <span asp-validation-for="EventWizard1.EventType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

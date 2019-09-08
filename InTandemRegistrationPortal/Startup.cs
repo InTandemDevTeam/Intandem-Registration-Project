@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Session;
 namespace InTandemRegistrationPortal
 {
     public class Startup
@@ -60,7 +61,7 @@ namespace InTandemRegistrationPortal
             {
                 options.Conventions.AddPageRoute("/Events/Index", "");
             });
-
+            services.AddSession();
             services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
 
@@ -99,7 +100,7 @@ namespace InTandemRegistrationPortal
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseMvc();
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)

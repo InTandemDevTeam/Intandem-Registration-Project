@@ -42,10 +42,13 @@
   * need to categorize and show events based on status
   * need to tweak links shown based on if user is signed in (done)
   * add reason why event was cancelled (done)  
-  * implement authorization on events pages (in progress, need to see why roles check doesn't work)
+  * implement authorization on events pages (seems to be working)
   * show list of ride leaders (done)
   * give ride leaders ability to edit event (done)
-  * implement assigning multiple ride leaders
+  * implement assigning multiple ride leaders (pending)
   * implement paging, sorting, searching, and filtering on events page
   * implement adding/changing ride leaders after event creation (done)
   * make sure selecting and viewing selection of multiple ride leaders is accessible
+  * implement wizard functionality for event creation (done, pending refinement)
+  * erase certain fields for event creation and editing
+  * implement iterative search for selecting ride leaders

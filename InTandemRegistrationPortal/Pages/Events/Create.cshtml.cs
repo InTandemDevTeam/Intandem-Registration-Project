@@ -34,6 +34,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
+        // used to fetch list of selected users
         public class InputModel
         {
             public IList<string> SelectedUser { get; set; }
@@ -48,10 +49,11 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return Page();
             }
-            var testvar = Input.SelectedUser;
             _context.RideEvent.Add(RideEvents);
             foreach (var user in Input.SelectedUser)
             {
+                // finds single selected user in list by full name
+                // will change this so it searches by id instead
                 var selectedUser = await _context.Users
                     .AsNoTracking()
                     .FirstOrDefaultAsync(m => m.FullName == user);
