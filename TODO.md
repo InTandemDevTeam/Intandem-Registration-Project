@@ -52,3 +52,5 @@
   * implement wizard functionality for event creation (done, pending refinement)
   * erase certain fields for event creation and editing
   * implement iterative search for selecting ride leaders
+  * reaplce text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
+

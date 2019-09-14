@@ -1,9 +1,14 @@
-﻿using InTandemRegistrationPortal.Models;
+﻿using InTandemRegistrationPortal.Helpers;
+using InTandemRegistrationPortal.Models;
 using InTandemRegistrationPortal.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyIntandemBooking.Helpers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InTandemRegistrationPortal.Pages.Events
 {
@@ -11,8 +16,27 @@ namespace InTandemRegistrationPortal.Pages.Events
     {
         [BindProperty]
         public EventWizard1 EventWizard1 { get; set; }
+        public List<SelectListItem> EventTypes { get; set; }
+        [BindProperty]
+        public InputModel Input { get; set; }
+        public class InputModel
+        {
+            [Required(ErrorMessage = "Please select the type of event")]
+            [Display(Name = "Type of event")]
+            public string SelectedEventType { get; set; }
+        }
         public void OnGet()
         {
+            EventTypes = new List<SelectListItem>();
+            foreach (EventType eventType in Enum.GetValues(typeof(EventType)))
+            {
+                EventTypes.Add(new SelectListItem
+                {
+                    Value = eventType.GetDescription(),
+                    Text = eventType.GetDescription()
+                });
+            }
+            
             var wizardEvent = HttpContext.Session.GetJson<RideEvent>("WizardEvent");
             if (wizardEvent == null)
             {
@@ -26,7 +50,8 @@ namespace InTandemRegistrationPortal.Pages.Events
                     EventDate = wizardEvent.EventDate,
                     Description = wizardEvent.Description,
                     Location = wizardEvent.Location,
-                    Distance = wizardEvent.Distance
+                    Distance = wizardEvent.Distance,
+                    EventType = wizardEvent.EventType
                 };
             }
         } // OnGet
@@ -37,12 +62,13 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return Page();
             }
             var wizardEvent = HttpContext.Session.GetJson<RideEvent>("WizardEvent");
-
+            var test = Input.SelectedEventType;
             wizardEvent.EventName = EventWizard1.EventName;
             wizardEvent.EventDate = EventWizard1.EventDate;
             wizardEvent.Description = EventWizard1.Description;
             wizardEvent.Location = EventWizard1.Location;
             wizardEvent.Distance = EventWizard1.Distance;
+            wizardEvent.EventType = EnumExtensionMethods.GetValueFromDescription<EventType>(Input.SelectedEventType);
             HttpContext.Session.SetJson("WizardEvent", wizardEvent);
 
 

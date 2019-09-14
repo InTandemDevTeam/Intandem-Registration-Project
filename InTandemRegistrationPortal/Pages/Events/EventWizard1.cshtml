@@ -36,10 +36,17 @@
                 <input asp-for="EventWizard1.Distance" class="form-control" />
                 <span asp-validation-for="EventWizard1.Distance" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="EventWizard1.EventType" class="control-label"></label>
                 <input asp-for="EventWizard1.EventType" class="form-control" />
                 <span asp-validation-for="EventWizard1.EventType" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Input.SelectedEventType" class="control-label"></label>
+                
+                <select asp-for="Input.SelectedEventType" asp-items="Model.EventTypes" class="form-control" id="RoleDropdown">
+                    <option value="" selected disabled>Select Type of Event</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-default" />

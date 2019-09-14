@@ -52,7 +52,7 @@ namespace InTandemRegistrationPortal.Areas.Identity.Pages.Account
         public InTandemUser InTandemUser { get; set; }
 
         public SelectList Roles => new SelectList(_roleManager.Roles
-                    //.Where(x => x.Name != Constants.AdministratorsRole)
+                    .Where(x => x.Name != Constants.AdministratorsRole)
                     .ToDictionary(k => k.Name, v => v.Name), "Key", "Value");
 
         public string DateRegistered { get; set; }

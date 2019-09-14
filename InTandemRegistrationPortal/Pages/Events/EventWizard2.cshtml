@@ -22,14 +22,17 @@
                 <span asp-validation-for="EventWizard2.MaxSignup" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EventWizard2.MaxSignUpType" class="control-label"></label>
-                <input asp-for="EventWizard2.MaxSignUpType" class="form-control" />
-                <span asp-validation-for="EventWizard2.MaxSignUpType" class="text-danger"></span>
+                <label asp-for="Input.SelectedMaxSignUpType" class="control-label"></label>
+                <select asp-for="Input.SelectedMaxSignUpType" asp-items="Model.MaxSignUpTypes" class="form-control" id="RoleDropdown">
+                    <option value="" selected disabled>Select limiting factor for sign ups</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="EventWizard2.Status" class="control-label"></label>
-                <input asp-for="EventWizard2.Status" class="form-control" />
-                <span asp-validation-for="EventWizard2.Status" class="text-danger"></span>
+                <label asp-for="Input.SelectedStatus" class="control-label"></label>
+
+                <select asp-for="Input.SelectedStatus" asp-items="Model.Statuses" class="form-control">
+                    <option value="" selected disabled>Select status of event</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Previous" asp-page-handler="Previous" formnovalidate="formnovalidate" class="btn btn-default" />

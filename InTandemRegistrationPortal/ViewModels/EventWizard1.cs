@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InTandemRegistrationPortal.Models;
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +8,7 @@ namespace InTandemRegistrationPortal.ViewModels
 {
     public class EventWizard1
     {
+
         //primary key
         public int ID { get; set; }
 
@@ -34,9 +37,9 @@ namespace InTandemRegistrationPortal.ViewModels
         [Column(TypeName = "decimal(18, 1)")]
         public decimal? Distance { get; set; }
 
-        [Required(ErrorMessage = "Please select the type of event")]
+        
         [Display(Name = "Type of event")]
-        public int EventType { get; set; }
+        public EventType? EventType { get; set; }
 
     }
 }
