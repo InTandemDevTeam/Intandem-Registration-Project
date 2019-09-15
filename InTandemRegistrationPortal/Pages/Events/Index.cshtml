@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.RideEvents)
+            @foreach (var item in Model.UpcomingEvents)
             {
                 <tr>
                     <td>
@@ -69,18 +69,18 @@
                             <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
                         }
                     </td>
-                    <td>                  
+                    <td>
                         @if (User.IsInRole(Constants.AdministratorsRole))
                         {
                             <a class="btn btn-danger btn-sm" asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
-                        }                  
+                        }
                     </td>
                     <td>
                         @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Register)).Succeeded)
                         {
-                        <form id="registerForm" asp-page="./Register" asp-route-id=@item.ID>
-                            <button id="register" type="submit" class="btn btn-success btn-sm">Register</button>
-                        </form>
+                            <form id="registerForm" asp-page="./Register" asp-route-id=@item.ID>
+                                <button id="register" type="submit" class="btn btn-success btn-sm">Register</button>
+                            </form>
                         }
                     </td>
                 </tr>
@@ -88,3 +88,183 @@
         </tbody>
     </table>
 </div>
+@if (User.IsInRole(Constants.AdministratorsRole))
+{
+    <h2>Incomplete Rides and Events</h2>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Location)
+                    </th>
+                    <th>
+                        Leader(s)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.IncompleteEvents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @{
+                                var managersList = item.RideLeaderAssignments.Select(x => x.InTandemUser.FullName);
+                                var managers = string.Join(", ", managersList);
+                            }
+                            @managers
+                        </td>
+                        <td>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                            {
+                                <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                            }
+                        </td>
+                        <td>
+                            @if (User.IsInRole(Constants.AdministratorsRole))
+                            {
+                                <a class="btn btn-danger btn-sm" asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h2>Cancelled Rides and Events</h2>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Location)
+                    </th>
+                    <th>
+                        Leader(s)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CancelledEvents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @{
+                                var managersList = item.RideLeaderAssignments.Select(x => x.InTandemUser.FullName);
+                                var managers = string.Join(", ", managersList);
+                            }
+                            @managers
+                        </td>
+                        <td>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                            {
+                                <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h2>Passed Rides and Events</h2>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].EventDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RideEvents[0].Location)
+                    </th>
+                    <th>
+                        Leader(s)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PassedEvents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @{
+                                var managersList = item.RideLeaderAssignments.Select(x => x.InTandemUser.FullName);
+                                var managers = string.Join(", ", managersList);
+                            }
+                            @managers
+                        </td>
+                        <td>
+                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                            {
+                                <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

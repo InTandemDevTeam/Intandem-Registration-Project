@@ -39,7 +39,7 @@
     * implement searching, paging, sorting, and filtering for users page
 * Events 
   * cross table created and records registrations, stores user and event id (done)
-  * need to categorize and show events based on status
+  * need to categorize and show events based on status (done)
   * need to tweak links shown based on if user is signed in (done)
   * add reason why event was cancelled (done)  
   * implement authorization on events pages (seems to be working)
@@ -52,5 +52,5 @@
   * implement wizard functionality for event creation (done, pending refinement)
   * erase certain fields for event creation and editing
   * implement iterative search for selecting ride leaders
-  * reaplce text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
-
+  * replace text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
+  * add dropdown for Status, MaxSignUpType, and EventType on Edit page

@@ -46,7 +46,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return NotFound();
             }
             RideEvent.ReasonForCancellation = Input.ReasonForCancellation;
-            RideEvent.Status = 0;
+            RideEvent.Status = Status.Cancelled;
             _context.Attach(RideEvent).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
