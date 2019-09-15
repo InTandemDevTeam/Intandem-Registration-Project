@@ -53,4 +53,4 @@
   * erase certain fields for event creation and editing
   * implement iterative search for selecting ride leaders
   * replace text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
-  * add dropdown for Status, MaxSignUpType, and EventType on Edit page
+  * add dropdown for Status, MaxSignUpType, and EventType on Edit page (done)

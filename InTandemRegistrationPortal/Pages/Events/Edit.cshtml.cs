@@ -1,11 +1,14 @@
 ﻿using InTandemRegistrationPortal.Data;
+using InTandemRegistrationPortal.Helpers;
 using InTandemRegistrationPortal.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,9 +33,24 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
+        public List<SelectListItem> EventTypes { get; set; }
+        public List<SelectListItem> Statuses { get; set; }
+        public List<SelectListItem> MaxSignUpTypes { get; set; }
         public class InputModel
         {
-            public IList<string> SelectedUser { get; set; }
+            // add validation for fields below
+            [Required(ErrorMessage ="Please select one or more ride leaders")]
+            [Display(Name = "Leader(s)")]
+            public List<string> SelectedUser { get; set; }
+            [Required(ErrorMessage = "Please select a type of event")]
+            [Display(Name = "Type of event")]
+            public string SelectedEventType { get; set; }
+            [Required(ErrorMessage = "Please select a status")]
+            [Display(Name = "Status")]
+            public string SelectedStatus { get; set; }
+            [Required(ErrorMessage = "Please enter the limiting factor for max sign ups")]
+            [Display(Name = "Factor limiting sign ups")]
+            public string SelectedMaxSignUpType { get; set; }
         }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -40,19 +58,48 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return NotFound();
             }
+            EventTypes = new List<SelectListItem>();
+            Statuses = new List<SelectListItem>();
+            MaxSignUpTypes = new List<SelectListItem>();
+            foreach (EventType eventType in Enum.GetValues(typeof(EventType)))
+            {
+                EventTypes.Add(new SelectListItem
+                {
+                    Value = eventType.GetDescription(),
+                    Text = eventType.GetDescription()
+                });
+            }
+            foreach (Status status in Enum.GetValues(typeof(Status)))
+            {
+                Statuses.Add(new SelectListItem
+                {
+                    Value = status.GetDescription(),
+                    Text = status.GetDescription()
+                });
+            }
+            foreach (MaxSignUpType type in Enum.GetValues(typeof(MaxSignUpType)))
+            {
+                MaxSignUpTypes.Add(new SelectListItem
+                {
+                    Value = type.GetDescription(),
+                    Text = type.GetDescription()
+                });
+            }
             // get RideEvent as well as the leader assignments
             RideEvent = await _context.RideEvent
                 .AsNoTracking()
                 .Include(r => r.RideLeaderAssignments)
                     .ThenInclude(r => r.InTandemUser)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            IList<string> assignedLeaders = RideEvent.RideLeaderAssignments
+            List<string> assignedLeaders = RideEvent.RideLeaderAssignments
                 .Select(RideLeaderAssignment => RideLeaderAssignment.InTandemUser.FullName)
                 .ToList();
-
             Input = new InputModel
             {
-                SelectedUser = assignedLeaders
+                SelectedUser = assignedLeaders,
+                SelectedStatus = RideEvent.Status.GetDescription(),
+                SelectedEventType = RideEvent.EventType.GetDescription(),
+                SelectedMaxSignUpType = RideEvent.MaxSignUpType.GetDescription()
             };
             if (RideEvent == null)
             {
@@ -118,7 +165,9 @@ namespace InTandemRegistrationPortal.Pages.Events
             }
 
 
-
+            RideEvent.Status = EnumExtensionMethods.GetValueFromDescription<Status>(Input.SelectedStatus);
+            RideEvent.EventType = EnumExtensionMethods.GetValueFromDescription<EventType>(Input.SelectedEventType);
+            RideEvent.MaxSignUpType = EnumExtensionMethods.GetValueFromDescription<MaxSignUpType>(Input.SelectedMaxSignUpType);
             // default entity tracking does not include navigation properties
 
             if (RideEventToUpdate == null)

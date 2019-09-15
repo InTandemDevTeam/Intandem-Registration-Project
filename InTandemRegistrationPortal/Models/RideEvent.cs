@@ -77,7 +77,7 @@ namespace InTandemRegistrationPortal.Models
 
 
         // event ratio to be for phase 2
-        
+        [Display(Name = "Maximum number of sign ups")]
         public int? MaxSignup { get; set; }
         // limited by bikes, stoker, or people
 
