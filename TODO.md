@@ -51,6 +51,7 @@
   * make sure selecting and viewing selection of multiple ride leaders is accessible
   * implement wizard functionality for event creation (done, pending refinement)
   * erase certain fields for event creation and editing
-  * implement iterative search for selecting ride leaders
+  * implement search for selecting ride leaders
   * replace text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
   * add dropdown for Status, MaxSignUpType, and EventType on Edit page (done)
+  * added ability to copy event (done)

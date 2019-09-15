@@ -3,7 +3,9 @@ using InTandemRegistrationPortal.Models;
 using InTandemRegistrationPortal.Pages.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyIntandemBooking.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +48,14 @@ namespace InTandemRegistrationPortal.Pages.Events
             IncompleteEvents = RideEvents
                 .Where(m => m.Status == Status.Incomplete)
                 .ToList();
+        }
+        public async Task<IActionResult> OnPostCopyAsync(int? id)
+        {
+            var eventToCopy = await _context.RideEvent
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+            HttpContext.Session.SetJson("WizardEvent", eventToCopy);
+            return RedirectToPage("./EventWizard1");
         }
     }
 }

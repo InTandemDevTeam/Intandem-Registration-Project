@@ -62,7 +62,6 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return Page();
             }
             var wizardEvent = HttpContext.Session.GetJson<RideEvent>("WizardEvent");
-            var test = Input.SelectedEventType;
             wizardEvent.EventName = EventWizard1.EventName;
             wizardEvent.EventDate = EventWizard1.EventDate;
             wizardEvent.Description = EventWizard1.Description;
@@ -74,5 +73,10 @@ namespace InTandemRegistrationPortal.Pages.Events
 
             return RedirectToPage("./EventWizard2");
         } //OnPost
+        public IActionResult OnPostClear()
+        {
+            HttpContext.Session.SetJson("WizardEvent", null);
+            return RedirectToPage("./Index");
+        }
     }
 }

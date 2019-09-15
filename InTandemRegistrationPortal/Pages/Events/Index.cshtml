@@ -67,11 +67,18 @@
                         @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
                         {
                             <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                            
                         }
                     </td>
                     <td>
                         @if (User.IsInRole(Constants.AdministratorsRole))
                         {
+                            <form method="post">
+                                <div class="form-group">
+                                    <input type="submit" value="Copy Event" asp-page-handler="Copy" asp-route-id="@item.ID" class="btn btn-primary btn-sm" />
+                                </div>
+                            </form>
+                        
                             <a class="btn btn-danger btn-sm" asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
                         }
                     </td>

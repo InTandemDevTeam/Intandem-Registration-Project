@@ -41,7 +41,9 @@ namespace InTandemRegistrationPortal.Models
                         Description = "Description for Central Park Ride in 1 month's time",
                         Location = "Central Park NYC",
                         EventName = "Central Park Ride",
-                        Status = Status.Upcoming
+                        Status = Status.Upcoming,
+                        EventType = EventType.ParkRide,
+                        MaxSignUpType = MaxSignUpType.Stokers
                     };
                     var fb = new RideEvent
                     {
@@ -49,7 +51,9 @@ namespace InTandemRegistrationPortal.Models
                         Description = "Description for 5 Borough Ride in 2 month's time",
                         Location = "All 5 Boroughs!",
                         EventName = "5 Borough Ride",
-                        Status = Status.Upcoming
+                        Status = Status.Upcoming,
+                        EventType = EventType.ParkRide,
+                        MaxSignUpType = MaxSignUpType.Bikes
                     };
                     var se = new RideEvent
                     {
@@ -57,7 +61,9 @@ namespace InTandemRegistrationPortal.Models
                         Description = "Description for Social Event tomorrow",
                         Location = "Brooklyn Bridge Park",
                         EventName = "Social Picnic",
-                        Status = Status.Upcoming
+                        Status = Status.Upcoming,
+                        EventType = EventType.NonRideEvent,
+                        MaxSignUpType = MaxSignUpType.People
 
                     };
 

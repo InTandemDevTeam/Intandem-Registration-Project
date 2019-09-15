@@ -100,7 +100,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             wizardEvent.MaxSignup = EventWizard2.MaxSignup;
             wizardEvent.MaxSignUpType = EnumExtensionMethods.GetValueFromDescription<MaxSignUpType>(Input.SelectedMaxSignUpType);
             wizardEvent.Status = EnumExtensionMethods.GetValueFromDescription<Status>(Input.SelectedStatus);
-            HttpContext.Session.SetJson("WizardEvent", wizardEvent);
+            HttpContext.Session.SetJson("WizardEvent", null);
             _context.RideEvent.Add(wizardEvent);
             foreach (var user in Input.SelectedUser)
             {

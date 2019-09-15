@@ -33,6 +33,7 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
+
         public List<SelectListItem> EventTypes { get; set; }
         public List<SelectListItem> Statuses { get; set; }
         public List<SelectListItem> MaxSignUpTypes { get; set; }
@@ -63,19 +64,27 @@ namespace InTandemRegistrationPortal.Pages.Events
             MaxSignUpTypes = new List<SelectListItem>();
             foreach (EventType eventType in Enum.GetValues(typeof(EventType)))
             {
+
+
                 EventTypes.Add(new SelectListItem
                 {
                     Value = eventType.GetDescription(),
                     Text = eventType.GetDescription()
                 });
+
             }
             foreach (Status status in Enum.GetValues(typeof(Status)))
             {
-                Statuses.Add(new SelectListItem
+                if (!status.GetDescription().Equals("Cancelled"))
                 {
-                    Value = status.GetDescription(),
-                    Text = status.GetDescription()
-                });
+
+                    Statuses.Add(new SelectListItem
+                    {
+                        Value = status.GetDescription(),
+                        Text = status.GetDescription()
+                    });
+                }
+
             }
             foreach (MaxSignUpType type in Enum.GetValues(typeof(MaxSignUpType)))
             {

@@ -51,7 +51,12 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    @*<a asp-page="Index">Back to List</a>*@
+    <form method="post">
+        <div class="form-group">
+            <input type="submit" value="Back To List" asp-page-handler="Clear" class="page-link" />
+        </div>
+    </form>
 </div>
 
 @section Scripts {

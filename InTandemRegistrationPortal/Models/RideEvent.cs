@@ -73,6 +73,7 @@ namespace InTandemRegistrationPortal.Models
         //[Display(Name = "Ride Leader(s)")]
         //[DisplayFormat(ConvertEmptyStringToNull = false)]
         //navigation property
+        [Display(Name = "Leader(s)")]
         public ICollection<RideLeaderAssignment> RideLeaderAssignments { get; set; }
 
 
@@ -80,7 +81,7 @@ namespace InTandemRegistrationPortal.Models
         [Display(Name = "Maximum number of sign ups")]
         public int? MaxSignup { get; set; }
         // limited by bikes, stoker, or people
-
+        [Display(Name = "Factor limiting sign ups")]
         public MaxSignUpType? MaxSignUpType { get; set; }
         // cancelled, incomplete, pending, passed
         // admin has not decided this is not ready
@@ -97,6 +98,7 @@ namespace InTandemRegistrationPortal.Models
         public string ReasonForCancellation { get; set; }
         // navigation property
         // below is needed to create cross table
+        
         public ICollection<RideRegistration> RideRegistrations { get; set; }
     } // class RideEvent
 
