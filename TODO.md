@@ -55,3 +55,4 @@
   * replace text box with dropdown for MaxSignUpType, Status, and EventType (done, now uses enum instead of string for type)
   * add dropdown for Status, MaxSignUpType, and EventType on Edit page (done)
   * added ability to copy event (done)
+  * implemented basic search by full name on users page (done)

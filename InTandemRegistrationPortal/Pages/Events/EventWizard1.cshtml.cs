@@ -53,6 +53,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                     Distance = wizardEvent.Distance,
                     EventType = wizardEvent.EventType
                 };
+                Input.SelectedEventType = EventWizard1.EventType.GetDescription();
             }
         } // OnGet
         public IActionResult OnPost()

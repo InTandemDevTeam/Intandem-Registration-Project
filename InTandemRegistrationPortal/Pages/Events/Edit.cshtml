@@ -52,7 +52,13 @@
                 <select multiple="multiple" asp-for="Input.SelectedUser" asp-items="Model.Users" class="form-control">
                     <option value="" disabled>Select User</option>
                 </select>
+                
+            @*<p>
+                Title: <input type="text" asp-for="SearchString" />
+                <input type="submit" value="Filter" />
+            </p>*@
             </div>
+
             <div class="form-group">
                 <label asp-for="RideEvent.MaxSignup" class="control-label"></label>
                 <input asp-for="RideEvent.MaxSignup" class="form-control" />

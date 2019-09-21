@@ -30,10 +30,12 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideEvent RideEvent { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
+        public List<InTandemUser> RideLeaders { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
-
+        
+        
         public List<SelectListItem> EventTypes { get; set; }
         public List<SelectListItem> Statuses { get; set; }
         public List<SelectListItem> MaxSignUpTypes { get; set; }
@@ -59,9 +61,11 @@ namespace InTandemRegistrationPortal.Pages.Events
             {
                 return NotFound();
             }
+            // lists and loops are for populating fields that use enum
             EventTypes = new List<SelectListItem>();
             Statuses = new List<SelectListItem>();
             MaxSignUpTypes = new List<SelectListItem>();
+            // populates select list with event types (gets description which is a string)
             foreach (EventType eventType in Enum.GetValues(typeof(EventType)))
             {
 
@@ -94,15 +98,25 @@ namespace InTandemRegistrationPortal.Pages.Events
                     Text = type.GetDescription()
                 });
             }
-            // get RideEvent as well as the leader assignments
+            // search code
+            //var users = from m in _context.Users
+            //            select m;
+            //if (!string.IsNullOrEmpty(SearchString))
+            //{
+            //    users = users.Where(u => u.FullName.Contains(SearchString));
+            //}
+            //RideLeaders = await users.ToListAsync();
+            // get RideEvent asynchronously
             RideEvent = await _context.RideEvent
                 .AsNoTracking()
                 .Include(r => r.RideLeaderAssignments)
                     .ThenInclude(r => r.InTandemUser)
                 .FirstOrDefaultAsync(m => m.ID == id);
+            // get leader assignments
             List<string> assignedLeaders = RideEvent.RideLeaderAssignments
                 .Select(RideLeaderAssignment => RideLeaderAssignment.InTandemUser.FullName)
                 .ToList();
+            // set values of fields based on what is already been entered
             Input = new InputModel
             {
                 SelectedUser = assignedLeaders,
