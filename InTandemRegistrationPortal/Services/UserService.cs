@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InTandemRegistrationPortal.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace InTandemRegistrationPortal.Services
 {
-    public class UserService
+    public class UserService : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<InTandemUser> _userManager;
@@ -35,6 +37,7 @@ namespace InTandemRegistrationPortal.Services
 
             return users.ToList();
         }
+
         public async Task<IList<UserViewModel>> SearchAsync(string SearchString)
         {
             var users = from user in await _userManager.Users.ToListAsync()
@@ -54,5 +57,15 @@ namespace InTandemRegistrationPortal.Services
             }
             return users.ToList();
         }
+        //[Produces("application/json")]
+        [HttpGet("/search")]
+        public JsonResult SearchJson(string SearchString)
+        {
+            string term = HttpContext.Request.Query["term"].ToString();
+            
+
+            return new JsonResult(SearchAsync(term));
+        }
+
     }
 }

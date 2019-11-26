@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using InTandemRegistrationPortal.Services;
 namespace InTandemRegistrationPortal.Pages.Events
 {
     public class EditModel : PageModel
@@ -30,7 +30,6 @@ namespace InTandemRegistrationPortal.Pages.Events
         public RideEvent RideEvent { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
-        public List<InTandemUser> RideLeaders { get; set; }
         public RideLeaderAssignment RideLeaderAssignment { get; set; }
         public MultiSelectList Users => new MultiSelectList(_userManager.Users
             .ToDictionary(k => k.FullName, v => v.FullName), "Key", "Value");
@@ -44,7 +43,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             // add validation for fields below
             [Required(ErrorMessage ="Please select one or more ride leaders")]
             [Display(Name = "Leader(s)")]
-            public List<string> SelectedUser { get; set; }
+            public List<string> SelectedUsers { get; set; }
             [Required(ErrorMessage = "Please select a type of event")]
             [Display(Name = "Type of event")]
             public string SelectedEventType { get; set; }
@@ -54,7 +53,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             [Required(ErrorMessage = "Please enter the limiting factor for max sign ups")]
             [Display(Name = "Factor limiting sign ups")]
             public string SelectedMaxSignUpType { get; set; }
-        }
+        } // class InputModel
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -77,6 +76,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 });
 
             }
+            // populates select list with statuses (gets description which is a string)
             foreach (Status status in Enum.GetValues(typeof(Status)))
             {
                 if (!status.GetDescription().Equals("Cancelled"))
@@ -90,6 +90,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 }
 
             }
+            // populates select list with max sign up types (gets description which is a string)
             foreach (MaxSignUpType type in Enum.GetValues(typeof(MaxSignUpType)))
             {
                 MaxSignUpTypes.Add(new SelectListItem
@@ -98,14 +99,6 @@ namespace InTandemRegistrationPortal.Pages.Events
                     Text = type.GetDescription()
                 });
             }
-            // search code
-            //var users = from m in _context.Users
-            //            select m;
-            //if (!string.IsNullOrEmpty(SearchString))
-            //{
-            //    users = users.Where(u => u.FullName.Contains(SearchString));
-            //}
-            //RideLeaders = await users.ToListAsync();
             // get RideEvent asynchronously
             RideEvent = await _context.RideEvent
                 .AsNoTracking()
@@ -119,7 +112,7 @@ namespace InTandemRegistrationPortal.Pages.Events
             // set values of fields based on what is already been entered
             Input = new InputModel
             {
-                SelectedUser = assignedLeaders,
+                SelectedUsers = assignedLeaders,
                 SelectedStatus = RideEvent.Status.GetDescription(),
                 SelectedEventType = RideEvent.EventType.GetDescription(),
                 SelectedMaxSignUpType = RideEvent.MaxSignUpType.GetDescription()
@@ -129,8 +122,8 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return NotFound();
             }
             return Page();
-        }
-
+        } // OnGetAsync
+        
         public async Task<IActionResult> OnPostAsync(int? id)
         {
 
@@ -139,7 +132,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 return Page();
             }
             List<InTandemUser> SelectedInTandemUsers = new List<InTandemUser> { };
-            foreach (var user in Input.SelectedUser)
+            foreach (var user in Input.SelectedUsers)
             {
                 SelectedInTandemUsers.Add(_context.Users
                     .FirstOrDefault(u => u.FullName == user));
@@ -152,7 +145,7 @@ namespace InTandemRegistrationPortal.Pages.Events
                 .FirstOrDefaultAsync(m => m.ID == id);
             
 
-            //takes list of names of ride leaders selected and adds them to a list of ride leader assignments
+            // takes list of names of ride leaders selected and adds them to a list of ride leader assignments
             var assignedLeaders = RideEventToUpdate.RideLeaderAssignments
                 .Select(u => u.InTandemUser)
                 .ToList();
@@ -215,6 +208,8 @@ namespace InTandemRegistrationPortal.Pages.Events
             }
 
             return RedirectToPage("./Index");
-        }
+        } // OnPostAsync
+        
+
     }
 }

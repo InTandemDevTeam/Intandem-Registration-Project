@@ -56,3 +56,4 @@
   * add dropdown for Status, MaxSignUpType, and EventType on Edit page (done)
   * added ability to copy event (done)
   * implemented basic search by full name on users page (done)
+  * implement autocomplete search (in progress, need to figure out why result list does not render)
