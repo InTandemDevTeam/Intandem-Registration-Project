@@ -328,8 +328,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-/InTandemRegistrationPortal/Migrations/20190817193438_init.cs
-/InTandemRegistrationPortal/Migrations/20190817193438_init.Designer.cs
-/InTandemRegistrationPortal/Migrations/ApplicationDbContextModelSnapshot.cs
-/InTandemRegistrationPortal/Migrations/20190818150535_Initial.cs
-/InTandemRegistrationPortal/Migrations/20190818150535_Initial.Designer.cs
+InTandemRegistrationPortal/Migrations/
