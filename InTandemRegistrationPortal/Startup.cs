@@ -97,7 +97,6 @@ namespace InTandemRegistrationPortal
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseSession();
