@@ -5,7 +5,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Users</h1>
+<h3>Users</h3>
 <form>
     <p>
         Title: <input type="text" asp-for="SearchString" />
@@ -72,8 +72,8 @@
                         <td>Pending</td>
                     }
                     <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-primary btn-sm" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
 

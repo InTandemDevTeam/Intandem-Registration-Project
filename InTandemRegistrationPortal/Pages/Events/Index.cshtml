@@ -10,7 +10,7 @@
     ViewData["Title"] = "Events";
 }
 
-<h2>Upcoming Rides and Events</h2>
+<h3>Upcoming Rides and Events</h3>
 <br />
 @if (User.IsInRole(Constants.AdministratorsRole))
 {
@@ -38,6 +38,10 @@
                 <th>
                     Leader(s)
                 </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -66,8 +70,7 @@
                     <td>
                         @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
                         {
-                            <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
-                            
+                            <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>   
                         }
                     </td>
                     <td>
@@ -75,12 +78,13 @@
                         {
                             <form method="post">
                                 <div class="form-group">
-                                    <input type="submit" value="Copy Event" asp-page-handler="Copy" asp-route-id="@item.ID" class="btn btn-primary btn-sm" />
+                                    <input type="submit" value="Copy" asp-page-handler="Copy" asp-route-id="@item.ID" class="btn btn-info btn-sm" />
                                 </div>
-                            </form>
-                        
-                            <a class="btn btn-danger btn-sm" asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
+                            </form>    
                         }
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" asp-page="./Cancel" asp-route-id="@item.ID">Cancel</a>
                     </td>
                     <td>
                         @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Register)).Succeeded)
@@ -97,7 +101,7 @@
 </div>
 @if (User.IsInRole(Constants.AdministratorsRole))
 {
-    <h2>Incomplete Rides and Events</h2>
+    <h3>Incomplete Rides and Events</h3>
 
     <div class="table-responsive">
         <table class="table">
@@ -160,7 +164,7 @@
             </tbody>
         </table>
     </div>
-    <h2>Cancelled Rides and Events</h2>
+    <h3>Cancelled Rides and Events</h3>
 
     <div class="table-responsive">
         <table class="table">
@@ -217,7 +221,7 @@
             </tbody>
         </table>
     </div>
-    <h2>Passed Rides and Events</h2>
+    <h3>Passed Rides and Events</h3>
 
     <div class="table-responsive">
         <table class="table">
