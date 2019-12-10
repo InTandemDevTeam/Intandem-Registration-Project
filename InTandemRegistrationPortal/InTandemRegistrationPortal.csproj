@@ -24,14 +24,4 @@
     <Folder Include="Pages\Shared\Components\" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Content Update="wwwroot\lib\jqueryui\jquery-ui.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\lib\jqueryui\jquery-ui.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>
