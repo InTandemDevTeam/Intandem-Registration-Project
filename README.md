@@ -31,9 +31,7 @@ Run the following command to install it in the Package Manager Console\
 
 In order to be able to send account confirmation emails via SendGrid, run the following commands if you do not want to use your own SendGrid account
 
-    dotnet user-secrets set SendGridUser faizan.jamil
-    dotnet user-secrets set SendGridKey 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
-
-If you would like to use your own SendGrid account, replace the API key and your username in the commands above
+    dotnet user-secrets set SendGridUser <your username here>
+    dotnet user-secrets set SendGridKey <your user key here>
 
 These two commands create secrets used by Visual Studio, they are stored in secrets.json which is located in `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>`
