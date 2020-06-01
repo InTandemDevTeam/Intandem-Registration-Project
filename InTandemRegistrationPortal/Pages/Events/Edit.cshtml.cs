@@ -123,7 +123,23 @@ namespace InTandemRegistrationPortal.Pages.Events
             }
             return Page();
         } // OnGetAsync
-        
+        public async Task<IActionResult> SearchForUsers(string searchString)
+        {
+            try
+            {
+                var UserList = await _userManager.Users
+                    .Where(u => u.LastName.ToLower().Contains(searchString.ToLower()))
+                    .OrderBy(u => u.LastName)
+                    .Select(u => u.LastName).Take(10)
+                    .ToListAsync();
+
+                return new JsonResult(UserList);
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+             
+        } // OnGetSearchAsync
         public async Task<IActionResult> OnPostAsync(int? id)
         {
 

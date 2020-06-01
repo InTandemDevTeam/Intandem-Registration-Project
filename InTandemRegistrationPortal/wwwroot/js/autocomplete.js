@@ -1,55 +1,43 @@
 ﻿// search code
+// works, controller maintainence needed
+function getBaseUrl() {
+    return window.location.href.match(/^.*\//);
+}
+const rootUrl = window.location.host
+console.log(rootUrl)
+const testvar = rootUrl.concat('/api/searchuser/search')
+console.log(testvar)
 var availableTags = [
-    "ActionScript",
-    "AppleScript",
-    "Asp",
-    "BASIC",
-    "C",
-    "C++",
-    "Clojure",
-    "COBOL",
-    "ColdFusion",
-    "Erlang",
-    "Fortran",
-    "Groovy",
-    "Haskell",
-    "Java",
-    "JavaScript",
-    "Lisp",
-    "Perl",
-    "PHP",
-    "Python",
-    "Ruby",
-    "Scala",
-    "Scheme"
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
 ];
-//$(document).ready(function () {
-//    $('#userSearchBox').autocomplete({
-//        // change source so that it gets json produced
-//        // by search method in userservice
-//        source: '/search'
-//        //source: availableTags
-//    });
-//});
 
 $(document).ready(function () {
     $("#userSearchBox").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "/search",
-                type: "POST",
-                dataType: "json",
-                data: { Prefix: request.term },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return { label: item.Name, value: item.Name };
-                    }))
 
-                }
-            })
-        },
-        messages: {
-            noResults: "", results: ""
-        }
-    });
+        source: rootUrl.concat('/api/searchuser/search')
+        //source: availableTags
+
+    })
+
 }) 

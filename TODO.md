@@ -45,7 +45,7 @@
   * implement authorization on events pages (seems to be working)
   * show list of ride leaders (done)
   * give ride leaders ability to edit event (done)
-  * implement assigning multiple ride leaders (pending)
+  * implement assigning multiple ride leaders (pending, JS working, UserSearchController not working)
   * implement paging, sorting, searching, and filtering on events page
   * implement adding/changing ride leaders after event creation (done)
   * make sure selecting and viewing selection of multiple ride leaders is accessible

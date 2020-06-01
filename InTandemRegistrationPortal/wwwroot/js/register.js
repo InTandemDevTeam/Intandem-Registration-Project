@@ -33,13 +33,11 @@ function changeShownFields(Dropdown) {
     $(".CaptainStokerField").each(function () {
         if ((this.nodeName === "SELECT") && (this.value !== "")) {
             cachedCaptainStokerValues.push($(this).prop("selectedIndex"));
-            //console.log($(this).prop("selectedIndex"));
         }
         if ((this.nodeName === "INPUT") && (this.value !== "")) {
             cachedCaptainStokerValues.push(this.value);
         }
     });
-    //console.table(cachedCaptainStokerValues);
     $(".CaptainField").each(function () {
         if (this.nodeName === "SELECT") {
             cachedCaptainValues.push(this.options[this.selectedIndex]);
@@ -57,18 +55,14 @@ function changeShownFields(Dropdown) {
         }
     });
     console.table(cachedCaptainStokerValues);
-    /*for (let i = 0; i < cachedCaptainStokerValues.length; i++) {
-        console.log("index: " + i + "value: " + cachedCaptainStokerValues[i]);
-    }*/
+
     if (Dropdown !== null) {
         const UserType = Dropdown.options[Dropdown.selectedIndex].value;
         if (UserType === "Stoker") {
 
             // show captain+stoker info
-            //changeMultipleFields(CaptainFields, cachedCaptainStokerValues)
             $("#captain_stoker").show();
             // show stoker-specific info
-            //changeMultipleFields(CaptainFields, cachedStokerValues)
             $("#stoker").show();
             $("#captain").hide();
             changeMultipleFields(CaptainFields, "clear")
@@ -78,11 +72,9 @@ function changeShownFields(Dropdown) {
         if (UserType === "Captain") {
             // show captain+stoker info
             $("#captain_stoker").show();
-            //changeMultipleFields(CaptainStokerFields, cachedCaptainStokerValues)
 
             // show captain-specific info
             $("#captain").show();
-            //changeMultipleFields(StokerFields, cachedCaptainValues)
 
             // hides/clears information not pertaining to captain
             $("#stoker").hide();
@@ -111,7 +103,6 @@ function changeMultipleFields(fields, newValues) {
     // first param is data structure containing html elements
     // loops through array-like jquery object
     // assumed that indeces of both parameters correspond exactly to a given element and its cached value
-    //console.trace("changeMultipleFields executed");
     $(fields).each(function (index) {
         // if <select> element is detected
         if (this.nodeName === "SELECT") {

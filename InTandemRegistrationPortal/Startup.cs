@@ -7,15 +7,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Session;
 namespace InTandemRegistrationPortal
 {
     public class Startup
@@ -45,13 +43,14 @@ namespace InTandemRegistrationPortal
             {
                 config.SignIn.RequireConfirmedEmail = false;
             })
-                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-
-            services.AddMvc(config =>
+            services.AddControllers();
+            // deprecated code
+            /*services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
@@ -60,27 +59,21 @@ namespace InTandemRegistrationPortal
             }).AddRazorPagesOptions(options =>
             {
                 options.Conventions.AddPageRoute("/Events/Index", "");
+            });*/
+            services.AddRazorPages()
+                .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute("/Events/Index", "");
             });
             services.AddSession();
             services.AddScoped<IAuthorizationHandler, RegisterAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, ManagerAuthorizationHandler>();
 
             services.AddScoped<UserService>();
-
-            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            /*.AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizePage("/Privacy", "RequireStokerRole");
-            });*/
-            /*services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireStokerRole",
-                    policy => policy.RequireRole("Stoker"));
-            })*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -100,13 +93,19 @@ namespace InTandemRegistrationPortal
 
             app.UseAuthentication();
             app.UseSession();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+            });
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             //var UserManager = serviceProvider.GetRequiredService<UserManager<InTandemUser>>();
-            string[] roleNames = {"Administrator", "Captain", "Stoker", "Volunteer"};
+            string[] roleNames = { "Administrator", "Captain", "Stoker", "Volunteer" };
             IdentityResult result;
             foreach (string roleName in roleNames)
             {

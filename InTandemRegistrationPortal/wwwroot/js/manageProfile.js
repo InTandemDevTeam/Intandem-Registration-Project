@@ -6,7 +6,6 @@
 
 // hides all type-specific information until type is selected
 // adds event listener to load below code on page load
-console.log("manage page reached");
 $(document).ready(function () {
     let RoleDropdown = document.getElementById("RoleDropdown");
     // clears fields not pertaining to user selection on page load

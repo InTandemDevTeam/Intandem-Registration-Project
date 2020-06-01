@@ -57,15 +57,7 @@ namespace InTandemRegistrationPortal.Services
             }
             return users.ToList();
         }
-        //[Produces("application/json")]
-        [HttpGet("/search")]
-        public JsonResult SearchJson(string SearchString)
-        {
-            string term = HttpContext.Request.Query["term"].ToString();
-            
-
-            return new JsonResult(SearchAsync(term));
-        }
+        
 
     }
 }
